@@ -1,0 +1,750 @@
+An id (or class) name cannot start with a number!
+Do not add a space between the property value and the unit (such as margin-left: 20 px;). The correct way is: margin-left: 20px;
+
+External Style Sheet
+    <head>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+    </head>
+
+Cascading Order :
+
+    1 - Inline style (inside an HTML element)
+    2 - External and internal style sheets (in the head section)
+    3 - Browser default
+
+
+
+
+CSS Backgrounds :
+    background-color :      background-color: color|transparent|initial|inherit;
+    Background Image :      background-image: url|none|initial|inherit;
+    background-repeat:      background-repeat: repeat|repeat-x|repeat-y|no-repeat|initial|inherit;
+    background-attachment:  background-attachment: scroll|fixed|local|initial|inherit;
+    background-position:    https://www.w3schools.com/cssref/pr_background-position.asp
+    background :            background: bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit;
+    background-size:        background-size: auto|length|cover|contain|initial|inherit;
+        Cover :
+            Resize the background image to cover the entire container, even if it has to stretch the 
+            image or cut a little bit off one of the edges.
+
+        Contain :       https://www.w3schools.com/css/tryit.asp?filename=trycss3_background-size_contain
+                        https://www.w3schools.com/cssref/tryit.asp?filename=trycss3_background-size5
+                        the css code in the second link could be replaced with the following :
+                            #example1 {
+                                border: 2px solid black;
+                                padding: 25px;
+                                background: url(img_tree.gif) 0 0/contain, url(mountain.jpg) 0 0/cover;
+                                background-repeat: no-repeat;
+
+                            }
+ 
+
+            Resize the background image to make sure the image is fully visible.
+
+
+
+
+CSS Borders :
+    border :                border: border-width border-style border-color|initial|inherit;
+    border-radius
+    border-bottom(-color -style -width)
+    border-top(-color -style -width)
+    border-left(-color -style -width)
+    border-right(-color -style -width)
+
+
+
+CSS Margins :
+    margin :                margin-top margin-right margin-bottom margin-left
+
+
+    Margin Collapse : Top and bottom margins of elements are sometimes collapsed into a single margin that is equal to the largest of the two margins.
+                    This does not happen on left and right margins! Only top and bottom margins!
+
+
+
+Css Padding :
+    padding :               padding-top padding-right padding-bottom padding-left
+
+
+CSS Height and Width : 
+    The height and width properties do not include padding, borders, or margins; they set the height/width of the content area
+    Setting max-width fixes the scroll bar problem when resizing    https://www.w3schools.com/css/css_dimension.asp
+
+    Height :                height: auto|length|initial|inherit;
+    Width :                 width: auto|value|initial|inherit;
+    max-height :            max-height: none|length|initial|inherit;
+    max-width :             max-width: none|length|initial|inherit;
+    min-height :            min-height: length|initial|inherit;
+    min-width :             length|initial|inherit;
+
+
+
+CSS Box Model :             https://www.w3schools.com/css/css_boxmodel.asp
+    To calculate the full size of an element, you must also add padding, borders and margins.
+
+
+
+CSS Outline :
+    Outline Style :         outline-style: none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset|initial|inherit;
+    Outline Color :         outline-color: invert|color|initial|inherit;
+    Outline Width :         outline-width: medium|thin|thick|length|initial|inherit;
+    Outline :               outline: outline-width outline-style outline-color|initial|inherit;
+    
+    Outline Offset :        adds space between an outline and the edge/border of an element. The space between an element and its outline is transparent.
+                            outline-offset: length|initial|inherit;
+
+
+
+CSS Text :
+    Text Color :            (color :red;)
+
+    Text Alignment :        specifies the horizontal alignment of text in an element.
+                            text-align: left|right|center|justify|initial|inherit;
+
+    text-align-last :       specifies how to align the last line of a text.
+                            text-align-last: auto|left|right|center|justify|start|end|initial|inherit;
+
+    text-justify :          text-justify: auto|inter-word|inter-character|none|initial|inherit; 
+                            (Set the justification method to "inter-word" when text-align is set to "justify":)
+    
+    Text Decoration :       text-decoration: text-decoration-line text-decoration-color text-decoration-style|initial|inherit;
+    
+    Text Transformation :   controls the capitalization of text.
+                            text-transform: none|capitalize|uppercase|lowercase|initial|inherit;
+    
+    Text Indentation :      specifies the indentation of the first line in a text-block.
+                            text-indent: length|initial|inherit;
+                            
+    Letter Spacing  :       letter-spacing: normal|length|initial|inherit;
+    Line Height :           line-height: normal|number|length|initial|inherit;
+    Text Direction :        direction: ltr|rtl|initial|inherit;
+    Word Spacing :          word-spacing: normal|length|initial|inherit;
+    Text Shadow :           text-shadow: h-shadow v-shadow blur-radius color|none|initial|inherit;
+
+
+
+CSS Fonts :
+    On computer screens, sans-serif fonts are considered easier to read than serif fonts.
+    If you do not specify a font size, the default size for normal text, like paragraphs, is 16px (16px=1em).
+
+    The font-size value can be an absolute, or relative size.
+        Absolute size:
+            Sets the text to a specified size
+            Does not allow a user to change the text size in all browsers (bad for accessibility reasons)
+            Absolute size is useful when the physical size of the output is known
+
+        Relative size:
+            Sets the size relative to surrounding elements
+            Allows a user to change the text size in browsers
+    
+    Responsive Font Size :
+        The text size can be set with a vw unit, which means the "viewport width".
+        Viewport is the browser window size. 1vw = 1% of viewport width. If the viewport is 50cm wide, 1vw is 0.5cm.
+
+
+    font :                  font-style font-variant font-weight font-size/line-height font-family
+                            font: italic bold 12px/30px Georgia, serif;       
+
+    font-family :           font-family: "Times New Roman", Times, serif;
+    font-size :             font-size:medium|xx-small|x-small|small|large|x-large|xx-large|smaller|larger|length|initial|inherit;
+    font-style :            normal|italic|oblique|initial|inherit;
+    font-weight :           normal|bold|bolder|lighter|number|initial|inherit;
+
+
+
+
+CSS Icons : 
+    Icons Reference     https://www.w3schools.com/icons/icons_reference.asp
+
+    The simplest way to add an icon to your HTML page, is with an icon library, such as Font Awesome.
+    Add the name of the specified icon class to any inline HTML element (like <i> or <span>).
+    
+    Font Awesome :
+        To use the Font Awesome icons, add the following line inside the <head> section of your HTML page:     
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        All the icons in the icon libraries are scalable vectors that can be customized with CSS (size, color, shadow, etc.)
+        https://www.w3schools.com/css/tryit.asp?filename=trycss_icons_fa
+
+
+    Bootstrap Icons :
+        To use the Bootstrap glyphicons, add the following line inside the <head> section of your HTML page:
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+    Google Icons :
+        To use the Google icons, add the following line inside the <head> section of your HTML page:
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+
+
+
+CSS Links :
+    The four links states are:
+        a:link - a normal, unvisited link
+        a:visited - a link the user has visited
+        a:hover - a link when the user mouses over it
+        a:active - a link the moment it is clicked
+
+    When setting the style for several link states, there are some order rules:
+        a:hover MUST come after a:link and a:visited
+        a:active MUST come after a:hover
+
+
+    Button Link :
+        a:link, a:visited {
+        background-color: #f44336;
+        color: white;
+        padding: 14px 25px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+
+    a:hover, a:active {
+        background-color: red;
+    }
+
+
+
+Css Lists :
+    list-style-type:                none disc circle square upper-roman
+    list-style-image:               none|url|initial|inherit;
+    list-style-position:            inside|outside|initial|inherit;         https://www.w3schools.com/cssref/tryit.asp?filename=trycss_list-style-position
+    list-style:                     list-style-type list-style-position list-style-image|initial|inherit;
+
+    Remove Default Settings :
+        ul.demo {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+
+Css Tables :
+    border-collapse:                separate|collapse|initial|inherit;
+    order-spacing:                  length|initial|inherit;
+    caption-side:                   top|bottom|initial|inherit;
+    empty-cells:                    show|hide|initial|inherit;  (Display no borders on empty cells in a table:)
+    table-layout:                   table-layout: auto|fixed|initial|inherit;          https://www.w3schools.com/cssref/tryit.asp?filename=trycss_table_table-layout
+
+
+    Hoverable Table :
+        https://www.w3schools.com/css/tryit.asp?filename=trycss_table_hover
+
+    Striped Tables :
+        https://www.w3schools.com/css/tryit.asp?filename=trycss_table_striped
+
+    Responsive Table :
+        https://www.w3schools.com/css/tryit.asp?filename=trycss_table_responsive
+
+
+CSS Layout - The display Property :
+    The display property specifies if/how an element is displayed.
+    display: none; is commonly used with JavaScript to hide and show elements without deleting and recreating them.
+
+
+    display:none or visibility:hidden?
+        visibility: hidden;
+            hides an element, However, the element will still take up the same space as before. The element will be hidden, but still affect the layout
+
+        display: none;
+            he element will be hidden, and the page will be displayed as if the element is not there
+
+    display:                        none inline block ;     https://www.w3schools.com/cssref/tryit.asp?filename=trycss_display
+    visibility:                     visible|hidden|collapse|initial|inherit;
+
+
+
+
+CSS Layout - width and max-width :
+    a block-level element always takes up the full width available (stretches out to the left and right as far as it can).
+    Setting the width of a block-level element will prevent it from stretching out to the edges of its container. Then, 
+    you can set the margins to auto, to horizontally center the element within its container. The element will take up 
+    the specified width, and the remaining space will be split equally between the two margins:
+
+    The problem is when the browser window is smaller than the width of the element. The browser then adds a horizontal scrollbar to the page.
+    Using max-width instead, in this situation, will improve the browser's handling of small windows. This is important when making a site usable on small devices
+
+
+
+CSS Layout - The position Property:
+    Note: A "positioned" element is one whose position is anything except static.
+    The position property specifies the type of positioning method used for an element.
+
+
+    There are five different position values:       https://www.youtube.com/watch?v=wNfpNJRuSJk&t=16s
+        static:
+            HTML elements are positioned static by default. 
+            Static positioned elements are not affected by the top, bottom, left, and right properties.   
+
+        relative:
+            An element with position: relative; is positioned relative to its normal position.
+            Setting the top, right, bottom, and left properties of a relatively-positioned element 
+            will cause it to be adjusted away from its normal position. Other content will not be 
+            adjusted to fit into any gap left by the element.     
+
+        fixed :
+            A fixed element does not leave a gap in the page where it would normally have been located.
+            An element with position: fixed; is positioned relative to the viewport, which means it 
+            always stays in the same place even if the page is scrolled. The top, right, bottom, and 
+            left properties are used to position the element.
+
+
+        absolute : (Absolute positioned elements are removed from the normal flow, and can overlap elements.)
+            An element with position: absolute; is positioned relative to the nearest positioned 
+            ancestor (instead of positioned relative to the viewport, like fixed).
+            However; if an absolute positioned element has no positioned ancestors, it uses 
+            the document body, and moves along with page scrolling.
+
+        sticky :
+            An element with position: sticky; is positioned based on the user's scroll position.
+            A sticky element toggles between relative and fixed, depending on the scroll position. 
+            It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed).
+
+
+        Overlapping Elements :
+            The z-index property specifies the stack order of an element (which element should be placed in front of, or behind, the others).
+            An element with greater stack order is always in front of an element with a lower stack order.
+            If two positioned elements overlap without a z-index specified, the element positioned last in the HTML code will be shown on top.
+
+
+
+CSS Layout - Overflow :
+    Note: The overflow property only works for block elements with a specified height.
+    The CSS overflow property controls what happens to content that is too big to fit into an area.
+    The overflow property specifies whether to clip content or to add scrollbars when the content of an element is too big to fit in a specified area.
+    
+
+    The overflow property has the following values:
+        visible -       Default. The overflow is not clipped. It renders outside the element's box
+        hidden -        The overflow is clipped, and the rest of the content will be invisible
+        scroll -        The overflow is clipped, but a scrollbar is added to see the rest of the content
+        auto -          If overflow is clipped, a scrollbar should be added to see the rest of the content
+
+
+    overflow-x and overflow-y
+        overflow-x: hidden; /* Hide horizontal scrollbar */
+        overflow-y: scroll; /* Add vertical scrollbar */
+
+
+
+CSS Layout - float and clear :
+
+    overflow and float : https://www.youtube.com/watch?v=Iph2v39SguM
+    Float : https://www.youtube.com/watch?v=VwxGKpvW8Zk
+    Clear : https://www.youtube.com/watch?v=nE9lIRbIfI0
+
+
+    It's common to create layouts using float :     https://www.w3schools.com/css/tryit.asp?filename=trycss_layout_cols
+
+    The CSS float property specifies how an element should float.
+    The CSS clear property specifies what elements can float beside the cleared element and on which side.
+
+
+    The float property can have one of the following values:
+        left -              The element floats to the left of its container
+        right-              The element floats to the right of its container
+        none -              The element does not float (will be displayed just where it occurs in the text). This is default
+        inherit -           The element inherits the float value of its parent
+
+    
+    The clear property specifies what elements can float beside the cleared element and on which side.
+    The clear property can have one of the following values:
+        none -                  Allows floating elements on both sides. This is default
+        left -                  No floating elements allowed on the left side
+        right-                  No floating elements allowed on the right side
+        both -                  No floating elements allowed on either the left or the right side
+        inherit -               The element inherits the clear value of its parent
+
+    The clearfix Hack :
+        If an element is taller than the element containing it, and it is floated, it will "overflow" outside of its container:
+        Then we can add overflow: auto; to the containing element to fix this problem
+            .clearfix {
+                overflow: auto;
+            }
+
+        The new, modern clearfix hack however, is safer to use, and the following code is used for most webpages:
+            .clearfix::after {
+                content: "";
+                clear: both;
+                display: table;
+            }
+
+
+    Grid of Boxes / Equal Width Boxes:
+        https://www.w3schools.com/css/tryit.asp?filename=trycss_float_boxes
+
+        What is box-sizing?
+            You can easily create three floating boxes side by side. However, 
+            when you add something that enlarges the width of each box (e.g. padding or borders), 
+            the box will break. The box-sizing property allows us to include the padding and border 
+            in the box's total width (and height), making sure that the padding stays inside of the 
+            box and that it does not break.
+
+
+
+
+CSS Layout - display: inline-block :
+    
+    inline-block vs inline :
+        Compared to display: inline, the major difference is that display: inline-block allows to set a width and height on the element.
+        Also, with display: inline-block, the top and bottom margins/paddings are respected, but with display: inline they are not.
+
+    inline-block vs block : 
+        Compared to display: block, the major difference is that display: 
+        inline-block does not add a line-break after the element, so the element can sit next to other elements.
+
+    to see the difference check out this link :     https://www.w3schools.com/css/tryit.asp?filename=trycss_inline-block_span1    
+
+
+
+CSS Layout - Horizontal & Vertical Align:
+    To horizontally center a block element (like <div>), use margin: auto;
+    Setting the width of the element will prevent it from stretching out to the edges of its container.
+    The element will then take up the specified width, and the remaining space will be split equally between the two margins
+    Note: Center aligning has no effect if the width property is not set (or set to 100%).
+
+    Center an Image :
+        To center an image, set left and right margin to auto and make it into a block element
+
+    Center vertically and horizontally :
+        To center both vertically and horizontally, use padding and text-align: center
+            .center {
+                padding: 70px 0;
+                border: 3px solid green;
+                text-align: center;
+            }
+
+        Another trick is to use the line-height property with a value that is equal to the height property.
+            .center {
+                line-height: 200px;
+                height: 200px;
+                border: 3px solid green;
+                text-align: center;
+            }
+
+            /* If the text has multiple lines, add the following: */
+            .center p {
+                line-height: 1.5;
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+
+CSS Combinators :
+    A combinator is something that explains the relationship between the selectors.
+    
+    There are four different combinators in CSS:        https://www.youtube.com/watch?v=UWzETKG2mYs
+        descendant selector (space)
+        child selector (>)
+        adjacent sibling selector (+)
+        general sibling selector (~)
+
+    Descendant Selector :           (matches all elements that are descendants of a specified element)
+        div p {}
+
+    Child Selector :                (selects all elements that are the immediate children of a specified element.)
+        div > p {}
+
+    Adjacent Sibling Selector :     (selects element that is the adjacent(immediate) sibling of a specified element.)
+        div + p {}
+
+    General Sibling Selector :      (selects all elements that are siblings of a specified element.)
+        div ~ p {}
+
+    
+    
+CSS Pseudo-classes : 
+    All CSS Pseudo Classes :    https://www.w3schools.com/css/css_pseudo_classes.asp
+
+    Not, Last-Child, First-Of-Type :                https://www.youtube.com/watch?v=cmG0F8Rlac8&list=PLDoPjvoNmBAyEyQaHOHO1HJtmSgGt07VC&index=51
+    Only-Child, Only-Of-Type, Selection :           https://www.youtube.com/watch?v=da5J0EEh7Mc&index=52&list=PLDoPjvoNmBAyEyQaHOHO1HJtmSgGt07VC
+    Selectors - Nth-Child, Nth-Of-Type Part 1 :     https://www.youtube.com/watch?v=BtF7MLrjRQ4&list=PLDoPjvoNmBAyEyQaHOHO1HJtmSgGt07VC&index=53
+    Selectors - Nth-Child, Nth-Of-Type Part 2 :     https://www.youtube.com/watch?v=K87Y0lqX220&index=54&list=PLDoPjvoNmBAyEyQaHOHO1HJtmSgGt07VC
+    
+    :first-child
+    :first-of-type
+    :not(selector)
+    :last-child
+    :last-of-type
+    :nth-child(n)
+    :nth-last-child(n)
+    :nth-of-type(n)
+    :nth-last-of-type(n)
+    :only-child
+    :only-of-type
+
+
+    Pseudo-classes and CSS Classes :
+        a.highlight:hover {
+            color: #ff0000;
+        }
+
+    The :first-child Pseudo-class :      (matches a specified element that is the first child of another element)
+        p:first-child {                 // matches any <p> element that is the first child of any element
+            color: blue;
+        }
+        
+    
+        p i:first-child {               // matches the first <i> element in all <p> elements:
+            color: blue;
+        }
+
+
+        p:first-child i {               // matches all <i> elements in <p> elements that are the first child of another element
+            color: blue;                // https://www.w3schools.com/css/tryit.asp?filename=trycss_first-child3
+        }
+
+    
+    The :lang Pseudo-class : (The :lang pseudo-class allows you to define special rules for different languages.)
+        In the example below, :lang defines the quotation marks for <q> elements with lang="no":
+            https://www.w3schools.com/css/tryit.asp?filename=trycss_lang
+
+
+
+CSS Pseudo-elements :
+    The double colon replaced the single-colon notation for pseudo-elements in CSS3. 
+    This was an attempt from W3C to distinguish between pseudo-classes and pseudo-elements.
+
+    ::first-line : 
+        is used to add a special style to the first line of a text.
+        can only be applied to block-level elements.
+
+        The following properties apply to the ::first-line pseudo-element:
+            font properties
+            color properties
+            background properties
+            word-spacing
+            letter-spacing
+            text-decoration
+            vertical-align
+            text-transform
+            line-height
+            clear
+
+    ::first-letter :
+        is used to add a special style to the first letter of a text.
+        can only be applied to block-level elements.
+
+        The following properties apply to the ::first-letter pseudo- element: 
+            font properties
+            color properties 
+            background properties
+            margin properties
+            padding properties
+            border properties
+            text-decoration
+            vertical-align (only if "float" is "none")
+            text-transform
+            line-height
+            float
+            clear
+
+
+
+    ::before :
+        can be used to insert some content before the content of an element.
+
+        h1::before {
+            content: url(smiley.gif);
+        }
+
+
+
+    ::after :
+        can be used to insert some content after the content of an element.
+
+        h1::after {
+            content: url(smiley.gif);
+        }
+
+
+
+    ::selection :
+        matches the portion of an element that is selected by a user.
+        The following CSS properties can be applied to ::selection: color, background, cursor, and outline.
+
+        ::selection {
+            color: red; 
+            background: yellow;
+        }
+
+
+
+
+    Pseudo-elements and CSS Classes :
+        p.intro::first-letter {
+            color: #ff0000;
+            font-size:200%;
+        }
+
+
+    
+    Multiple Pseudo-elements :
+        p::first-letter {
+            color: #ff0000;
+            font-size: xx-large;
+        }
+        p::first-line {
+            color: #0000ff;
+            font-variant: small-caps;
+        }
+
+
+
+CSS Opacity / Transparency :
+    The opacity property specifies the opacity/transparency of an element.
+    The opacity property can take a value from 0.0 - 1.0. The lower value, the more transparent
+
+    img {
+        opacity: 0.5;
+        filter: alpha(opacity=50); /* For IE8 and earlier */
+    }
+
+
+CSS Navigation Bar :
+    A navigation bar is basically a list of links, so using the <ul> and <li> elements makes perfect sense:
+    
+    Now let's remove the bullets and the margins and padding from the list:
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+    Vertical Navigation Bar : (add to the above code)       https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_vertical_gray
+        li a {
+            display: block;
+            width: 60px;
+        }
+        Displaying the links as block elements makes the whole link area clickable (not just the text), 
+        and it allows us to specify the width (and padding, margin, height, etc. if you want)
+
+
+    Active/Current Navigation Link :                        https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_vertical_active
+
+    Full-height Fixed Vertical Navbar :                     https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_vertical_fixed
+
+    Horizontal Navigation Bar :                             https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_horizontal_black_fixed
+
+    Sticky Navbar :                                         https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_sticky    
+
+    Responsive Topnav :                                     https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_horizontal_responsive
+
+
+
+CSS Dropdowns :
+    https://www.w3schools.com/css/tryit.asp?filename=trycss_dropdown_button
+
+
+CSS Image Gallery :
+    CSS Image Gallery
+
+
+
+CSS Attribute Selectors :
+
+    CSS [attribute] Selector :
+        a[target] {
+            background-color: yellow;
+        }
+
+
+    CSS [attribute="value"] Selector :
+        a[target="_blank"] { 
+            background-color: yellow;
+        }
+
+
+    CSS [attribute~="value"] Selector :
+        is used to select elements with an attribute value containing a specified word.
+            [title~="flower"] {
+                border: 5px solid yellow;
+            }
+
+    CSS [attribute*="value"] Selector :
+        is used to select elements whose attribute value contains a specified value.
+        The following example selects all elements with a class attribute value that contains "te".
+        Note: The value does not have to be a whole word!  
+            [class*="te"] {
+                background: yellow;
+            }
+
+    CSS [attribute|="value"] Selector :
+        is used to select elements with the specified attribute starting with the specified value.
+        The following example selects all elements with a class attribute value that begins with "top".
+        Note: The value has to be a whole word, either alone, like class="top", or followed by a hyphen( - ), like class="top-text".
+            [class|="top"] {
+                background: yellow;
+            }
+
+
+    CSS [attribute^="value"] Selector :
+        is used to select elements whose attribute value begins with a specified value.
+        The following example selects all elements with a class attribute value that begins with "top":
+        Note: The value does not have to be a whole word! 
+            [class^="top"] {
+                background: yellow;
+            }
+
+
+    CSS [attribute$="value"] Selector :
+        is used to select elements whose attribute value ends with a specified value.
+        The following example selects all elements with a class attribute value that ends with "test".
+        Note: The value does not have to be a whole word!  
+            [class$="test"] {
+                background: yellow;
+            }
+
+    
+CSS Counters :
+    To work with CSS counters we will use the following properties:
+        counter-reset -                         Creates or resets a counter
+        counter-increment -                     Increments a counter value
+        content -                               Inserts generated content
+        counter() or counters() function -      Adds the value of a counter to an element
+
+        body {
+            counter-reset: section;
+        }
+
+        h2::before {
+            counter-increment: section;
+            content: "Section " counter(section) ": ";
+        }
+
+
+        Nesting Counters :
+            https://www.w3schools.com/css/tryit.asp?filename=trycss_counters2
+
+
+    
+
+CSS Website Layout :
+    https://www.w3schools.com/css/tryit.asp?filename=trycss_website_layout_blog
+        
+
+
+
+CSS Units :
+    rem & em CSS Units : https://www.youtube.com/watch?v=H4UtKu11yXg
+    https://www.w3schools.com/css/css_units.asp
+
+
+
+CSS Specificity :
+    
+    Note: Specificity is a common reason why your CSS-rules don't apply to some elements, although you think they should.
+
+    1 - A class selector beats any number of element selectors - a class selector such as .intro beats h1, p, div, etc:
+            https://www.w3schools.com/css/tryit.asp?filename=trycss_specificity3
+
+
+    2 - ID selectors have a higher specificity than attribute selectors
+            https://www.w3schools.com/css/tryit.asp?filename=trycss_specificity2
+    
+
+    3 - The universal selector (*) has low specificity, while ID selectors are highly specific! 

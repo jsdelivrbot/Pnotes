@@ -1,0 +1,124 @@
+/************************************************************************************************************************************************************************************************/
+                                                                                    NPM
+
+we have two types of node.js packages 
+1 - libraries and frameworks      ex:   (jquery - react) they are dependencies (we use --save wiht them)
+2 - development tools             ex:   (webpack,babel) it goes in the devDependencies because it's not a dependency like react or jquery (we use the --save-dev with tools)
+
+
+node_modules folder contains dependencies of the dependencies we declared in the package.json file  
+
+
+if you wanna share the project, the package.json file will contain info on the project's dependencies and you don't need to share and folders (node_modules)
+
+
+
+
+
+
+
+ ------------------------------ Commands
+
+npm init                                    : creates package.json file 
+npm run [npmScript]                         : to run a npm script (they live in the package.json)
+npm install webpack --save-dev              : adds/installs it to devDependencies   (installed locally)
+npm install webpack-cli --save-dev          : installs cli for webpack
+nmp install webpack-dev-server              : automatically bundles the code and reloads the browser whenever a change is made
+npm install jquery --save                   : adds/installs it to dependencies      (installed locally)
+npm install                                 : it installs all the dependencies you have in the package.json file / creates the moudle directory
+npm uninstall jquery --save                 : removes jquery from both the package.json and the dependencies folder
+sudo npm install live-server --g            : globally =installs live-server (live-server in the terminal to run it)
+npm install youtube-api-search              : given a key, it makes calls to the api and returns data
+
+
+
+------------------------------Important Npm Packages and libraries
+npm install youtube-api-search
+sudo npm install live-server --g 
+npm install jquery --save
+npm install webpack-dev-server 
+npm install --save loadash 
+    watch 032 (react course)
+import {connect} from 'react-redux'; 
+
+/************************************************************************************************************************************************************************************************/  
+                                                                                    WepPack
+
+
+
+npm install webpack --save-dev              : adds/installs it to devDependencies   (installed locally)
+npm install webpack-cli --save-dev          : installs cli for webpack
+nmp install webpack-dev-server              : automatically bundles the code and reloads the browser whenever a change is made
+npm install html-webpack-plugin --save-dev  : automatically copies your index.html file into the distribution folder and inject bundle.js to it
+
+
+in webpack there are four core concepts :
+1 - Entry point 
+2 - Output (takes an object, tha path needs to be absolute)
+3 - Loaders
+4 - Plugins 
+
+
+
+in webpack 4 we have the development(builds the bundle without minifying) and the production mode (minifys)
+you can specify the mode either in the package.json file (inside scripts) or in webpack.config.js file
+
+
+
+when using the dev-server, the files will not be saved on the disk, instead they will be streamed to the server
+
+
+
+
+/************************************************************************************************************************************************************************************************/
+                                                                                Babel
+basically installing babel is a three-step process :
+1 - installing (babel-core, babel-polyfill, babel-preset-env, babel-loader)
+2 - creating the module object and adding babel-polyfill as an entry point in webpack.config.js 
+3 - creating babelrc file 
+
+npm install babel-core babel-preset-env babel-loader --save-dev
+npm install babel-polyfill --save (we use --save because it's a code dependency like jquery and react)
+
+for since babel-polyfill is a code dependency we need to added to the entry point we have in
+webpack.config.js file, so that it can be compiled together with our entries and eventually injected
+in the html file
+
+1 - babel-loader        : needed by the webpack
+2 - babel-preset-env    : specifies the target browsers
+3 - babel-core          : does the actual conversion 
+4 - babel-polyfill      : converts Es6 features like (promises)
+
+
+
+
+
+
+to use babel we need a json babel config file alongside with the webpack.config.js (.babelrc)
+
+basic babel configuration in webpack.config.js : 
+module:{
+        rules:[ // takes an object
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use:{
+                    loader: 'babel-loader'
+                }
+            }
+        ]
+    }
+
+basic babel configuration in .babelrc : 
+{
+    "presets": [ // takes an array of arrays
+        ["env",{
+            "targets":{
+                "browsers":[
+                    "last 5 versions",
+                    "ie >=8"
+                ]
+            }
+        }]
+    ]
+}

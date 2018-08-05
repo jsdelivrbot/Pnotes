@@ -1,0 +1,605 @@
+<!-- 
+    Basics :
+The <!DOCTYPE html> declaration defines this document to be HTML5
+The HTML5 standard does not require quotes around attribute values.
+The HTML <pre> element defines preformatted text.
+According to the HTML5 standard; the <html>, the <body>, and the <head> tag can be omitted.
+Only MP4, WebM, and Ogg video are supported by the HTML5 standard.
+Only MP3, WAV, and Ogg audio are supported by the HTML5 standard.
+-->
+
+<!--
+    HTML Formatting Elements :
+        <b>         : Bold text (bold)
+        <strong>    : Important text 
+        <i>         : Italic text
+        <em>        : Emphasized text (important)
+        <mark>      : Marked text
+        <small>     : Small text
+        <del>       : Deleted text
+        <ins>       : Inserted text (underlined)
+        <sub>       : Subscript text
+        <sup>       : Superscript text
+-->
+
+<!--
+    HTML5 Web Storage :   https://www.w3schools.com/html/html5_webstorage.asp
+        With web storage, web applications can store data locally within the user's browser.
+
+        Before HTML5, application data had to be stored in cookies, included in every server request. Web storage is more secure, 
+        and large amounts of data can be stored locally, without affecting website performance.
+
+        Unlike cookies, the storage limit is far larger (at least 5MB) and information is never transferred to the server.
+
+        Web storage is per origin (per domain and protocol). All pages, from one origin, can store and access the same data.
+
+        window.localStorage - stores data with no expiration date
+        window.sessionStorage - stores data for one session (data is lost when the browser tab is closed)
+
+        Before using web storage, check browser support for localStorage and sessionStorage:
+        if (typeof(Storage) !== "undefined") {
+            // Code for localStorage/sessionStorage.
+        } else {
+            // Sorry! No Web Storage support..
+        }
+-->
+
+<!--
+    HTML5 Web Workers  :    https://www.w3schools.com/html/html5_webworkers.asp
+        When executing scripts in an HTML page, the page becomes unresponsive until the script is finished.
+        A web worker is a JavaScript that runs in the background, independently of other scripts, without affecting 
+        the performance of the page. You can continue to do whatever you want: clicking, selecting things, etc., 
+        while the web worker runs in the background.
+
+        Before creating a web worker, check whether the user's browser supports it:
+        
+        if (typeof(Worker) !== "undefined") {
+            // Yes! Web worker support!
+            // Some code.....
+        } else {
+            // Sorry! No Web Worker support..
+        }
+-->
+
+
+<!--
+    HTML5 Server-Sent Events :
+        A server-sent event is when a web page automatically gets updates from a server.
+        This was also possible before, but the web page would have to ask if any updates were available. 
+        With server-sent events, the updates come automatically.
+
+-->
+
+
+<!--
+    Media :
+        <video> : you can manipulate the video with javascript      https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_video_js_prop
+                The controls attribute adds video controls, like play, pause, and volume.
+                It is a good idea to always include width and height attributes. If height and width are not set, the page might flicker while the video loads.
+                <source> : allows you to specify alternative video files which the browser may choose from. The browser will use the first recognized format.
+                The text between the <video> and </video> tags will only be displayed in browsers that do not support the <video> element.
+
+        <track> : adds subtitles to a video      https://www.w3schools.com/tags/tag_track.asp
+        
+        
+        <audio> : https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_audio_all
+-->
+
+<!--
+    Embed a youtube Video or playlist :
+        1 - use iframe and define width and height
+        2 - place the word 'embed/' between the domain name and the video(or playlist) ID
+        3 - ?rel=0  will stop the suggestion you get at the end of every video 
+-->
+
+<!--
+    Image Links:
+    <a href="default.asp">
+        <img src="smiley.gif" alt="HTML tutorial" style="width:42px;height:42px;border:0">
+    </a>
+-->
+
+<!--
+    HTML Forms :
+        <form action="/action_page.php" target="_blank" method='get'>
+        
+        autocomplete : specifies whether a form or input field should have autocomplete on or off.
+                    It is possible to have autocomplete "on" for the form, and "off" for specific input fields
+
+        novalidate : novalidate specifies that the form data should not be validated when submitted.            
+        
+        autofocus : specifies that the input field should automatically get focus when the page loads.
+
+        form     : specifies one or more forms an <input> element belongs to.
+                To refer to more than one form, use a space-separated list of form ids.
+                An input field located outside the HTML form (but still a part of the form): https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_input_form
+        
+        formaction : specifies the URL of a file that will process the input control when the form is submitted.
+                    overrides the action attribute of the <form> element
+
+
+        formenctype : specifies how the form data should be encoded when submitted (only for forms with method="post").
+                    overrides the enctype attribute of the <form> element.
+                    https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_input_formenctype
+
+
+        formmethod : defines the HTTP method for sending form-data to the action URL.
+                    overrides the method attribute of the <form> element.
+                    
+        
+        formnovalidate : overrides the novalidate attribute of the <form> element.
+                        can be used with type="submit".
+
+        
+        list           : refers to a <datalist> element that contains pre-defined options for an <input> element.
+                        https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_datalist
+
+
+        multiple    : specifies that the user is allowed to enter more than one value in the <input> element.
+                    works with the following input types: email, and file.
+
+        
+        pattern     : specifies a regular expression that the <input> element's value is checked against.
+                    Use the global title attribute to describe the pattern to help the user.
+
+
+        GET :
+            url ex : /action_page.php?firstname=Mickey&lastname=Mouse
+            Notes on GET:
+            Appends form-data into the URL in name/value pairs
+            The length of a URL is limited (about 3000 characters)
+            Never use GET to send sensitive data! (will be visible in the URL)
+            Useful for form submissions where a user want to bookmark the result
+            GET is better for non-secure data, like query strings in Google
+        
+
+
+        POST :
+            Notes on POST:
+            POST has no size limitations, and can be used to send large amounts of data.
+            Form submissions with POST cannot be bookmarked
+
+
+
+
+        Radio Button Input:
+            <form>
+                <input type="radio" name="gender" value="male" checked> Male<br>
+                <input type="radio" name="gender" value="female"> Female<br>
+                <input type="radio" name="gender" value="other"> Other
+            </form>
+
+
+
+        Input Type Checkbox:
+            <form>
+                <input type="checkbox" name="vehicle1" value="Bike"> I have a bike<br>
+                <input type="checkbox" name="vehicle2" value="Car"> I have a car 
+            </form>
+        
+        
+        Input Type Color:
+            <form>
+                Select your favorite color:
+                <input type="color" name="favcolor">
+            </form>
+        
+
+        Input Type Date:
+            <form>
+                Enter a date before 1980-01-01:
+                <input type="date" name="bday" max="1979-12-31"><br>
+                Enter a date after 2000-01-01:
+                <input type="date" name="bday" min="2000-01-02"><br>
+            </form>
+
+
+
+        Input Type Datetime-local: https://www.w3schools.com/html/tryit.asp?filename=tryhtml_input_datetime-local
+            <form>
+                Birthday (date and time):
+                <input type="datetime-local" name="bdaytime">
+            </form>
+
+
+
+        Input Type Email:
+            <form>
+                E-mail:
+                <input type="email" name="email">
+            </form>
+
+
+
+
+        Input Type File:
+            <form>
+                Select a file: <input type="file" name="myFile">
+            </form>
+
+
+
+        Input Type Month:
+            <form>
+                Birthday (month and year):
+                <input type="month" name="bdaymonth">
+            </form>
+
+
+
+        Input Type Number: set restrictions on what numbers are accepted.
+            <form>
+                Quantity (between 1 and 5):
+                <input type="number" name="quantity" min="1" max="5">
+            </form>
+
+            <form>
+                Quantity:
+                <input type="number" name="points" min="0" max="100" step="10" value="30">
+            </form>
+        
+
+
+        Input Type Range:           
+            <input type="range" name="rangeInput" min="0" max="100" onchange="updateTextInput(this.value);">
+            <span id ='sp'></span>
+            function updateTextInput(val) {
+                document.getElementById('spam').textContent=val; 
+            }   
+
+
+
+        Input Type Time:
+        <form>
+            Select a time:
+            <input type="time" name="usr_time">
+        </form>
+
+
+        Input Type Url:
+        <form>
+            Add your homepage:
+            <input type="url" name="homepage">
+        </form>
+
+
+
+
+        Fieldset :
+            <fieldset>
+                <legend>Personal information:</legend>
+                First name:<br>
+                <input type="text" name="firstname" value="Mickey">
+                <br>
+                Last name:<br>
+                <input type="text" name="lastname" value="Mouse">
+                <br><br>
+                <input type="submit" value="Submit">
+            </fieldset>
+
+
+
+        Select :
+            <select name="cars">
+                <option value="volvo" selected >Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="fiat">Fiat</option>
+                <option value="audi">Audi</option>
+            </select>
+
+
+
+            Visible Option Values :
+            <select name="cars" size="3">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="fiat">Fiat</option>
+                <option value="audi">Audi</option>
+            </select>
+
+
+
+            Allow Multiple Selections: (Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.)
+            <select name="cars" size="4" multiple>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="fiat">Fiat</option>
+                <option value="audi">Audi</option>
+            </select>
+
+
+
+
+        TextArea :
+            <textarea name="message" rows="10" cols="30">
+                The cat was playing in the garden.
+            </textarea>
+            or
+            <textarea name="message" style="width:200px; height:600px">
+                The cat was playing in the garden.
+            </textarea>
+
+
+
+        Button :
+            Always specify the type attribute for the button element. Different browsers may use different default types for the button element.
+            <button type="button" onclick="alert('Hello World!')">Click Me!</button>
+
+
+
+        HTML5 <datalist> :
+            specifies a list of pre-defined options for an <input> element.
+                    <input list="browsers">
+                    <datalist id="browsers">
+                        <option value="Internet Explorer">
+                        <option value="Firefox">
+                        <option value="Chrome">
+                        <option value="Opera">
+                        <option value="Safari">
+                    </datalist>
+
+
+
+
+
+        HTML5 <output> and rang attribute :
+            https://www.w3schools.com/html/tryit.asp?filename=tryhtml_elem_output
+
+        
+        
+-->
+
+
+<!--
+    Create a Bookmark:
+    <h2 id="C4">Chapter 4</h2>
+    <a href="#C4">Jump to Chapter 4</a>
+
+    Or, add a link to the bookmark ("Jump to Chapter 4"), from another page:
+
+    <a href="html_demo.html#C4">Jump to Chapter 4</a>
+-->
+
+
+
+<!--
+    Horizontal List with CSS :
+    https://www.w3schools.com/html/tryit.asp?filename=tryhtml_lists_menu
+-->
+
+<!--
+    Block level elements in HTML:
+    <address>   <article>   <aside>     <blockquote>    <canvas>    <dd>        <div>
+    <dl>        <dt>        <fieldset>  <figcaption>    <figure>    <footer>    <form>
+    <h1>-<h6>   <header>    <hr>        <li>            <main>      <nav>       <noscript>
+    <ol>        <output     <p>         <pre>           <section>   <table>     <tfoot>
+    <ul>        <video>
+-->
+
+<!--
+    The HTML <meta> Element: 
+    Metadata is used by browsers (how to display content), by search engines (keywords), and other web services.
+    <meta charset="UTF-8">
+    <meta name="description" content="Free Web tutorials">
+    <meta name="keywords" content="HTML, CSS, XML, JavaScript">
+    <meta name="author" content="John Doe">
+    <meta http-equiv="refresh" content="30">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> (
+
+-->
+
+<!--
+    Problem With Internet Explorer 8 : 
+        You will require the HTML5shiv to provide compatibility for IE Browsers older than IE 9.
+        The HTML5Shiv is placed within the <head> tag.
+        he HTML5Shiv is a javascript file that is referenced in a <script> tag.
+        You should use the HTML5Shiv when you are using the new HTML5 elements such as: <article>, <section>, <aside>, <nav>, <footer>.
+        
+        CDN version : https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js
+        Download    : https://github.com/aFarkas/html5shiv
+-->
+
+<head>
+    <!--[if lt IE 9]>
+                <script src="/js/html5shiv.js"></script>
+            <![endif]-->
+</head>
+
+<!--
+    HTML Layout Techniques. There are four different ways :
+            HTML tables (not recommended)
+            CSS float property
+            CSS flexbox                 (it is not supported in Internet Explorer 10 and earlier versions).
+            CSS framework (bootstrap)
+
+    Css Flexbo : a new layout mode in CSS3.
+                Use of flexbox ensures that elements behave predictably when 
+                the page layout must accommodate different screen sizes and 
+                different display devices. Disadvantages: Does not work in IE10 and earlier.
+
+    HTML Layout (Semantic) Elements :  https://www.w3schools.com/html/html_layout.asp
+        these are block-level elements:
+
+        <header>    - Defines a header for a document or a section
+        <nav>       - Defines a container for navigation links
+        <section>   - Defines a section in a document
+        <article>   - Defines an independent self-contained article
+        <aside>      Defines content aside from the content (like a sidebar)
+        <footer>    - Defines a footer for a document or a section
+        <details>   - Defines additional details
+        <summary>   - Defines a heading for the <details> element
+
+        
+        <section>   : (can be nested with article element) A section is a thematic grouping of content, typically with a heading.
+                    A home page could normally be split into sections for introduction, content, and contact information.
+
+        <article>   : (can be nested with section element) specifies independent, self-contained content.
+                    An article should make sense on its own, and it should be possible to read it independently from the rest of the web site.
+                    can be used: (Forum post, Blog post, Newspaper Article)
+        
+        <header>    : specifies a header for a document or section. https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_header
+                    should be used as a container for introductory content.
+                    You can have several <header> elements in one document.
+                    
+        
+        <footer>    : A footer typically contains the author of the document, copyright information, links to terms of use, contact information, etc.
+
+
+        <nav>       : defines a set of navigation links.
+
+        
+        <aside>     : defines some content aside from the content it is placed in (like a sidebar).
+
+
+        <figure> and <figcaption> : In HTML5, an image and a caption can be grouped together in a <figure> element.
+
+-->
+
+<!--
+    ComputerCode :
+        <code>  - defines a fragment of computer code, does not preserve extra whitespace and line-breaks.
+                To fix this, you can put the <code> element inside a <pre> element
+        
+        <var>   - defines a variable. 
+                ex : <var>E</var> = <var>mc</var><sup>2</sup>.
+
+        <kbd>   - element represents user input, like keyboard input or voice commands.
+                pressing <kbd>Ctrl + S</kbd>
+
+-->
+
+<!--
+    URL Encoding : 
+        URLs can only be sent over the Internet using the ASCII character-set. If a URL contains characters outside the ASCII set, the URL has to be converted.
+        URL encoding converts non-ASCII characters into a format that can be transmitted over the Internet.
+        URL encoding replaces non-ASCII characters with a "%" followed by hexadecimal digits.
+-->
+
+
+<!--
+    Responsive:
+        The HTML <picture> element allows you to define different images for different browser window sizes.
+
+        If the CSS width property is set to 100%, the image will be responsive and scale up and down
+        https://www.w3schools.com/html/tryit.asp?filename=tryhtml_responsive_image
+
+        If the max-width property is set to 100%, the image will scale down if it has to, but never scale up to be larger than its original size
+        https://www.w3schools.com/html/tryit.asp?filename=tryhtml_responsive_image_maxwidth
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        This will set the viewport of your page, which will give the browser instructions on how to control the page's dimensions and scaling.
+        
+        Responsive Text Size: The text size can be set with a "vw" unit, which means the "viewport width".
+        Viewport is the browser window size. 1vw = 1% of viewport width. If the viewport is 50cm wide, 1vw is 0.5cm.
+        https://www.w3schools.com/html/tryit.asp?filename=tryhtml_responsive_text
+
+        Media Queries:
+        In addition to resize text and images, it is also common to use media queries in responsive web pages.
+        https://www.w3schools.com/html/tryit.asp?filename=tryhtml_responsive_media_query
+
+
+-->
+
+
+<!-- 
+    Elements :
+    <html>      : is the root element of an HTML page.
+
+    <pre>       : defines preformatted text.
+
+    <q>         : element defines a short quotation.
+
+    <blockquote>: defines a section that is quoted from another source (cite attribute contains the like)
+    
+    <abbr>      : defines an abbreviation or an acronym.
+
+    <address>   : element defines contact information (author/owner) of a document or an article.
+                usually displayed in italic. Most browsers will add a line break before and after the element.
+
+    <cite>      : element defines the title of a work. https://www.w3schools.com/html/tryit.asp?filename=tryhtml_formatting_cite
+
+    <bdo>       : element is used to override the current text direction
+    
+    <a>         : target, title, href.
+
+    <img>       : src, alt, style(where you define width and height. using style is the better option), width, height
+                If the CSS width property is set to 100%, the image will be responsive and scale up and down
+                https://www.w3schools.com/html/tryit.asp?filename=tryhtml_responsive_image
+                If the max-width property is set to 100%, the image will scale down if it has to, but never scale up to be larger than its original size
+                https://www.w3schools.com/html/tryit.asp?filename=tryhtml_responsive_image_maxwidth
+
+    <map>       : defines an image-map. An image-map is an image with clickable areas. https://www.w3schools.com/html/tryit.asp?filename=tryhtml_images_map2
+
+    <picture>   : contains a number of <source> elements, each referring to different image sources. This way the browser can choose the image that best fits the current view and/or device.
+                https://www.w3schools.com/html/tryit.asp?filename=tryhtml_images_picture
+                Always specify an <img> element as the last child element of the <picture> element. The <img> element is used by browsers that do not support the <picture> element, 
+                or if none of the <source> tags matched.
+
+    <caption>   : To add a caption to a table. The <caption> tag must be inserted immediately after the <table> tag.
+
+    <table>     : https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_tbody
+    
+    <ol>        : <ol start="50"> controls the counting.
+                type="1"	The list items will be numbered with numbers (default)
+                type="A"	The list items will be numbered with uppercase letters
+                type="a"	The list items will be numbered with lowercase letters
+                type="I"	The list items will be numbered with uppercase roman numbers
+                type="i"	The list items will be numbered with lowercase roman numbers
+
+    <dl>        : defines the description list
+                <dl>
+                    <dt>Coffee</dt>
+                    <dd>- black hot drink</dd>
+                    <dt>Milk</dt>
+                    <dd>- white cold drink</dd>
+                </dl>
+
+    <iframe>    : https://www.w3schools.com/html/tryit.asp?filename=tryhtml_iframe_target
+
+    <noscript>  : defines an alternate content for users that have disabled scripts in their browser
+                The <noscript> element can be used in both <head> and <body>.
+
+    <base>      : specifies the base URL and base target for all relative URLs in a page
+                https://www.w3schools.com/html/tryit.asp?filename=tryhtml_head_base
+
+    
+
+
+
+
+-->
+
+<!--
+    Attributes :
+    lang        : the lang attribute is important for search engines
+
+    style       : "property:value;"
+    
+    cite        : with <blockquote>, contains the link
+
+    target      : specifies where to open the linked document.
+                _blank      - Opens the linked document in a new window or tab
+                _self       - Opens the linked document in the same window/tab as it was clicked (this is default)
+                _parent     - Opens the linked document in the parent frame
+                _top        - Opens the linked document in the full body of the window, If your webpage is locked in a frame, you can use target="_top" to break out of the frame
+
+    disabled    : Applies to 
+                <button>
+                <fieldset>
+                <input>
+                <optgroup>
+                <option>
+                <select>
+                <textarea>
+
+    readonly    : 
+    
+    maxlength   : the input field will not accept more than the allowed number of characters.
+
+    for         :       https://stackoverflow.com/questions/12894169/what-is-the-html-for-attribute-in-label
+                        https://www.w3schools.com/css/tryit.asp?filename=trycss_forms
+    
+
+    
+-->

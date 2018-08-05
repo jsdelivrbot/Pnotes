@@ -1,0 +1,145 @@
+
+* React is a javascript library that is used to produce html code to the browser 
+   
+* React library is starting to diverge into to separate libraries :
+    1 - core react library 
+    2 -  react Dom 
+
+* state concept :
+  state is a plain javascript object that is used to record and react to user events.
+  each class based component has it's own state object
+  functional components don't have a state.
+
+* in a functional component the props object is accessed as an argument 
+  but in a class-based component it's available anywhere in any method we define through this.props
+
+* to give a component a class we use className to avoid naming conflict with the keyword class
+
+* props are data passed between components
+  
+
+* we only update the state using the setState(). However we define the state inside our constructor
+  when setState is called the component rerenders again
+
+* Controlled Components are set by the state object 
+  value={this.state.term}
+  it's value only ever changes when the state value changes
+
+* JSX is a preprocessor step that adds XML syntax to JavaScript. You can definitely 
+  use React without JSX but JSX makes React a lot more elegant. Just like XML, JSX tags have 
+  a tag name, attributes, and children.
+
+* Jsx is a react extension that allows us to write javascript
+
+* jsx can not be read by the browser that's why we need webpack and babel to compile it
+
+* whenever we are accessing a variable inside jsx we wrap it in {}
+
+* u need to include react in every file that has jsx in it, coz this jsx code :
+  const searchbar = () => {return <input />;} ;
+  it's converted to the following code :
+  React.createElement 
+
+* when rendering a list react requires a key for each listItem so that it can easily update them
+
+
+* in react, passing callbacks is a great way to do small communication between a parent and child component.
+  watch video 029
+
+
+* import React, {Component} from 'react';. {Component} is the same as React.Component
+
+**********************************************Reducers***********************************************************  
+
+* state in react is more of a component level state, however in redux, it's more of an application level state
+
+* Redux : a state container (a collection of all the date that describes the app).
+
+* reducers : a function that returns a piece of the application state
+  the get two arguments (state,action). 
+  state argument is not the application state, it's the state the reducer is responsible for.
+  reducers are only called when an action occurs 
+
+* in your reducers directory you will normally have index.js where you will combine all reducers in the same folder into 
+  on big object :
+  1 - import {combineReducers} from 'redux';
+  2 - const allReducers = combineReducers({});
+  
+  after that you should use allReducers to create a store in the main index file :
+  1 - import {createStore} from 'redux';
+  2 - const store = createStore(allReducers);
+
+***********************************************Redux*****************************************************
+
+* containers are called smart components because they have a direct access to redux
+
+* difference between smart component and dump component :
+  when exporting a dump component :
+    export default UserList;
+  when exporting smart component(container) :
+    export default connect(mapStateToProps)(UserList); // now it's smart because it's aware of the application state
+
+
+* smart components (containers) need to be the components that care the most about the state
+
+* to connect React with Redux we use a separate library called react-redux
+
+* Provider : makes store available to all containers (components)
+  this goes in your main index.js file :
+    1 - import {Provider} from 'react-redux';
+    2 - ReactDom.render(
+      <Provider store={store}>
+        <App />
+      </Provider>, document.querySelector(".container") 
+    );
+
+
+* mapStateToProps(state) whatever is returned will show up as props. (it bridges the redux state to react component)
+  watch 042
+
+* for mapStateToProps to work it should be call inside the connect method from 'react-redux'
+
+* connect (mapStateToProps, mapDispatchToProps, mergeProps, options) (component);
+  these parameters can be function or an object. However mapStateToProps needs to be a function
+
+* whenever the state changes when using redux :
+  1 - the container rerenders
+  2 - and the object in the mapStateToProps will be assigned to the props property
+
+* an action creator is a function that returns an action(an object), the action then is sent to all reducers
+  which will normally have a switch statement to handle the action, the reducers will react to the action by 
+  updating the state which will cause the mapStateToProps to run and the containers to rerenders.
+
+
+* action : can also be define as any change done to your app(clicking a button, submitting a form)
+
+
+* every action must have a type(always an uppercase usually string).
+  an action may have a payload (more info on the action)
+
+* to send the action to all reducers we use bindActionCreators method. 'import {bindActionCreators} from 'redux' '
+
+* mapDispatchToProps : whatever is returned ends up as props. bindActionCreators is called from inside this method
+
+* 5 Ways to Connect Redux Actions : (with mapDispatchToProps)
+  https://blog.benestudio.co/5-ways-to-connect-redux-actions-3f56af4009c8
+
+* 4 ways to dispatch actions with Redux
+  https://blog.bam.tech/developper-news/4-ways-to-dispatch-actions-with-redux
+  
+***********************************************  *****************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

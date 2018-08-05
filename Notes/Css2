@@ -1,0 +1,838 @@
+CSS Rounded Corners :
+    border-radius :     https://www.w3schools.com/css/css3_borders.asp
+        The border-radius property is actually a shorthand property for the border-top-left-radius,
+         border-top-right-radius, border-bottom-right-radius and border-bottom-left-radius properties.
+
+
+
+
+CSS Border Images :
+    border-image :      https://www.w3schools.com/css/css3_border_images.asp
+        allows you to specify an image to be used instead of the normal border around an element.
+
+
+
+
+CSS Multiple Backgrounds :  https://www.w3schools.com/css/tryit.asp?filename=trycss3_background_multiple
+                            https://www.w3schools.com/css/tryit.asp?filename=trycss3_background_multiple2
+
+    CSS allows you to add multiple background images for an element, through the background-image property.
+    The different background images are separated by commas, and the images are stacked on top of each other, 
+    where the first image is closest to the viewer.
+        
+
+
+        
+    Full Size Background Image :
+        Now we want to have a background image on a website that covers the entire browser window at all times.
+
+            The requirements are as follows:
+                Fill the entire page with the image (no white space)
+                Scale image as needed
+                Center image on page
+                Do not cause scrollbars
+
+                html {
+                    background: url(img_flower.jpg) no-repeat center fixed; 
+                    background-size: cover;
+                }
+
+    CSS background-origin Property :
+        specifies where the background image is positioned.
+
+        The property takes three different values:  https://www.w3schools.com/css/tryit.asp?filename=trycss3_background-origin
+            border-box -        the background image starts from the upper left corner of the border
+            padding-box -       (default) the background image starts from the upper left corner of the padding edge
+            content-box -       the background image starts from the upper left corner of the content
+
+
+    CSS background-clip Property:   https://www.w3schools.com/css/tryit.asp?filename=trycss3_background-clip
+        specifies the painting area of the background.
+
+        The property takes three different values:
+            border-box - (default) the background is painted to the outside edge of the border
+            padding-box - the background is painted to the outside edge of the padding
+            content-box - the background is painted within the content box
+
+        
+
+
+CSS Gradients :      https://www.w3schools.com/css/css3_gradients.asp
+    CSS gradients let you display smooth transitions between two or more specified colors.
+
+
+
+CSS Shadow Effects :
+
+    CSS Text Shadow :   https://www.w3schools.com/cssref/css3_pr_text-shadow.asp
+        text-shadow :     text-shadow: h-shadow v-shadow blur-radius color|none|initial|inherit;
+
+    
+    CSS box-shadow Property :   https://www.w3schools.com/cssref/css3_pr_box-shadow.asp
+        box-shadow :    box-shadow: none|h-offset v-offset blur spread color |inset|initial|inherit;
+                        https://www.w3schools.com/css/tryit.asp?filename=trycss3_box-shadow4
+                            the box-shadow property in that link can be :
+                                box-shadow: 0 4px 25px 0 gray;
+
+
+
+CSS Text Effects :
+    text-overflow :
+        text-overflow: clip|ellipsis|string|initial|inherit; 
+            specifies how overflowed content that is not displayed should be signaled to the user
+            https://www.w3schools.com/css/tryit.asp?filename=trycss3_text-overflow
+            https://www.w3schools.com/css/tryit.asp?filename=trycss3_text-overflow_hover
+
+
+    word-wrap: break-word : recently changed to overflow-wrap: break-word
+        will wrap long words onto the next line.
+        adjusts different words so that they do not break in the middle.
+
+    word-break: break-all
+        irrespective of whether it’s a continuous word or many words, 
+        breaks them up at the edge of the width limit. (i.e. even within the characters of the same word)
+
+
+    So if you have many fixed-size spans which get content dynamically, you might just prefer 
+    using word-wrap: break-word, as that way only the continuous words are broken in between, 
+    and in case it’s a sentence comprising many words, the spaces are adjusted to get intact words (no break within a word).
+    And if it doesn’t matter, go for either.
+            
+
+  
+CSS Web Fonts :     https://www.w3schools.com/css/css3_fonts.asp
+    Web fonts allow Web designers to use fonts that are not installed on the user's computer.
+    When you have found/bought the font you wish to use, just include the font file on your web 
+    server, and it will be automatically downloaded to the user when needed.
+    Your "own" fonts are defined within the CSS @font-face rule.
+
+
+CSS 2D Transforms :
+    transform: translate()         moves an element from its current position (according to the parameters given for the X-axis and the Y-axis).
+    transform: rotate()            rotates an element clockwise or counter-clockwise according to a given degree.
+    transform: scale()             increases or decreases the size of an element (according to the parameters given for the width and height).
+    transform: skewX()             https://www.w3schools.com/css/tryit.asp?filename=trycss3_transform_skewx
+    transform: skewY()             https://www.w3schools.com/css/tryit.asp?filename=trycss3_transform_skewy
+    transform: skew()              https://www.w3schools.com/css/tryit.asp?filename=trycss3_transform_skew
+
+    matrix()            combines all the 2D transform methods into one.
+         matrix(scaleX(),skewY(),skewX(),scaleY(),translateX(),translateY())
+
+
+
+
+    
+CSS 3D Transforms :     https://www.w3schools.com/css/css3_3dtransforms.asp
+    rotateX()
+    rotateY()
+    rotateZ()
+
+    backface-visibility :   backface-visibility: visible|hidden|initial|inherit;                            
+                                defines whether or not the back face of an element should be visible when facing the user.                     
+                                This property is useful when an element is rotated. It lets you choose if the user should see the back face or not.
+
+    perspective-origin :    perspective-origin: x-axis y-axis|initial|inherit;
+                            defines at from which position the user is looking at the 3D-positioned element.
+
+
+
+CSS Transitions :
+    
+    transition:                         transition: property duration timing-function delay|initial|inherit;
+    transition-delay:                   transition-delay: time|initial|inherit;
+    transition-duration:                transition-duration: time|initial|inherit;
+    transition-property:                transition-property: none|all|property|initial|inherit;    
+    transition-timing-function:         linear|ease|ease-in|ease-out|ease-in-out|step-start|step-end|steps(int,start|end)|cubic-bezier(n,n,n,n)|initial|inherit;
+
+
+    To create a transition effect, you must specify two things:
+        the CSS property you want to add an effect to
+        the duration of the effect
+    Note: If the duration part is not specified, the transition will have no effect, because the default value is 0.
+
+    https://www.w3schools.com/css/tryit.asp?filename=trycss3_transition2
+
+
+    transition-timing-function :    https://www.w3schools.com/css/tryit.asp?filename=trycss3_transition_speed
+
+        specifies the speed curve of the transition effect.
+            ease -                      specifies a transition effect with a slow start, then fast, then end slowly (this is default)
+            linear -                    specifies a transition effect with the same speed from start to end
+            ease-in -                   specifies a transition effect with a slow start
+            ease-out -                  specifies a transition effect with a slow end
+            ease-in-out -               specifies a transition effect with a slow start and end
+            cubic-bezier(n,n,n,n) -     lets you define your own values in a cubic-bezier function
+
+
+    Transition + Transformation :
+        https://www.w3schools.com/css/tryit.asp?filename=trycss3_transition_transform
+
+    
+
+CSS Animations :        https://www.youtube.com/watch?v=zHUpx90NerM
+
+    animation:                  animation: name duration timing-function delay iteration-count direction fill-mode play-state;
+    animation-play-state:       animation-play-state: paused|running|initial|inherit;
+
+
+
+    from & to :
+        https://www.w3schools.com/css/tryit.asp?filename=trycss3_animation1
+
+    % :
+        https://www.w3schools.com/css/tryit.asp?filename=trycss3_animation2
+
+
+    background-color and the position (animation) :
+        https://www.w3schools.com/css/tryit.asp?filename=trycss3_animation3
+
+
+    animation-delay (negative value) :
+        https://www.w3schools.com/css/tryit.asp?filename=trycss3_animation_delay2
+
+
+    animation-iteration-count :
+        https://www.w3schools.com/css/tryit.asp?filename=trycss3_animation_count
+
+
+    infinite loop :
+        https://www.w3schools.com/css/tryit.asp?filename=trycss3_animation_count2
+
+
+
+
+    Run Animation in Reverse Direction or Alternate Cycles :
+        animation-direction :
+            normal -                The animation is played as normal (forwards). This is default
+            reverse -               The animation is played in reverse direction (backwards)            https://www.w3schools.com/css/tryit.asp?filename=trycss3_animation_direction
+            alternate -             The animation is played forwards first, then backwards              https://www.w3schools.com/css/tryit.asp?filename=trycss3_animation_direction2
+            alternate-reverse -     The animation is played backwards first, then forwards              https://www.w3schools.com/css/tryit.asp?filename=trycss3_animation_direction3
+
+    
+    animation-timing-function :     https://www.w3schools.com/css/tryit.asp?filename=trycss3_animation_speed    
+
+        ease -                      Specifies an animation with a slow start, then fast, then end slowly (this is default)
+        linear -                    Specifies an animation with the same speed from start to end
+        ease-in -                   Specifies an animation with a slow start
+        ease-out -                  Specifies an animation with a slow end
+        ease-in-out -               Specifies an animation with a slow start and end
+        cubic-bezier(n,n,n,n) -     Lets you define your own values in a cubic-bezier function
+
+
+    Specify the fill-mode For an Animation :
+        CSS animations do not affect an element before the first keyframe is 
+        played or after the last keyframe is played. The animation-fill-mode property can override this behavior.
+
+
+        The animation-fill-mode property specifies a style for the target 
+        element when the animation is not playing (before it starts, after it ends, or both).
+
+
+        The animation-fill-mode property can have the following values:
+            none -          Default value. Animation will not apply any styles to the element before or after it is executing
+            forwards -      The element will retain the style values that is set by the last keyframe (depends on animation-direction and animation-iteration-count)
+            backwards -     The element will get the style values that is set by the first keyframe (depends on animation-direction), and retain this during the animation-delay period
+            both -          The animation will follow the rules for both forwards and backwards, extending the animation properties in both directions
+            
+
+            Forwards  :  https://www.w3schools.com/css/tryit.asp?filename=trycss3_animation_fill-mode
+
+
+            Backwards :  just during the delay period
+                         https://www.w3schools.com/css/tryit.asp?filename=trycss3_animation_fill-mode2
+
+            
+            Both :      https://www.w3schools.com/css/tryit.asp?filename=trycss3_animation_fill-mode3
+
+
+CSS Tooltip :
+
+    Positioning Tooltips :
+        right  :    https://www.w3schools.com/css/tryit.asp?filename=trycss_tooltip_right
+        left   :    https://www.w3schools.com/css/tryit.asp?filename=trycss_tooltip_left
+        top    :    https://www.w3schools.com/css/tryit.asp?filename=trycss_tooltip_top
+        bottom :    https://www.w3schools.com/css/tryit.asp?filename=trycss_tooltip_bottom
+
+
+    Tooltip Arrows : (Created using borders)
+        Bottom Arrow :  https://www.w3schools.com/css/tryit.asp?filename=trycss_tooltip_arrow_bottom
+        Top Arrow    :  https://www.w3schools.com/css/tryit.asp?filename=trycss_tooltip_arrow_top
+        Left Arrow   :  https://www.w3schools.com/css/tryit.asp?filename=trycss_tooltip_arrow_left
+        Right Arrow  :  https://www.w3schools.com/css/tryit.asp?filename=trycss_tooltip_arrow_right
+
+
+    Fade In Tooltips :
+        https://www.w3schools.com/css/tryit.asp?filename=trycss_tooltip_transition
+
+
+CSS Styling Images :    
+    Image Hover Overlay         : (at the bottom of the link)           https://www.w3schools.com/css/css3_images.asp
+    Responsive Image Gallery    : (at the very bottom of the link)      https://www.w3schools.com/css/css3_images.asp
+
+
+CSS The object-fit Property :       (is used to specify how an <img> or <video> should be resized to fit its container.)
+
+    his property tells the content to fill the container in a variety of ways; 
+    such as "preserve that aspect ratio" or "stretch up and take up as much space as possible".
+    
+    The object-fit property can have the following values:
+        fill -          This is default. The replaced content is sized to fill the element's content box. If necessary, the object will be stretched or squished to fit
+        contain -       The replaced content is scaled to maintain its aspect ratio while fitting within the element's content box
+        cover -         The replaced content is sized to maintain its aspect ratio while filling the element's entire content box. The object will be clipped to fit
+        none -          The replaced content is not resized
+        scale-down -    The content is sized as if none or contain were specified (would result in a smaller concrete object size)
+
+        https://www.w3schools.com/css/tryit.asp?filename=trycss3_object-fit_all
+
+
+        without object-fill, when resizing the screen the ratio rate will be destroyed :
+            https://www.w3schools.com/css/tryit.asp?filename=trycss3_object-fit2_without
+        
+        now with object-fill :
+            https://www.w3schools.com/css/tryit.asp?filename=trycss3_object-fit2
+
+
+CSS Buttons :
+    https://www.w3schools.com/css/tryit.asp?filename=trycss_buttons_basic
+    
+    Hoverable Buttons :
+        https://www.w3schools.com/css/tryit.asp?filename=trycss_buttons_hover
+
+
+    Shadow Buttons :
+        https://www.w3schools.com/css/tryit.asp?filename=trycss_buttons_shadow
+
+
+    Disabled Buttons :
+        https://www.w3schools.com/css/tryit.asp?filename=trycss_buttons_disabled
+
+    
+    Button Groups :
+        https://www.w3schools.com/css/tryit.asp?filename=trycss_buttons_group
+
+    
+    Bordered Button Group :
+        https://www.w3schools.com/css/tryit.asp?filename=trycss_buttons_group_border
+
+    
+    Vertical Button Group :
+        https://www.w3schools.com/css/tryit.asp?filename=trycss_buttons_group_vertical
+
+
+    Animated Buttons :
+        https://www.w3schools.com/css/tryit.asp?filename=trycss_buttons_animate1
+
+        https://www.w3schools.com/css/tryit.asp?filename=trycss_buttons_animate3
+
+        https://www.w3schools.com/css/tryit.asp?filename=trycss_buttons_animate2
+
+
+
+
+
+CSS Pagination Examples :
+
+    Active and Hoverable Pagination     :       https://www.w3schools.com/css/tryit.asp?filename=trycss_ex_pagination_active
+
+    Rounded Active and Hoverable Buttons:       https://www.w3schools.com/css/tryit.asp?filename=trycss_ex_pagination_active_round    
+
+    Hoverable Transition Effect         :       https://www.w3schools.com/css/tryit.asp?filename=trycss_ex_pagination_transition
+
+    Bordered Pagination                 :       https://www.w3schools.com/css/tryit.asp?filename=trycss_ex_pagination_border
+
+    Rounded Borders                     :       https://www.w3schools.com/css/tryit.asp?filename=trycss_ex_pagination_border_round
+    
+    Space Between Links                 :       https://www.w3schools.com/css/tryit.asp?filename=trycss_ex_pagination_margin
+
+    Pagination Size                     :       https://www.w3schools.com/css/tryit.asp?filename=trycss_ex_pagination_size
+
+    Centered Pagination                 :       https://www.w3schools.com/css/tryit.asp?filename=trycss_ex_pagination_center
+
+
+
+
+
+CSS Multiple Columns :
+
+    Multi-column Properties :
+        column-count        : specifies the number of columns an element should be divided into.
+        
+        column-gap          : specifies the gap between the columns.
+
+        column-fill         : balance(default)|auto|initial|inherit;
+
+        column-rule-style   : none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset|initial|inherit; 
+                             specifies the style of the rule between columns.
+
+        column-rule-width   : specifies the width of the rule between columns.
+
+        column-rule-color   : specifies the color of the rule between columns.
+
+        column-rule         : column-rule-width column-rule-style column-rule-color|initial|inherit;
+
+        column-span         : none|all|initial|inherit;
+                            specifies how many columns an element should span across.
+
+        column-width        : specifies a suggested, optimal width for the columns.
+
+        columns             : auto|column-width column-count|initial|inherit;
+    
+
+
+
+
+CSS User Interface :
+    resize                  : defines if (and how) an element is resizable by the user.
+                            none|both|horizontal|vertical|initial|inherit;
+                            
+                            Note: The resize property does not apply to inline elements or to 
+                            block elements where overflow="visible". So, make sure that overflow is set to "scroll", "auto", or "hidden".
+
+
+
+
+CSS Custom Properties (Variables) :     https://www.w3schools.com/css/tryit.asp?filename=trycss3_var2
+
+    The var() function can be used to insert the value of a custom property.
+
+    Variables in CSS should be declared within a CSS selector that defines its scope. 
+    For a global scope you can use either the :root or the body selector.
+
+    The variable name must begin with two dashes (--) and is case sensitive!
+
+
+
+
+CSS Box Sizing :
+
+    box-sizing: content-box|border-box|initial|inherit;
+
+    allows us to include the padding and border in an element's total width and height.
+
+    Without the CSS box-sizing Property :
+
+        By default, the width and height of an element is calculated like this:
+        width + padding + border = actual width of an element
+        height + padding + border = actual height of an element
+
+        This means: When you set the width/height of an element, the element often 
+        appear bigger than you have set (because the element's border and padding are 
+        added to the element's specified width/height).
+
+    Applying this to all elements is safe and wise:
+        * {
+            box-sizing: border-box;
+        }
+
+
+
+
+CSS Flexbox Layout Module :     https://www.youtube.com/watch?v=JJSoEo8JSnc&index=21&list=PLillGF-RfqbYeckUaD1z6nviTp31GLTH8&t=0s
+                                it is not supported in Internet Explorer 10 and earlier versions. If you require IE6-10 support, use floats
+                                https://codepen.io/enxaneta/full/adLPwv
+                                https://www.youtube.com/watch?v=R0c911HMb9w&list=PLDoPjvoNmBAyEyQaHOHO1HJtmSgGt07VC&index=27
+                                https://www.w3schools.com/css/css3_flexbox.asp#flex-direction
+
+    The Flexible Box Layout Module, makes it easier to design flexible responsive layout structure without using float or positioning.
+
+    The flex container becomes flexible by setting the display property to flex:
+
+
+    The flex container properties are:
+
+        flex-direction      : column-reverse | column | row | row-reverse
+                            defines in which direction the container wants to stack the flex items.
+
+        flex-wrap           : wrap | nowrap(default) | wrap-reverse
+                            specifies whether the flex items should wrap or not.
+        
+        flex-flow           : flex-direction  flex-direction
+                            shorthand property for setting both the flex-direction and flex-wrap properties.
+                             
+        justify-content     : center | flex-start(default) | flex-end | space-around | space-between
+                            used to align the flex items
+        
+        align-items         : center | flex-start | flex-end | stretch(default) | baseline
+                            is used to align the flex items vertically.
+
+        align-content       : space-between | space-around | stretch(default) | center | flex-start | flex-end
+
+
+
+    Perfect Centering :
+        Set both the justify-content and align-items properties to center, and the flex item will be perfectly centered
+
+    Child Elements (Items) :
+        The direct child elements of a flex container automatically becomes flexible (flex) items.
+
+    
+
+    The flex item properties are:
+
+        order           : specifies the order of the flex items. (default value is 0).
+
+        flex-grow       : specifies how much a flex item will grow relative to the rest of the flex items. (default value is 0.).
+
+        flex-shrink     : specifies how much a flex item will shrink relative to the rest of the flex items. (default value is 1.).
+
+        flex-basis      : specifies the initial length of a flex item
+
+        flex            : a shorthand property for the (flex-grow, flex-shrink, and flex-basis) properties.
+
+        align-self      : specifies the alignment(vertically) for the selected item inside the flexible container
+                        The align-self property overrides the default alignment set by the container's align-items property.
+
+
+
+    Responsive Image Gallery using Flexbox :
+        https://www.w3schools.com/css/tryit.asp?filename=trycss3_flexbox_image_gallery
+
+
+
+    Responsive Website using Flexbox :
+        https://www.w3schools.com/css/tryit.asp?filename=trycss3_flexbox_website2
+
+
+
+
+
+
+CSS Media Queries : https://www.w3schools.com/cssref/css3_pr_mediaquery.asp
+
+
+    Media queries in CSS3 extended the CSS2 media types idea: Instead of looking for a 
+    type of device, they look at the capability of the device.
+
+    Media queries can be used to check many things, such as:
+        width and height of the viewport
+        width and height of the device
+        orientation (is the tablet/phone in landscape or portrait mode?)
+        resolution.
+
+
+    CSS3 Media Types :
+        all 	        Used for all media type devices
+        print	        Used for printers
+        screen	        Used for computer screens, tablets, smart-phones etc.
+        speech	        Used for screenreaders that "reads" the page out loud
+
+    
+    You can also have different stylesheets for different media :
+        <link rel="stylesheet" media="screen and (min-width: 900px)" href="widescreen.css">
+        <link rel="stylesheet" media="screen and (max-width: 600px)" href="smallscreen.css">
+
+
+
+    Orientation: Portrait / Landscape :
+        @media only screen and (orientation: landscape) {
+            body {
+                background-color: lightblue;
+            }
+        }
+
+
+
+    Min Width to Max Width :
+        @media screen and (max-width: 900px) and (min-width: 600px) {
+            div.example {
+                font-size: 50px;
+                padding: 50px;
+                border: 8px solid black;
+                background: yellow;
+            }
+        }
+
+
+
+    Using an additional value:
+        /* When the width is between 600px and 900px OR above 1100px - change the appearance of <div> */
+        @media screen and (max-width: 900px) and (min-width: 600px), (min-width: 1100px) {
+            div.example {
+                font-size: 50px;
+                padding: 50px;
+                border: 8px solid black;
+                background: yellow;
+            }
+        }
+
+
+
+CSS Media Queries - Examples :
+
+    Media Queries For Menus :
+        https://www.w3schools.com/css/tryit.asp?filename=trycss_mediaqueries_navbar
+
+
+    Media Queries For Columns :
+        https://www.w3schools.com/css/tryit.asp?filename=trycss_mediaqueries_ex2
+
+        Tip: A more modern way of creating column layouts, is to use CSS Flexbox 
+        However, it is not supported in Internet Explorer 10 and earlier versions.
+        If you require IE6-10 support, use floats (as shown above).
+
+
+    
+
+
+CSS Responsive :
+
+    The Viewport :  
+        The viewport is the part of the webpage that the user can currently see. 
+        The scrollbars move the viewport to show other parts of the page.
+
+        And to avoid any confusion, it is neither the size of the windows of your browser
+        nor the screen resolution. For the same window size, a browser with more toolbars 
+        displayed will have a smaller viewport
+
+
+        Setting The Viewport :
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+            A <meta> viewport element gives the browser instructions on how to control the page's dimensions and scaling.
+            The width=device-width part sets the width of the page to follow the screen-width of the device (which will vary depending on the device).
+            The initial-scale=1.0 part sets the initial zoom level when the page is first loaded by the browser.
+
+        
+        Users are used to scroll websites vertically on both desktop and mobile devices - but not horizontally!
+        So, if the user is forced to scroll horizontally, or zoom out, to see the whole web page it results in a poor user experience
+
+
+
+
+
+    Grid-View :
+        Many web pages are based on a grid-view, which means that the page is divided into columns:
+        Using a grid-view is very helpful when designing web pages. It makes it easier to place elements on the page.
+        
+        https://www.w3schools.com/css/tryit.asp?filename=tryresponsive_cols
+
+
+
+
+
+
+    Media Queries :
+        https://www.w3schools.com/css/tryit.asp?filename=tryresponsive_breakpoints
+
+        Always Design for Mobile First :
+            Mobile First means designing for mobile before designing for desktop or 
+            any other device (This will make the page display faster on smaller devices).
+
+            https://www.w3schools.com/css/tryit.asp?filename=tryresponsive_mobilefirst
+
+            
+
+        breakpoints for (tablets and phones) :
+            https://www.w3schools.com/css/css_rwd_mediaqueries.asp
+
+            It might seem odd that we have two sets of identical classes, 
+            but it gives us the opportunity in HTML, to decide what will happen with the columns at each breakpoint.
+
+
+
+        Typical Device Breakpoints :
+            https://www.w3schools.com/css/tryit.asp?filename=tryresponsive_mediaquery_breakpoints
+
+
+
+        Orientation: Portrait / Landscape :
+            @media only screen and (orientation: landscape) {
+                body {
+                    background-color: lightblue;
+                }
+            }
+
+
+
+
+    Images :
+        If the width property is set to 100%, the image will be responsive and scale up and down :
+            img {
+                width: 100%;
+                height: auto;
+            }
+
+        If the max-width property is set to 100%, the image will scale down if it has to, but never scale up to be larger than its original size:
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+
+        Background Images :
+            If the background-size property is set to "contain"   :     https://www.w3schools.com/css/tryit.asp?filename=tryresponsive_image_background1
+
+            If the background-size property is set to "100% 100%" :     https://www.w3schools.com/css/tryit.asp?filename=tryresponsive_image_background2
+
+            If the background-size property is set to "cover"     :     https://www.w3schools.com/css/tryit.asp?filename=tryresponsive_image_background3
+
+
+        HTML5 <picture> Element :
+            The <picture> element works similar to the <video> and <audio> elements. 
+            You set up different sources, and the first source that fits the preferences is the one being used:
+                <picture>
+                    <source srcset="img_smallflower.jpg" media="(max-width: 400px)">
+                    <source srcset="img_flowers.jpg">
+                    <img src="img_flowers.jpg" alt="Flowers">
+                </picture>
+
+
+
+    Videos :
+        If the width property is set to 100%, the video player will be responsive and scale up and down:
+            video {
+                width: 100%;
+                height: auto;
+            }
+
+        If the max-width property is set to 100%, the video player will scale down if it has to, but never scale up to be larger than its original size:
+            video {
+                max-width: 100%;
+                height: auto;
+            }
+
+
+        Adding video example :
+            https://www.w3schools.com/css/tryit.asp?filename=tryresponsive_video3
+        
+
+
+    Templates :
+        https://www.w3schools.com/css/css_rwd_templates.asp
+
+
+
+
+
+CSS Grid Layout Module :    https://www.youtube.com/watch?v=jV8B24rSN5o
+
+    The CSS Grid Layout Module offers a grid-based layout system, with rows and columns, 
+    making it easier to design web pages without having to use floats and positioning.
+
+
+    An HTML element becomes a grid container by setting the display property to grid or inline-grid.
+    All direct children of the grid container automatically become grid items.
+
+
+    You can adjust the gap size by using one of the following properties:
+        grid-column-gap     :   https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_grid-column-gap
+        grid-row-gap        :   https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_grid-row-gap
+        grid-gap            :   a shorthand property for the grid-column-gap and the grid-row-gap properties.
+
+    
+    Grid Lines :
+        The line between columns are called column lines.
+        The line between rows are called row lines.
+
+        Place a grid item at column line 1, and let it end on column line 3:
+            https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_lines
+
+        Place a grid item at row line 1, and let it end on row line 3:
+            https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_lines2
+
+
+
+    Grid Container :
+        To make an HTML element behave as a grid container, you have to set the display property to grid or inline-grid.
+        Grid containers consist of grid items, placed inside columns and rows.
+
+        grid-template-columns :  none|auto|max-content|min-content|length|initial|inherit;
+                                 https://www.w3schools.com/cssref/playit.asp?filename=playcss_grid-template-columns
+                                 https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_grid-template-columns2
+
+        
+        grid-template-rows    : none|auto|max-content|min-content|length|initial|inherit;
+                                https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_grid-template-rows
+
+
+        justify-content       : aligns the whole grid inside the container.
+                                Note: The grid's total width has to be less than the container's width for the justify-content property to have any effect.
+                                
+                                space-evenly :  https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_justify-content_space-evenly
+                                space-around :  https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_justify-content_space-around
+                                space-between:  https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_justify-content_space-between
+                                center       :  https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_justify-content_center
+                                start        :  https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_justify-content_start
+                                end          :  https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_justify-content_end
+
+
+
+        align-content         : used to vertically align the whole grid inside the container.
+                                Note: The grid's total height has to be less than the container's height for the align-content property to have any effect.
+                                
+                                center       : https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_align-content_center
+                                space-evenly : https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_align-content_space-evenly
+                                space-around : https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_align-content_space-around
+                                space-between: https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_align-content_space-between
+                                start        : https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_align-content_start
+                                end          : https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_align-content_end
+
+
+
+
+    Grid Item :
+        grid-column           : defines on which column(s) to place an item.
+                                Note: The grid-column property is a shorthand property for the grid-column-start and the grid-column-end properties.
+
+                               https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_grid-column_line
+
+                               Make "item1" start on column 1 and span 3 columns: https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_grid-column
+
+                               Make "item2" start on column 2 and span 3 columns: https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_grid-column2
+
+        
+        grid-row              : defines on which row to place an item.
+                                Note: The grid-row property is a shorthand property for the grid-row-start and the grid-row-end properties.
+
+
+                                Make "item1" start on row-line 1 and end on row-line 4: https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_grid-row1
+
+                                Make "item1" start on row 1 and span 2 rows:  https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_grid-row2
+
+
+
+        grid-area             : a shorthand property for the (grid-row-start, grid-column-start, grid-row-end and the grid-column-end)                       
+                                
+                                Make "item8" start on row-line 1 and column-line 2, and end on row-line 5 and column line 6:
+                                    https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_grid-area1
+
+
+                                Make "item8" start on row-line 2 and column-line 1, and span 2 rows and 3 columns:
+                                    https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_grid-area2
+
+
+
+
+        Naming Grid Items  :
+
+            The grid-area property can also be used to assign names to grid items.
+            Named grid items can be referred to by the grid-template-areas property of the grid container.
+
+            Item1 gets the name "myArea" and spans all five columns in a five columns grid layout:
+                https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_grid-area_named
+
+                Each row is defined by apostrophes (' ')
+                The columns in each row is defined inside the apostrophes, separated by a space.
+
+                Note: A period sign represents a grid item with no name.
+
+                Let "myArea" span two columns in a five columns grid layout (period signs represent items with no name):
+                    https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_grid-area_named1
+
+                
+                Make "item1" span two columns and two rows:
+                    https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_grid-area_named2
+
+                
+                Name all items, and make a ready-to-use webpage template:
+                    https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_grid-area_named3
+
+        
+
+        The Order of the Items :
+            The Grid Layout allows us to position the items anywhere we like.
+            The first item in the HTML code does not have to appear as the first item in the grid.
+
+            https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_flexible_order
+
+        You can re-arrange the order for certain screen sizes, by using media queries:
+            https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_flexible_order2

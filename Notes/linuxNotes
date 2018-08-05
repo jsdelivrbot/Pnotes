@@ -1,0 +1,139 @@
+
+******* basic info *******
+/                : is the root, the top of the file system hierarchy
+/bin             : binaries and other executable files
+/ect             : system configuration files
+/opt             : third party software
+/tmp             : temporary space, cleared on reboot
+/usr             : user related programs
+Sell              : is the default interface to linux
+$ sell prompt    : normal user
+# sell prompt    : super user
+~                : is the current user home directory 
+PATH             : is an environment variable, controls the command search path
+-- help / -h     : works with some commands but not with all
+
+
+******* basic Commands *******
+ls               : you can perform this command on an external directory (ls Desktop/dir1)
+
+ls -a            : lits all files including hidden files 
+
+ls -F            : for files (/ for directories, * is for executable)
+
+ls -latr         : l for long listing, a for all files, t for sorting by time, r for recursively
+
+ls -d            : lists directory name, not contents
+
+cd               : (cd ~) cd and enter will take you home
+
+cd /             : root directory 
+
+cd -             : previous directory
+
+pwd              : cwd
+
+cat              : displays files
+
+exit
+
+clear
+
+man              : online manual
+
+echo             : displays arguments
+
+which            : locates a command
+
+ls --help
+
+rm -r            : deletes everything in this dir (files & dirs)
+
+rm -rf           : deletes everything and it does not prompt you.
+
+rm               : (rm file1) deletes file1
+
+rm *             : all the files in the dir
+
+rm file*         : every file that starts with file
+
+rm -d            : removes empty directories (rm -d mydir) also read the below command
+
+rmdir [-p]       : removes an empty directory, (rmdir *) removes all empty directories in cwd at once
+                   you can't do that wiht (rm -d *) this will erase everything 
+
+mkdir [-p]       : creates a dir     ex : mkdir -p dir1/dir2/dir3
+
+pushd, popd      : are shell builtins which allow you manipulate the directory stack. This can be used to change directories but return to the directory from which you came.
+
+file             : it tells you the type of the file you write after it
+
+locate           : to locate a file, it takes the name of the file or part of the name and does the search
+
+sudo updatedb    : it helps the locate command work properly
+
+history          : lists all the commands you typed in
+
+whatis           : display what a command does
+
+apropos          : gives you a list of commands that are related to the word you typed after it (apropos time)
+
+man              : gives you info on the command you type after it
+
+touch            : if you touch a file the exists, it will update the date of the file (last access date)
+                   if you touch a file that doesn't exist, it will be created
+
+cp               : it copy the file you type after it with the name you specify in the cwd 
+                   (cp ~/file filecopy) copys the file from ~ dir to cwd with this name "filecopy"
+                   to copy multiple directories at once (cp -r /mnt/c/Users/omara/Desktop/Dev/JavaScript/{dist,src} .)
+
+mv               : it moves commands and files. (mv file file1) renames file as file1 and deletes file  
+                   it moved file into file1
+                   to move multiple files or directories at once (mv ./{dist,src} /mnt/c/Users/omara/Desktop/Dev/JavaScript/)
+
+cat              : displays the contents of a file (cat file1)
+                   concatenates two files (cat file1 file2)
+                   (cat >> file2) append to the file. use (ctrl D) to exit
+                   (cat > file2 ) overwrite the file. or creates new file if it doesn't exist
+                   (ls -al / > file.txt)
+
+less             : it pages through a file, you can search through the file as well
+
+nano             : text editor
+
+history | less   : perform less on the history output
+
+sudo -s          : admin user (timer running in the background)
+
+su - bakni       : login as another user
+
+chmod +x file    : make a file executable
+                   (chmod 644 file) (chmod 722 file) (chmod 755 file) the most common one
+
+ctrl c           : to kill and process
+
+watch            : runs a command every 2 sec 
+
+killall firefox  : kill every process that has to do with firefox
+
+grep             : The grep command is used to search text. It searches the given file for lines containing a match to the given strings or words.
+                   (grep "less" ./Notes/linuxNotes)
+
+source           : executes files (source ~/.bashrc)
+
+
+
+installing apps :
+    How do I show the git branch with colours in Bash prompt?       https://askubuntu.com/questions/730754/how-do-i-show-the-git-branch-with-colours-in-bash-prompt
+
+    How to install Winrar ?                                         sudo apt-get install rar unrar
+
+    How to install Git ?                                            https://www.liquidweb.com/kb/install-git-ubuntu-16-04-lts/
+
+    How to install Chrome ?                                         https://askubuntu.com/questions/510056/how-to-install-google-chrome
+
+    How to install Node.js ?
+                                                                    1- insall curl : sudo apt install curl
+                                                                    2- curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+                                                                    3- sudo apt-get install -y nodejs
+                                                                    4- sudo apt-get install -y build-essential

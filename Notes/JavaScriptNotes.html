@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+
+</body>
+
+<script src="">
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // get Date from the console :
+    var x = prompt('what is your name ?');
+    console.log(x);
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //function expression :
+    var x = function (par) {
+        // code goes here
+    }
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Loops in JavaScript
+    // https://stackoverflow.com/questions/9329446/for-each-over-an-array-in-javascript
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Arrays in Js :
+    var names = ['Omar', 'moh', 'Awwad']; // this one is faster and more readable
+    var names = new Array('Omar', 'moh', 'Awwad');
+
+    names.forEach(function (current, index, array) {
+
+    });
+
+
+    //forEach accepts a call back as well
+    const renderRecipe = recipe => {
+        // some code
+    }
+    export const renderResults = recipes => {
+        recipes.foreach(renderRecipe);
+    }
+
+
+
+    var newArr = names.map(function (current, index, array) { // the only difference betwenn foreach and map is that this one returns a new array
+        return current;
+    }); // newArr will be an array of Omar, moh, awwad
+
+
+    function cal() { // returns an arrray
+        const arr = [2, 4, 5, 6, 7];
+
+        return arr.map(num => {
+            return (num * 2);
+        });
+    }
+
+
+
+
+    // reduce method https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
+    // Array Reference (Properties && Methods) : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+    //                                          https://www.w3schools.com/jsref/jsref_obj_array.asp
+
+
+    // prototype property for Arrays :
+    Array.prototype.myUcase = function () {
+        var i;
+        for (i = 0; i < this.length; i++) {
+            this[i] = this[i].toUpperCase();
+        }
+    };
+    var names = ['omar', 'moh'];
+    names.myUcase();
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Objects : (a variable containing an object, doesn't have a real copy of the object. it just points (reference)to it.)
+
+    // JavaScript Objects are Mutable
+    // Objects are mutable: They are addressed by reference, not by value.
+    // If person is an object, the following statement will not create a copy of person:
+    var x = person;
+    // The object x is not a copy of person. It is person. Both x and person are the same object.
+
+
+    var john = {
+        name: 'John',
+        lastName: 'Smith',
+        yearOfBirth: 1990,
+        job: 'teacher',
+        isMarried: false
+    };
+
+    console.log(john.lastName);
+    console.log(john['lastName']);
+
+    var xyz = 'job';
+    console.log(john[xyz]);
+
+    john.lastName = 'Miller';
+    john['job'] = 'programmer';
+
+
+    var jane = new Object();
+    jane.name = 'Jane';
+    jane.lastName = 'Smith';
+    jane['yearOfBirth'] = 1969;
+    jane['job'] = 'retired';
+    jane['isMarried'] = true;
+
+    // Object with methods :
+
+    var john = {
+        name: 'John',
+        lastName: 'Smith',
+        yearOfBirth: 1990,
+        job: 'teacher',
+        isMarried: false,
+        family: ['Jane', 'Mark', 'Bob'],
+        calculateAge: function () {
+            this.age = 2016 - this.yearOfBirth; // this creates an Age property when the function is invoked
+        }
+    };
+    john.calculateAge();
+
+
+    var mike = {
+        yearOfBirth: 1950,
+        calculateAge: function () {
+            this.age = 2016 - this.yearOfBirth; // this creates an Age property when the function is invoked
+        }
+    };
+    mike.calculateAge();
+
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Execution Contexts :
+
+    // Global : code that is not inside any function
+    //          associated with the global object
+    //          in the browser, that's the widow object
+    // in other words, everything we declare in the global object automatically gets attached to the window object
+    lastName === window.lastName
+
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Hoisting in JavaScript : the main takeaway is that you can use a function in js before u actually create it
+
+    calculateAge(1965); // this would work because functions statements and variables in Js are hoisted
+    function calculateAge(year) {
+        console.log(2016 - year);
+    }
+
+    retirement(1956); // wouldn't work coz this is function expression
+    var retirement = function (year) {
+        console.log(65 - (2016 - year));
+    }
+
+    console.log(age); // this would give you undefined coz, and if u remove the declaration it will give you an error
+    var age = 23;
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Lecture: Scoping :
+    // First scoping example
+    var a = 'Hello!';
+    first();
+
+    function first() {
+        var b = 'Hi!';
+        second();
+
+        function second() {
+            var c = 'Hey!';
+            console.log(a + b + c); // this will print out Hello!Hi!Hey!
+        }
+    }
+
+    // Example to show the difference between execution stack and scope chain
+    var a = 'Hello!';
+    first();
+
+    function first() {
+        var b = 'Hi!';
+        second();
+
+        function second() {
+            var c = 'Hey!';
+            third()
+        }
+    }
+
+    function third() {
+        var d = 'John';
+        //console.log(c); will give you C in not defined error
+        console.log(a + d); // it only has access to these variables
+    }
+
+
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // This KeyWord :
+    // 1 - each execution context has 'this' keyword
+    // 2 - in a Regular Function Call : points at the global object (the window object)
+    // 3 - in a Method Call : points to the object calling the method
+    // 4 - this keyword is only assigned a value when the object calls the method
+
+    console.log(this); // this points to the window
+    calculateAge(1985);
+
+    function calculateAge(year) {
+        console.log(2016 - year);
+        console.log(this); // this points to the window coz it's a regular function call
+    }
+
+    var john = {
+        name: 'John',
+        yearOfBirth: 1990,
+        calculateAge: function () {
+            console.log(this); // points to the john object coz it's a method call
+            console.log(2016 - this.yearOfBirth);
+
+            function innerFunction() { // innerFunction is not a method.
+                console.log(this); // careful, this also points to the window object coz it's still a regular function call not a method
+            }
+            innerFunction(); // function call
+        }
+    }
+
+    john.calculateAge(); // method call
+    john.in
+
+    var mike = {
+        name: 'Mike',
+        yearOfBirth: 1984
+    };
+
+
+    mike.calculateAge = john.calculateAge; // this is method borrowing (without the parenthesis, coz we are not calling any methods)
+    mike.calculateAge();
+
+
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // DOM manipulation :
+    // Reference        :     https://www.w3schools.com/jsref/dom_obj_document.asp
+    // Events Reference :     https://developer.mozilla.org/en-US/docs/Web/Events
+    // Element Object   :     https://www.w3schools.com/jsref/dom_obj_all.asp
+
+    // useful like for Dom manipulation
+    // https://github.com/nefe/You-Dont-Need-jQuery#dom-manipulation
+
+    // important events :
+    // hashchange :  https://developer.mozilla.org/en-US/docs/Web/Events/hashchange
+    // load       :  https://developer.mozilla.org/en-US/docs/Web/Events/load
+
+
+    // how to add the same event listener to different events 
+    ['hashchange', 'load'].forEach(event => window.addEventListener(event, () => { }))
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Inheritance : (Js is a prototype-based language)
+    // the prototype property of an object is where we put methods and properties
+    // that we want other objects to inherit.
+
+    // few important notes on inheritance in Js :
+    // 1. every js object has a prototype property which makes inheritance possible
+    // 2. when a certain method or property is called, the search starts in the
+    // object itself, and if it's not there it moves to the object's prototype.
+
+
+
+
+    // in and delete operator :
+    //  https: //developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/in
+    //  https: //developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Lecture: Function constructor (it's only a template (a class))
+    // the methods that you have inside the function constructor are invoked only
+    // through the object.
+    // with objects you can assign methods from outside the object itself
+    // but with function constructor you must do it from inside the function itself.
+    // or you can use the prototype property
+
+
+    var john = {
+        name: 'John',
+        yearOfBirth: 1990,
+        job: 'teacher'
+    };
+
+    var Person = function (name, yearOfBirth, job) {
+        this.name = name;
+        this.yearOfBirth = yearOfBirth;
+        this.job = job;
+    }
+
+    Person.prototype.calculateAge = function () { // this method is not attached to the objects created but it can be inherited by them
+        console.log(2016 - this.yearOfBirth);
+    };
+
+    Person.prototype.lastName = 'Smith';
+
+    var john = new Person('John', 1990, 'teacher'); // the new keyword creates
+    // a new empty object and have the this keyword point at the object itself
+    // rather than the global context (notice that calling Person without the new
+    // keyword would have the this keyword point at the global context)
+    var jane = new Person('Jane', 1969, 'designer');
+    var mark = new Person('Mark', 1948, 'retired');
+
+    john.calculateAge();
+    jane.calculateAge();
+    mark.calculateAge();
+
+    console.log(john.lastName);
+    console.log(jane.lastName);
+    console.log(mark.lastName);
+
+
+
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Object.Create (a different way of creating an object)
+    // it allows as to set the prototype manually for the newly created object
+    var personProto = {
+        calculateAge: function () {
+            console.log(2016 - this.yearOfBirth);
+        }
+    };
+
+    var john = Object.create(personProto);
+    john.name = 'John';
+    john.yearOfBirth = 1990;
+    john.job = 'teacher';
+
+    var jane = Object.create(personProto, {
+        name: {
+            value: 'Jane'
+        },
+        yearOfBirth: {
+            value: 1969
+        },
+        job: {
+            value: 'designer'
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Lecture: Primitives vs objects
+
+    // Primitives
+    var a = 23;
+    var b = a;
+    a = 46;
+    console.log(a); // 46
+    console.log(b); // 23
+
+    // Objects
+    var obj1 = {
+        name: 'John',
+        age: 26
+    };
+    var obj2 = obj1;
+    obj1.age = 30;
+    console.log(obj1.age); // 30 (Objects are mutable: They are addressed by reference)
+    console.log(obj2.age); // 30
+
+    // Functions
+    var age = 27;
+    var obj = {
+        name: 'Jonas',
+        city: 'Lisbon'
+    };
+
+    function change(a, b) {
+        a = 30;
+        b.city = 'San Francisco';
+    }
+
+    change(age, obj);
+
+    console.log(age); // 27
+    console.log(obj.city); // San Francisco
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Functions :
+    // Notes :
+    // 1. are instances of the object type, therefore they behave like any other object
+    // 2. we can pass a function as an argument to another function
+    // 3. we can return a function from another function
+
+    var years = [1990, 1965, 1937, 2005, 1998];
+
+    function arrayCalc(arr, fn) {
+        var arrRes = [];
+        for (var i = 0; i < arr.length; i++) {
+            arrRes.push(fn(arr[i]));
+        }
+        return arrRes;
+    }
+
+    function calculateAge(el) {
+        return 2016 - el;
+    }
+
+    function isFullAge(el) {
+        return el >= 18;
+    }
+
+    function maxHeartRate(el) {
+        if (el >= 18 && el <= 81) {
+            return Math.round(206.9 - (0.67 * el));
+        } else {
+            return -1;
+        }
+    }
+
+
+    var ages = arrayCalc(years, calculateAge); // we don't use parentheses (coz, it's a callback function)
+    var fullAges = arrayCalc(ages, isFullAge);
+    var rates = arrayCalc(ages, maxHeartRate);
+
+    console.log(ages);
+    console.log(rates);
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Lecture: Functions returning functions
+
+    function interviewQuestion(job) {
+        if (job === 'designer') {
+            return function (name) {
+                console.log(name + ', can you please explain what UX design is?');
+            }
+        } else if (job === 'teacher') {
+            return function (name) {
+                console.log('What subject do you teach, ' + name + '?');
+            }
+        } else {
+            return function (name) {
+                console.log('Hello ' + name + ', what do you do?');
+            }
+        }
+    }
+
+    var teacherQuestion = interviewQuestion('teacher'); // the right part will return the anonymous function
+    var designerQuestion = interviewQuestion('designer'); // and then we store it in the variable on the left and invoke it with a param
+
+
+    teacherQuestion('John');
+    designerQuestion('John');
+    designerQuestion('jane');
+    designerQuestion('Mark');
+    designerQuestion('Mike');
+
+    // instead of having to store the anonymous function in a variable and then invoke it
+    // we can just invoke it right away once it's returned
+    interviewQuestion('teacher')('Mark');
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Lecture: IIFE
+
+    function game() {
+        var score = Math.random() * 10;
+        console.log(score >= 5);
+    }
+    game();
+
+
+    (function () { // IIFE called immediately and only only time
+        var score = Math.random() * 10;
+        console.log(score >= 5);
+    })();
+
+    //console.log(score);
+
+
+    (function (goodLuck) {
+        var score = Math.random() * 10;
+        console.log(score >= 5 - goodLuck);
+    })(5);
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Lecture: Closures : an inner function has always access to the variables
+    // and parameters of its outer function, even after the outer function has returned
+
+
+    function retirement(retirementAge) {
+        var a = ' years left until retirement.';
+        return function (yearOfBirth) {
+            var age = 2016 - yearOfBirth;
+            console.log((retirementAge - age) + a);
+        }
+    }
+
+    var retirementUS = retirement(66);
+    var retirementGermany = retirement(65);
+    var retirementIceland = retirement(67);
+
+    retirementGermany(1990);
+    retirementUS(1990);
+    retirementIceland(1990);
+
+    //retirement(66)(1990);
+
+
+    function interviewQuestion(job) {
+        return function (name) {
+            if (job === 'designer') {
+                console.log(name + ', can you please explain what UX design is?');
+            } else if (job === 'teacher') {
+                console.log('What subject do you teach, ' + name + '?');
+            } else {
+                console.log('Hello ' + name + ', what do you do?');
+            }
+        }
+    }
+
+    interviewQuestion('teacher')('John');
+
+    // how to control data access using the power of closures, this how you create a module (model - view - controller)
+    // how to return an object ?
+    // budgetController module
+    var budgetController = (function () {
+        var x = 23;
+        var add = function (a) {
+            return x + a;
+
+        }
+        return { // we are returning an object here
+            publicTest: function () { // this function is public because it's being return
+                console.log(x); // but the x and add function are private to that scope
+            },
+            secMethod: function () {
+                // has access to all the external variables
+            }
+        }
+    })();
+
+    budgetController.publicTest(); // budgetController is an object that is returned by the IIFE
+    budgetController.x; // won't work, this object only has the publicTest and secMethod methods
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Lecture: Bind, call and apply
+
+    var john = {
+        name: 'John',
+        age: 26,
+        job: 'teacher',
+        presentation: function (style, timeOfDay) {
+            if (style === 'formal') {
+                console.log('Good ' + timeOfDay + ', Ladies and gentlemen! I\'m ' + this.name + ', I\'m a ' +
+                    this.job + ' and I\'m ' + this.age + ' years old.');
+            } else if (style === 'friendly') {
+                console.log('Hey! What\'s up? I\'m ' + this.name + ', I\'m a ' + this.job + ' and I\'m ' + this
+                    .age + ' years old. Have a nice ' + timeOfDay + '.');
+            }
+        }
+    };
+
+    var emily = {
+        name: 'Emily',
+        age: 35,
+        job: 'designer'
+    };
+
+    john.presentation('formal', 'morning');
+
+    john.presentation.call(emily, 'friendly', 'afternoon'); // method borrowing
+
+    //john.presentation.apply(emily, ['friendly', 'afternoon']); // apply is the same but it sends an array as a second param
+
+    var johnFriendly = john.presentation.bind(john, 'friendly');
+    //bind is similar to 'call' function the difference is it does not invoke the function immediately
+    // instead it generates a copy and stores it.
+    // it allows you to pre-set some params (this is called carrying )
+
+
+    johnFriendly('morning');
+    johnFriendly('night');
+
+    var emilyFormal = john.presentation.bind(emily, 'formal');
+    emilyFormal('afternoon');
+
+
+    // Another cool example
+    var years = [1990, 1965, 1937, 2005, 1998];
+
+    function arrayCalc(arr, fn) {
+        var arrRes = [];
+        for (var i = 0; i < arr.length; i++) {
+            arrRes.push(fn(arr[i]));
+        }
+        return arrRes;
+    }
+
+    function calculateAge(el) {
+        return 2016 - el;
+    }
+
+    function isFullAge(limit, el) {
+        return el >= limit;
+    }
+
+    var ages = arrayCalc(years, calculateAge);
+    var fullJapan = arrayCalc(ages, isFullAge.bind(this, 20)); // you used the bind function on
+    // 'isFullAge' function to create a copy of it with pre-set arguments
+    console.log(ages);
+    console.log(fullJapan);
+
+    // Event bubbling and Event Delegation
+
+    // bubbling     : the event bubbles up inside the Dom tree
+    // Delegation   : Using bubbling to place the event handler on the parent instead of the target element
+    // if you have a list of items to be added to your site, instead of attaching click event on each list item
+    // you can attach the event on the list itself and make use of the event delegation
+    // on your event handler function you always have an access to the event as a param and therefore you can
+    // get the target element that fired up the event like that "event.target"
+    // if you want to reach the parent of the target element you can do this :
+    event.target.parentNode // you can repeat parentNode multiple times
+    // you may need to use the closest method with target property
+    event.target.closest('.btn-class');
+    // or
+    event.target.matches('btn', 'btn *'); // this matches either btn or any child of btn
+
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ES6
+
+    // Lecture: let and const
+    // variables declared with var are function-scope
+    // variables declared with let and const are block-scope
+
+    // ES5
+    var name5 = 'Jane Smith';
+    var age5 = 23;
+    name5 = 'Jane Miller'; // name5 will be 'Jane Smith'
+    console.log(name5);
+
+    // ES6
+    const name6 = 'Jane Smith';
+    let age6 = 23;
+    name6 = 'Jane Miller'; // name6 cannot be changed
+    console.log(name6);
+
+
+    // ES5
+    function driversLicence5(passedTest) {
+
+        if (passedTest) {
+            console.log(firstName); // will be undefined coz in an execution context all vars are hoisted
+            var firstName = 'John';
+            var yearOfBirth = 1990;
+        }
+
+
+        console.log(firstName + ', born in ' + yearOfBirth + ', is now officially allowed to drive a car.'); // this will work coz variables declared with var are function-scope
+    }
+
+    driversLicence5(true);
+
+
+    // ES6
+    function driversLicence6(passedTest) {
+
+        //console.log(firstName); // will not work in ES6 even though it's hoisted
+        let firstName;
+        const yearOfBirth = 1990; // constants have to be initialized on the same line the were declared
+
+        if (passedTest) {
+            firstName = 'John';
+        }
+
+        console.log(firstName + ', born in ' + yearOfBirth + ', is now officially allowed to drive a car.'); // this won't work coz variables declared with let and const are block-scope
+    }
+
+    driversLicence6(true);
+
+
+
+    // ES5
+    var i = 23;
+
+    for (var i = 0; i < 5; i++) {
+        console.log(i); // this will print (0 1 2 3 4 )
+    }
+
+    console.log(i); // this will print (5)
+
+
+    // ES6
+    let i = 23;
+
+    for (let i = 0; i < 5; i++) {
+        console.log(i); // this will print (0 1 2 3 4 )
+    }
+
+    console.log(i); // this will print (23)
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Import & Export Es6 :
+    https://www.youtube.com/watch?v=Jqn_wjkSZwo
+    //    1 - https://medium.com/@thejasonfile/a-simple-intro-to-javascript-imports-and-exports-389dd53c3fac
+    //    2 - https://hackernoon.com/import-export-default-require-commandjs-javascript-nodejs-es6-vs-cheatsheet-different-tutorial-example-5a321738b50f
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Lecture: Blocks and IIFEs
+
+
+    // in ES6 we don't need to use IIFEs to achieve data privacy we can just create blocks and use the keyword let instead of var
+    {
+        const a = 1;
+        let b = 2;
+        var c = 3;
+    }
+
+    console.log(a + b); // error
+    console.log(c); // c is accessible
+
+
+    // ES5     this is the old way of achieving data privacy with IIFEs in ES5
+    (function () {
+        var c = 3;
+    })();
+
+    console.log(c);
+
+
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Lecture: Strings
+
+
+    let firstName = 'John';
+    let lastName = 'Smith';
+    const yearOfBirth = 1990;
+
+    function calcAge(year) {
+        return 2016 - year;
+    }
+
+    // ES5
+    console.log('This is ' + firstName + ' ' + lastName + '. He was born in ' + yearOfBirth + '. Today, he is ' +
+        calcAge(yearOfBirth) + ' years old.');
+
+    // ES6
+    console.log(
+        `This is ${firstName} ${lastName}. He was born in ${yearOfBirth}. Today, he is ${calcAge(yearOfBirth)} years old.`
+    ); // this is template literals using
+
+
+    const n = `${firstName} ${lastName}`;
+    console.log(n.startsWith('j'));
+    console.log(n.endsWith('Sm'));
+    console.log(n.includes('oh'));
+    console.log(`${firstName} `.repeat(5));
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Lecture: Arrow functions
+
+
+    const years = [1990, 1965, 1982, 1937];
+
+    // ES5
+    var ages5 = years.map(function (el) {
+        return 2016 - el;
+    });
+    console.log(ages5);
+
+
+    // ES6
+    let ages6 = years.map(el => 2016 - el); // one argument and one line of code inside
+    console.log(ages6);
+
+    ages6 = years.map((el, index) => `Age element ${index + 1}: ${2016 - el}.`); // two arguments and one line of code
+    console.log(ages6);
+
+    ages6 = years.map((el, index) => { // two argument and more than one line of code
+        const now = new Date().getFullYear();
+        const age = now - el;
+        return `Age element ${index + 1}: ${age}.`
+    });
+    console.log(ages6);
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Lecture: Arrow functions 2 (lexical this keyword)
+    // arrow function don't have their this keyword, they borrow it from the outer function, they have a lexical this keyword
+
+    // ES5
+    var box5 = {
+        color: 'green',
+        position: 1,
+        clickMe: function () {
+
+            document.querySelector('.green').addEventListener('click', function () {
+                var str = 'This is box number ' + this.position + ' and it is ' + this.color;
+                alert(str);
+            });
+        }
+    }
+    box5.clickMe(); // not gonna work, coz 'this' only gets assigned in a method call. so using 'this' inside the callback function (the inner anonymous function)
+    // is not gonna work because it's just a regular function call. even though box5.clickMe is a method call, but this still won't work inside the inner
+    // function coz it's not a method
+
+
+    // Es5 workaround
+    var box5 = {
+        color: 'green',
+        position: 1,
+        clickMe: function () {
+
+            var self = this;
+            document.querySelector('.green').addEventListener('click', function () {
+                var str = 'This is box number ' + self.position + ' and it is ' + self.color;
+                alert(str);
+            });
+        }
+    }
+    box5.clickMe(); // now it will work
+
+
+    // ES6
+    const box6 = {
+        color: 'green',
+        position: 1,
+        clickMe: function () {
+            document.querySelector('.green').addEventListener('click', () => {
+                var str = 'This is box number ' + this.position + ' and it is ' + this.color;
+                alert(str);
+            });
+        }
+    }
+    box6.clickMe();
+
+
+    // ES6 2
+    const box66 = {
+        color: 'green',
+        position: 1,
+        clickMe: () => { // won't work coz clickMe now is an arrow function, which means that it has a lexical this keyword (the surroundings 'this') which is the global 'this'
+            document.querySelector('.green').addEventListener('click', () => {
+                var str = 'This is box number ' + this.position + ' and it is ' + this.color;
+                alert(str);
+            });
+        }
+    }
+    box66.clickMe();
+
+    // ES5
+    Person.prototype.myFriends5 = function (friends) {
+
+        var arr = friends.map(function (el) {
+            return this.name + ' is friends with ' + el;
+        });
+
+        console.log(arr);
+    }
+
+    var friends = ['Bob', 'Jane', 'Mark'];
+    new Person('John').myFriends5(friends); // won't work coz the inner anonymous function has its own 'this' which is the global onw (coz it's a regular function call)
+
+
+    // ES5 workaround
+    Person.prototype.myFriends5 = function (friends) {
+
+        var arr = friends.map(function (el) {
+            return this.name + ' is friends with ' + el;
+        }.bind(this));
+
+        console.log(arr);
+    }
+
+    var friends = ['Bob', 'Jane', 'Mark'];
+    new Person('John').myFriends5(friends); // we set the 'this' keyword manually using bind()
+
+
+    // ES6
+    Person.prototype.myFriends6 = function (friends) {
+
+        var arr = friends.map(el => `${this.name} is friends with ${el}`);
+
+        console.log(arr);
+    }
+
+    new Person('Mike').myFriends6(friends);
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Lecture: Destructuring
+
+    // ES5
+    var john = ['John', 26];
+    var name = john[0];
+    var age = john[1];
+
+
+    // ES6
+    const [name, age] = ['John', 26];
+    console.log(name);
+    console.log(age);
+
+    //
+    const obj = {
+        firstName: 'John',
+        lastName: 'Smith'
+    };
+
+    const { // we use curly braces coz we are destructing an object
+        firstName, // this will be = to firstName:firstName it's an es6 feature (when the key and the value have the same name) 
+        lastName
+    } = obj;
+    console.log(firstName);
+    console.log(lastName);
+
+    // if you wanna use different names 
+    const {
+        firstName: a,
+        lastName: b
+    } = obj;
+    console.log(a);
+    console.log(b);
+
+    // ES6 returning more than one value from a function without the use of objects
+    function calcAgeRetirement(year) {
+        const age = new Date().getFullYear() - year;
+        return [age, 65 - age];
+    }
+
+
+    const [age2, retirement] = calcAgeRetirement(1990);
+    console.log(age2);
+    console.log(retirement);
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Lecture: Arrays
+    // we can't use continue or break statements with foreach or map methods
+    // a new loop in ES6 is for of
+
+
+    const boxes = document.querySelectorAll('.box');
+
+    //ES5
+    var boxesArr5 = Array.prototype.slice.call(boxes);
+    boxesArr5.forEach(function (cur) {
+        cur.style.backgroundColor = 'dodgerblue';
+    });
+
+    //ES6
+    const boxesArr6 = Array.from(boxes);
+    Array.from(boxes).forEach(cur => cur.style.backgroundColor = 'dodgerblue');
+
+
+    //ES5
+    for (var i = 0; i < boxesArr5.length; i++) {
+
+        if (boxesArr5[i].className === 'box blue') {
+            continue;
+        }
+
+        boxesArr5[i].textContent = 'I changed to blue!';
+
+    }
+
+
+    //ES6
+    for (const cur of boxesArr6) {
+        if (cur.className.includes('blue')) {
+            continue;
+        }
+        cur.textContent = 'I changed to blue!';
+    }
+
+
+    //ES5
+    var ages = [12, 17, 8, 21, 14, 11];
+
+    var full = ages.map(function (cur) {
+        return cur >= 18;
+    });
+    console.log(full);
+    console.log(full.indexOf(true));
+    console.log(ages[full.indexOf(true)]);
+
+
+    //ES6
+    console.log(ages.findIndex(cur => cur >= 18));
+    console.log(ages.find(cur => cur >= 18));
+    //The findIndex() method returns the index of the first element in the array that satisfies the provided testing function. Otherwise -1 is returned.
+
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Lecture: Spread operator
+
+
+    function addFourAges(a, b, c, d) {
+        return a + b + c + d;
+    }
+
+    var sum1 = addFourAges(18, 30, 12, 21);
+    console.log(sum1);
+
+    //ES5
+    var ages = [18, 30, 12, 21];
+    var sum2 = addFourAges.apply(null, ages);
+    console.log(sum2);
+
+    //ES6
+    const sum3 = addFourAges(...ages);
+    console.log(sum3);
+
+    // combine arrays
+    const familySmith = ['John', 'Jane', 'Mark'];
+    const familyMiller = ['Mary', 'Bob', 'Ann'];
+    const bigFamily = [...familySmith, 'Lily', ...familyMiller];
+    console.log(bigFamily);
+
+    // combine a node list
+    const h = document.querySelector('h1');
+    const boxes = document.querySelectorAll('.box');
+    const all = [h, ...boxes];
+
+    Array.from(all).forEach(cur => cur.style.color = 'purple');
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Lecture: Rest parameters
+
+
+    //ES5
+    function isFullAge5() {
+        console.log(arguments); // arguments is an array-like object
+        var argsArr = Array.prototype.slice.call(arguments);
+
+        argsArr.forEach(function (cur) {
+            console.log((2016 - cur) >= 18);
+        })
+    }
+
+
+    isFullAge5(1990, 1999, 1965);
+    isFullAge5(1990, 1999, 1965, 2016, 1987);
+
+
+    //ES6
+    function isFullAge6(...years) { // rest param gives u an array
+        years.forEach(cur => console.log((2016 - cur) >= 18));
+    }
+
+    isFullAge6(1990, 1999, 1965, 2016, 1987);
+
+
+    //ES5
+    function isFullAge5(limit) { // limit is gonna be only the first element in the array
+        var argsArr = Array.prototype.slice.call(arguments, 1); // by adding one as a second param. the slice method will start copying the array from the first index skipping the first element
+
+        argsArr.forEach(function (cur) {
+            console.log((2016 - cur) >= limit);
+        })
+    }
+
+
+    isFullAge5(16, 1990, 1999, 1965);
+
+
+
+    //ES6
+    function isFullAge6(limit, ...years) { // limit is gonna be 16 in this case
+        years.forEach(cur => console.log((2016 - cur) >= limit));
+    }
+
+    isFullAge6(16, 1990, 1999, 1965, 2016, 1987);
+
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Lecture: Default parameters
+
+
+    // ES5
+    function SmithPerson(firstName, yearOfBirth, lastName, nationality) {
+
+        lastName === undefined ? lastName = 'Smith' : lastName = lastName;
+        nationality === undefined ? nationality = 'american' : nationality = nationality;
+
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.yearOfBirth = yearOfBirth;
+        this.nationality = nationality;
+    }
+
+
+    //ES6
+    function SmithPerson(firstName, yearOfBirth, lastName = 'Smith', nationality = 'american') {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.yearOfBirth = yearOfBirth;
+        this.nationality = nationality;
+    }
+
+
+    var john = new SmithPerson('John', 1990);
+    var emily = new SmithPerson('Emily', 1983, 'Diaz', 'spanish');
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Lecture: Maps
+    // the key difference between maps and objects is that with maps we can use anything for keys not just strings as in objects
+    // you can loop through maps but you can't do this with arrays
+
+    const question = new Map();
+    question.set('question', 'What is the official name of the latest major JavaScript version?');
+    question.set(1, 'ES5');
+    question.set(2, 'ES6');
+    question.set(3, 'ES2015');
+    question.set(4, 'ES7');
+    question.set('correct', 3);
+    question.set(true, 'Correct answer :D');
+    question.set(false, 'Wrong, please try again!');
+
+    console.log(question.get('question'));
+    console.log(question.size); // 8
+
+
+    if (question.has(4)) {
+        question.delete(4);
+    }
+
+    question.clear(); // to clear all the map
+
+
+    question.forEach((value, key) => console.log(`This is ${key}, and it's set to ${value}`));
+
+
+    for (let [key, value] of question.entries()) { // using Destructuring with for of
+        if (typeof (key) === 'number') {
+            console.log(`Answer ${key}: ${value}`);
+        }
+    }
+
+    const ans = parseInt(prompt('Write the correct answer'));
+    console.log(question.get(ans === question.get('correct')));
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Lecture: Classes
+    // class definitions are not hoisted unlike function constructors
+    // we can only add method to classes (it's not recommended anyway to add properties to classes)
+    // functions are balled methods inside the class, so you create them without the function keyword
+
+    //ES5
+    var Person5 = function (name, yearOfBirth, job) {
+        this.name = name;
+        this.yearOfBirth = yearOfBirth;
+        this.job = job;
+    }
+
+    Person5.prototype.calculateAge = function () {
+        var age = new Date().getFullYear - this.yearOfBirth;
+        console.log(age);
+    }
+
+    var john5 = new Person5('John', 1990, 'teacher');
+
+    //ES6
+    class Person6 {
+        constructor(name, yearOfBirth, job) {
+            this.name = name;
+            this.yearOfBirth = yearOfBirth;
+            this.job = job;
+        }
+
+        calculateAge() {
+            var age = new Date().getFullYear - this.yearOfBirth;
+            console.log(age);
+        }
+
+        static greeting() {
+            console.log('Hey there!');
+        }
+    }
+
+    const john6 = new Person6('John', 1990, 'teacher');
+
+    Person6.greeting();
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Lecture: Classes and subclasses
+
+
+    //ES5
+    var Person5 = function (name, yearOfBirth, job) {
+        this.name = name;
+        this.yearOfBirth = yearOfBirth;
+        this.job = job;
+    }
+
+    Person5.prototype.calculateAge = function () {
+        var age = new Date().getFullYear() - this.yearOfBirth;
+        console.log(age);
+    }
+
+    var Athlete5 = function (name, yearOfBirth, job, olymicGames, medals) {
+        Person5.call(this, name, yearOfBirth, job);
+        this.olymicGames = olymicGames;
+        this.medals = medals;
+    }
+
+    Athlete5.prototype = Object.create(Person5.prototype); // that's how you extend the super class
+
+
+    Athlete5.prototype.wonMedal = function () { // this method is only attached to the subclass
+        this.medals++;
+        console.log(this.medals);
+    }
+
+
+    var johnAthlete5 = new Athlete5('John', 1990, 'swimmer', 3, 10);
+
+    johnAthlete5.calculateAge();
+    johnAthlete5.wonMedal();
+
+
+    //ES6
+    class Person6 {
+        constructor(name, yearOfBirth, job) {
+            this.name = name;
+            this.yearOfBirth = yearOfBirth;
+            this.job = job;
+        }
+
+        calculateAge() {
+            var age = new Date().getFullYear() - this.yearOfBirth;
+            console.log(age);
+        }
+    }
+
+    class Athlete6 extends Person6 { // that's how you extend a super class in js
+        constructor(name, yearOfBirth, job, olympicGames, medals) {
+            super(name, yearOfBirth, job);
+            this.olympicGames = olympicGames;
+            this.medals = medals;
+        }
+
+        wonMedal() {
+            this.medals++;
+            console.log(this.medals);
+        }
+    }
+
+    const johnAthlete6 = new Athlete6('John', 1990, 'swimmer', 3, 10);
+
+    johnAthlete6.wonMedal();
+    johnAthlete6.calculateAge();
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Asynchronous JavaScript
+    // setTimeOUt takes additional params as arguments to pass to the callback
+    const second = () => {
+        setTimeout(() => {
+            console.log('Async Hey there');
+        }, 2000);
+    }
+
+    const first = () => {
+        console.log('Hey there');
+        second();
+        console.log('The end');
+    }
+
+    first();
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // From Callback Hell to Promises
+    // promises is a new feature in ES6 to escape nested callbacks (setTimeOut)
+    // promise : object that keeps track about whether a certain event has happened or not
+    //and determine what happens after
+
+    // That's the callback hell without promises (the old way). hard to manage
+    function getRecipe() {
+        setTimeout(() => {
+            const recipeID = [523, 883, 432, 974];
+            console.log(recipeID);
+
+            setTimeout(id => {
+                const recipe = {
+                    title: 'Fresh tomato pasta',
+                    publisher: 'Jonas'
+                };
+                console.log(`${id}: ${recipe.title}`);
+
+                setTimeout(publisher => {
+                    const recipe2 = {
+                        title: 'Italian Pizza',
+                        publisher: 'Jonas'
+                    };
+                    console.log(recipe);
+                }, 1500, recipe.publisher);
+
+            }, 1500, recipeID[2]);
+
+        }, 1500);
+    }
+    getRecipe();
+
+
+    // the New Way Using Promises
+    const getIDs = new Promise((resolve, reject) => { // returns a promise
+        setTimeout(() => {
+            resolve([523, 883, 432, 974]);
+        }, 1500);
+    });
+
+    const getRecipe = recID => { // arrow fun that takes recID as a param
+        return new Promise((resolve, reject) => {
+            setTimeout(ID => {
+                const recipe = {
+                    title: 'Fresh tomato pasta',
+                    publisher: 'Jonas'
+                };
+                resolve(`${ID}: ${recipe.title}`);
+            }, 1500, recID);
+        });
+    };
+
+    const getRelated = publisher => {
+        return new Promise((resolve, reject) => {
+            setTimeout(pub => {
+                const recipe = {
+                    title: 'Italian Pizza',
+                    publisher: 'Jonas'
+                };
+                resolve(`${pub}: ${recipe.title}`);
+            }, 1500, publisher);
+        });
+    };
+
+    getIDs // now it's easy to escape callback hell because of object chaining
+        .then(IDs => { // then receives its param from the resolve method
+            console.log(IDs);
+            return getRecipe(IDs[2]); // then method returns the second promise we made
+        })
+        .then(recipe => {
+            console.log(recipe);
+            return getRelated('Jonas Schmedtmann');
+        })
+        .then(recipe => {
+            console.log(recipe);
+        })
+        .catch(error => {
+            console.log('Error!!');
+        });
+
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // From Promises to AsyncAwait
+    // AsyncAwait is a way of consuming promises and not producing them
+    // every async function returns a promise
+
+    const getIDs = new Promise((resolve, reject) => { // returns a promise
+        setTimeout(() => {
+            resolve([523, 883, 432, 974]);
+        }, 1500);
+    });
+
+    const getRecipe = recID => { // arrow fun that takes recID as a param
+        return new Promise((resolve, reject) => {
+            setTimeout(ID => {
+                const recipe = {
+                    title: 'Fresh tomato pasta',
+                    publisher: 'Jonas'
+                };
+                resolve(`${ID}: ${recipe.title}`);
+            }, 1500, recID);
+        });
+    };
+
+    const getRelated = publisher => {
+        return new Promise((resolve, reject) => {
+            setTimeout(pub => {
+                const recipe = {
+                    title: 'Italian Pizza',
+                    publisher: 'Jonas'
+                };
+                resolve(`${pub}: ${recipe.title}`);
+            }, 1500, publisher);
+        });
+    };
+
+    async function getRecipesAW() { // using AsyncAwait to consume promises
+        const IDs = await getIDs; // await stops the execution till it gets the result from resolve method
+        console.log(IDs);
+        const recipe = await getRecipe(IDs[2]);
+        console.log(recipe);
+        const related = await getRelated('Jonas Schmedtmann');
+        console.log(related);
+
+        return recipe;
+    }
+    const rec = getRecipeAw();
+    console.log(rec); // won't work coz by the time we reach this line getRecipeAw will have been still running at the background but since it returns a promise we can use then method as a workaround which receives an argument from
+    getRecipesAW().then(result => console.log(`${result} is the best ever!`));
+
+
+
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Making AJAX Calls with Fetch and Promises
+    // fetch is not supported by all the browsers
+    // using fetch is two-step process, you wait for the response and then convert it to json format
+    // an alternative is using a popular http request library called 'axios'
+    // with this library the response is automatically converted to json, plus it has better error handling
+
+
+    function getWeather(woeid) { // https://crossorigin.me/ or https://cors-anywhere.herokuapp.com/ is a way of solving the same origin problem
+        fetch(`https://crossorigin.me/https://www.metaweather.com/api/location/${woeid}/`)
+            .then(result => {
+                // console.log(result);
+                return result.json();
+            })
+            .then(data => {
+                // console.log(data);
+                const today = data.consolidated_weather[0]; // 0 index contains the first day
+                console.log(
+                    `Temperatures today in ${data.title} stay between ${today.min_temp} and ${today.max_temp}.`
+                );
+            })
+            .catch(error => console.log(error));
+    }
+    getWeather(2487956);
+    getWeather(44418);
+
+
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Making AJAX Calls with Fetch and AsyncAwait
+    // fetch is not supported by all browsers
+
+    async function getWeatherAW(woeid) {
+        try {
+            const result = await fetch(`https://crossorigin.me/https://www.metaweather.com/api/location/${woeid}/`);
+            const data = await result.json();
+            const tomorrow = data.consolidated_weather[1];
+            console.log(
+                `Temperatures tomorrow in ${data.title} stay between ${tomorrow.min_temp} and ${tomorrow.max_temp}.`
+            );
+            return data;
+        } catch (error) {
+            alert(error);
+        }
+    }
+    getWeatherAW(2487956);
+
+    let dataLondon;
+    getWeatherAW(44418).then(data => {
+        dataLondon = data
+        console.log(dataLondon);
+    });
+
+
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // exporting and importing
+
+    //file1.js
+    export default 'exported string';
+    //file2.js
+    import str from '.models/Search'; // you don't have to specify the extension of the file
+
+    // if you wanna export multiple things use named import
+    // file1.js
+    export const add = (a, b) => a + b;
+    export const multiply = (a, b) => a * b;
+    export const ID = 23;
+    // file2.js
+    import {
+        add,
+        multiply,
+        ID
+    } from './views/searchView'; // or import {add as a,multiply as m,ID} from './views/searchView';
+    console.log(`using the function ${add(ID, 2)}`);
+    // or
+    import * as searchView from './views/searchView';
+    console.log(`using the function ${searchView.add(searchView.ID, 2)}`);
+
+
+
+
+
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Useful Code
+
+
+    // useful packages and libraries :
+    axios
+    html - webpack - plugin
+    fractional
+    uniqid
+    localstorage  // important linke =>  https://www.quora.com/Is-localStorage-deleted-once-the-user-closes-the-browser-or-the-tab
+
+    // localstorage is a function that lives in the window object(global object) 
+    // localstorage.setItem(string,string)  it takes key-value pair
+    // to store an array as a string use : JSON.stringfy(array) to convert it back use : JSON.parse()
+    // localstorage.getItem(key)
+
+
+
+    // how to get the size of the viewport
+    // viewport is : is the part of the webpage that the user can currently see. The scrollbars move the viewport to show other parts of the page.
+    if (typeof window.innerWidth != 'undefined') {
+        viewportwidth = window.innerWidth,
+            viewportheight = window.innerHeight
+    }
+
+
+
+    // the difference between parentElement and parentNode
+    // https://stackoverflow.com/questions/8685739/difference-between-dom-parentnode-and-parentelement
+
+
+
+    // how to remove an element in Js
+    // https://stackoverflow.com/questions/3387427/remove-element-by-id#
+    // or just use this:
+    // el.parentNode.removeChild(el);
+
+
+
+    // return key event:
+    document.addEventListener('keypress', function (event) {
+        if (event.keyCode === 13 || event.which === 13) {
+            console.log('Enter was pressed');
+        }
+    })
+
+
+
+    // if you have too many query strings in your script use this method
+    var DOMstrings = { // this make it easier when you want to change the strings later
+        inputType: '.add__type', // coz now you will only have to change the object and not all the occurrences
+        inputDescription: '.desc'
+    };
+
+
+
+    // element.insertAdjacentHTML(position, text);
+
+
+
+    // how to convert the list returned from document.querySelectorAll(); to an array ?
+    fields = document.querySelector();
+    fieldsArr = Array.prototype.slice.call(fields); // we can't call slice directly because fields is a list not an array
+    // that's why we need to borrow the slice method
+
+
+
+    // to set the focus on an element use this :
+    element.focus();
+</script>
+
+
+
+</html>

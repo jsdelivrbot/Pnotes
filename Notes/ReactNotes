@@ -45,6 +45,10 @@
 
 * in react, passing callbacks is a great way to do small communication between a parent and child component.
   watch video 029
+  However, be careful when passing an object method as a callback.
+    we need to use bind(this) on them to keep 'this' pointing to the right context.
+    another way would be to type the following in the constructor 'this.myMethod = this.myMethod.bind(this);'
+    or u can just use arrow functions 
 
 
 * import React, {Component} from 'react';. {Component} is the same as React.Component

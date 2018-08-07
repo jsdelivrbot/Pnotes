@@ -191,9 +191,6 @@
 
 
 
-
-
-
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Lecture: Scoping :
     // First scoping example
@@ -244,6 +241,9 @@
     // 2 - in a Regular Function Call : points at the global object (the window object)
     // 3 - in a Method Call : points to the object calling the method
     // 4 - this keyword is only assigned a value when the object calls the method
+    // 5 - arrow functions don't have their own this keyword. (search for Arrow functions 2 lexical this keyword in this file)  
+    // 6 - this keyword in object methods set as callbacks :
+    // https://stackoverflow.com/questions/20279484/how-to-access-the-correct-this-inside-a-callback
 
     console.log(this); // this points to the window
     calculateAge(1985);
@@ -268,7 +268,7 @@
     }
 
     john.calculateAge(); // method call
-    john.in
+
 
     var mike = {
         name: 'Mike',
@@ -280,6 +280,56 @@
     mike.calculateAge();
 
 
+
+    // some experiments with This in function constructor and normal object :
+
+    const box68 = {
+        color: 'green',
+        position: 1,
+        getThis: this,
+
+        displayThis: function () { console.log(this.getThis) }
+    }
+    box68.displayThis(); // widow object
+
+
+    const box69 = {
+        color: 'green',
+        position: 1,
+        getThis: this,
+
+        displayThis: function () { console.log(this) }
+    }
+    box69.displayThis(); // box69 object
+
+
+
+    const box74 = function (color, position, ) {
+        this.color = color;
+        this.position = position;
+        thisval = this;
+        this.displayThis = function () { console.log(thisval) }
+    }
+    let b = new box74("green", 9);
+    b.displayThis(); // box74 object = b
+
+
+
+    const box76 = function (color, position, ) {
+        this.color = color;
+        this.position = position;
+        this.displayThis = () => { console.log(this.color) } // arrow functions don’t have this
+    }
+    let d = new box76("green", 9);
+    d.displayThis(); // green
+
+
+    const box77 = function (color, position, ) {
+        this.color = color;
+        this.position = position;
+        console.log(this);
+    }
+    let v = new box77("green", 9); // box77 object = v
 
 
 

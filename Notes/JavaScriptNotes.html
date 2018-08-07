@@ -1486,7 +1486,7 @@
     // From Callback Hell to Promises
     // promises is a new feature in ES6 to escape nested callbacks (setTimeOut)
     // promise : object that keeps track about whether a certain event has happened or not
-    //and determine what happens after
+    // and determine what happens after
 
     // That's the callback hell without promises (the old way). hard to manage
     function getRecipe() {
@@ -1515,8 +1515,32 @@
     }
     getRecipe();
 
+    /*
+    to create a promise : new Promise (function (resolve, reject)){ } 
+    it takes a callback function and this callback has two arguments which are functions to be called lager
+    and returns a promise which you can then consume.
+    inside this callback you check, if the promise is fulfilled call resolve with the result 
+    if not call reject. 
+
+    consuming a promise :
+
+    myPromise.then(function (fromResolve) { 
+        // do something with returned result 
+    }).catch (function (){ // catch is called in case the promise fails 
+
+    })
+    */
+
 
     // the New Way Using Promises
+    // this example create three promises, execute the first one immediately and store the other
+    // two promises in two constants.
+    // after run (creating the first promise) it consumes it using then method.
+    // and within the then method it makes use of the other two promises.
+    // the reason why it only use the other two promises inside the then method, is because
+    // the then method is only called if the resolve method was called which means the call was successful
+    // if the call fails reject method would be called and catch would be called instead of then
+
     const getIDs = new Promise((resolve, reject) => { // returns a promise
         setTimeout(() => {
             resolve([523, 883, 432, 974]);
@@ -1564,6 +1588,34 @@
         });
 
 
+
+    // new example from youtube 
+
+    let cleanRoom = function () {
+        return new Promise(function (resolve, reject) {
+            resolve('Cleaned The Room');
+        });
+    };
+
+    let removeGarbage = function (message) {
+        return new Promise(function (resolve, reject) {
+            resolve(message + ' remove Garbage');
+        });
+    };
+
+    let winIcecream = function (message) {
+        return new Promise(function (resolve, reject) {
+            resolve(message + ' won Icecream');
+        });
+    };
+
+    Promise.all([cleanRoom(), removeGarbage(), winIcecream()]).then(function () {
+        console.log('all finished')
+    }); // this takes an array of all the promises and calls then after all of them are done
+
+    Promise.race([cleanRoom(), removeGarbage(), winIcecream()]).then(function () {
+        console.log('all finished')
+    }); // this takes an array of all the promises and calls then after anyone of them has finished
 
 
 

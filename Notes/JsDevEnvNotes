@@ -40,7 +40,8 @@ npm install webpack-dev-server
 npm install --save loadash 
     watch 032 (react course)
 import {connect} from 'react-redux'; 
-
+npm install --save redux-promise (middleware)
+npm install --save axios () (for Ajax calls)
 /************************************************************************************************************************************************************************************************/  
                                                                                     WepPack
 

@@ -132,8 +132,34 @@
   https://blog.bam.tech/developper-news/4-ways-to-dispatch-actions-with-redux
 
 
-* MiddleWares : functions that manipulate actions ()
-  
+* MiddleWares : functions that manipulate actions before they hit reducers 
+  redux-promise middleware package : 
+   it's going to automatically stop the action before it's sent to the reducers 
+   and check whether it contains a promise or not, if it does it consumes that 
+   promise and sends the date to the reducers
+
+   notes on redux-promise :
+    If it receives a promise, it will dispatch the resolved value of the promise. It will not dispatch anything if the promise rejects.
+    If it receives an Flux Standard Action whose payload is a promise, it will either
+      - dispatch a copy of the action with the resolved value of the promise, and set status to success.
+      - dispatch a copy of the action with the rejected value of the promise, and set status to error.
+
+    to deal with failed promise :
+      https://stackoverflow.com/questions/35439019/redux-promise-with-axios-and-how-do-deal-with-errors
+
+
+* third-part libraries like google-maps that don't know how to work with react, have a special 
+    way of when dealing with them cause they don't understand what render() is or what jsx is
+    an example of this would be the Weather application => components => google_maps.js
+
+    however there's a new library that has been created specifically to work with react for google-maps
+      here is a quick starting point : (react-google-maps)
+        https://medium.com/@yelstin.fernandes/render-a-map-component-using-react-google-maps-5f7fb3e418bb
+      another package : (google-map-react):
+        https://hackernoon.com/implement-google-maps-in-reactjs-5bc218074689
+
+
+
 ******************************************************************************************************
 
 

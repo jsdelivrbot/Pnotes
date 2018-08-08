@@ -7,10 +7,10 @@ export const FETCH_WEATHER = "FETCH_WEATHER";
 
 export function fetchWeather(city) {
   const url = `${ROOT_URL}&q=${city},us`;
-  const request = axios.get(url);
+  const request = axios.get(url); // returns a promise
 
   return {
     type: FETCH_WEATHER,
-    payload: request
+    payload: request // notice that we are sending a unconsumed promise to reducers
   };
 }

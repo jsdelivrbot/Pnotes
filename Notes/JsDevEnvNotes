@@ -42,6 +42,7 @@ npm install --save loadash
 import {connect} from 'react-redux'; 
 npm install --save redux-promise (middleware)
 npm install --save axios () (for Ajax calls)
+npm install --save react-sparklines (for charts)
 /************************************************************************************************************************************************************************************************/  
                                                                                     WepPack
 

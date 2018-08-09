@@ -43,6 +43,9 @@ import {connect} from 'react-redux';
 npm install --save redux-promise (middleware)
 npm install --save axios () (for Ajax calls)
 npm install --save react-sparklines (for charts)
+npm install --save react-google-maps
+npm install --save google-map-react
+npm install --save react-router@2.0.0-rc5
 /************************************************************************************************************************************************************************************************/  
                                                                                     WepPack
 

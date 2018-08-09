@@ -158,8 +158,32 @@
       another package : (google-map-react):
         https://hackernoon.com/implement-google-maps-in-reactjs-5bc218074689
 
+* React-Router library :
+    history library comes as a bounce with react-router, it just watches the url and passes new url changes to 
+    react-router which updates the react components shown on the screen depending on the url
+    watch 074 React Router
 
+* setting up react-router :
+    1 - import {Router, [browserHistory or hashHistory or memoryHistory] } from 'react-router';
+      Router : decides what component to render when the url changes 
+      browserHistory : interprets everything after the protocol 
+        ex : http://www.blog.com/post/5
+        browserHistory will only care about the 'post/5' part (whatever after the protocol)
+      hashHistory : interprets everything after the the # 
+        ex : http://www.blog.com/#post/5
+      memoryHistory : doesn't use the url at all
+    
+    2 - define the Router component as the root component for the application 
+    3 - create a file that contains the routes rules 
 
+* when you have nested routes, the childs are passed to the root component as this.props.children
+
+* IndexRoute : only shows up only when the path matches up the one defined by the parent.
+
+* componentWillMount : it's a component lifecycle method, it's called when thte component is about to render on the screen for the first time
+    automatically called by react.
+
+* 
 ******************************************************************************************************
 
 

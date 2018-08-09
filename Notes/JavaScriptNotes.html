@@ -288,7 +288,9 @@
         position: 1,
         getThis: this,
 
-        displayThis: function () { console.log(this.getThis) }
+        displayThis: function () {
+            console.log(this.getThis)
+        }
     }
     box68.displayThis(); // widow object
 
@@ -298,7 +300,9 @@
         position: 1,
         getThis: this,
 
-        displayThis: function () { console.log(this) }
+        displayThis: function () {
+            console.log(this)
+        }
     }
     box69.displayThis(); // box69 object
 
@@ -308,7 +312,9 @@
         this.color = color;
         this.position = position;
         thisval = this;
-        this.displayThis = function () { console.log(thisval) }
+        this.displayThis = function () {
+            console.log(thisval)
+        }
     }
     let b = new box74("green", 9);
     b.displayThis(); // box74 object = b
@@ -318,7 +324,9 @@
     const box76 = function (color, position, ) {
         this.color = color;
         this.position = position;
-        this.displayThis = () => { console.log(this.color) } // arrow functions don’t have this
+        this.displayThis = () => {
+            console.log(this.color)
+        } // arrow functions don’t have this
     }
     let d = new box76("green", 9);
     d.displayThis(); // green
@@ -845,7 +853,7 @@
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Import & Export Es6 :
-    https://www.youtube.com/watch?v=Jqn_wjkSZwo
+    https: //www.youtube.com/watch?v=Jqn_wjkSZwo
     //    1 - https://medium.com/@thejasonfile/a-simple-intro-to-javascript-imports-and-exports-389dd53c3fac
     //    2 - https://hackernoon.com/import-export-default-require-commandjs-javascript-nodejs-es6-vs-cheatsheet-different-tutorial-example-5a321738b50f
 
@@ -1171,6 +1179,9 @@
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Lecture: Spread operator
 
+    // a really good article on spread operator is :
+    // https://medium.com/@patelhemil/utility-of-spread-operator-in-javascript-83c6e157afed
+
 
     function addFourAges(a, b, c, d) {
         return a + b + c + d;
@@ -1200,6 +1211,34 @@
     const all = [h, ...boxes];
 
     Array.from(all).forEach(cur => cur.style.color = 'purple');
+
+    // merging objects without duplicate keys
+    const profile1 = {
+        name: 'techsith',
+        age: 30
+    };
+    const profile2 = {
+        name: 'techsith',
+        age: 40,
+        website: 'techsith.com'
+    };
+
+    const newProfile = {
+        ...profile1,
+        ...profile2
+    }
+
+    /*
+        {
+            name: 'techsith',
+                age: 40,
+                    site: 'techsith.com'
+        }
+    
+    */
+
+
+
 
 
 
@@ -1795,7 +1834,7 @@
     html - webpack - plugin
     fractional
     uniqid
-    localstorage  // important linke =>  https://www.quora.com/Is-localStorage-deleted-once-the-user-closes-the-browser-or-the-tab
+    localstorage // important linke =>  https://www.quora.com/Is-localStorage-deleted-once-the-user-closes-the-browser-or-the-tab
 
     // localstorage is a function that lives in the window object(global object) 
     // localstorage.setItem(string,string)  it takes key-value pair

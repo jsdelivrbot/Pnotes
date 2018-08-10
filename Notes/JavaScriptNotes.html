@@ -755,6 +755,31 @@
     console.log(ages);
     console.log(fullJapan);
 
+
+    // Using an object in an array-like fashion
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
+    var obj = {
+        length: 0,
+
+        addElem: function addElem(elem) {
+            // obj.length is automatically incremented 
+            // every time an element is added.
+            [].push.call(this, elem);
+        }
+    };
+
+    // Let's add some empty objects just to illustrate.
+    obj.addElem({});
+    obj.addElem({});
+    console.log(obj.length);
+    // → 2
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     // Event bubbling and Event Delegation
 
     // bubbling     : the event bubbles up inside the Dom tree

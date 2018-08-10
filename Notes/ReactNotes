@@ -1,6 +1,15 @@
+* to start a react project you can either :
+  1 - use webpack
+  2 - using a CDN
+  3 - Create React App :
+      npm install -g create-react-app 
+      go where you wanna install you project and run create-react-app projectname
 
 * React is a javascript library that is used to produce html code to the browser 
-   
+  
+* render function is the one required function in a component
+
+
 * React library is starting to diverge into to separate libraries :
     1 - core react library 
     2 -  react Dom 
@@ -20,6 +29,44 @@
 
 * we only update the state using the setState(). However we define the state inside our constructor
   when setState is called the component rerenders again
+
+* setState takes a second parameter (a callback function)
+
+* this is an example from one of the reducers : 
+    check out this link also : https://stackoverflow.com/questions/37435334/correct-way-to-push-into-state-array
+
+    return state.push(action.payload.data), dont ever modify (change,manipulate) 
+      the state manually like that. always return a new one 
+    
+    return state.concat([action.payload.data]); // this is okay because it returns 
+      an new array (state)
+
+    return [action.payload.data, ...state]; using the spread operator, it gives u back 
+      an array which starts with action.payload.data
+
+
+* use propTypes to validate props on a component :
+  MyComponent.propTypes= {
+    prop1: React.PropTypes.array,
+    prop2: React.PropTypes.func
+  }
+
+* React life-cycle functions and API calls (where should u do you API calls) :
+   Component life-cycle methods : https://hackernoon.com/reactjs-component-lifecycle-methods-a-deep-dive-38275d9d13c0
+   
+   APIs in React : https://hackernoon.com/where-to-integrate-api-calls-in-reactjs-componentwillmount-vs-componentdidmount-710085dc05c3
+                   https://forum.freecodecamp.org/t/react-lifecycle-methods-where-do-you-make-your-api-calls/89117
+
+* in a sample react application we declare the state in the constructor and gives it it's values inside
+  one of react life-cycle function 'componentWillMount' which gets called every time the component is rerendered
+  we assign the value of the state inside this function using setState method
+
+* to set default props on a component, use the static defaultProps
+  static defaultProps = {}
+  now you can access whatever you define inside that object through this.props
+ 
+* refs Attribute 
+
 
 * Controlled Components are set by the state object 
   value={this.state.term}
@@ -158,6 +205,47 @@
       another package : (google-map-react):
         https://hackernoon.com/implement-google-maps-in-reactjs-5bc218074689
 
+
+* redux-form : watch 086 & 087
+  1 - in your reducer index add the following : 
+    import {reducer as formReducer} from 'redux-form'
+    inside rootReducer add : form: formReducer
+
+  2 - import the reduxForm function from 'redux-form'
+    it acts like the connect function, it injects some helpers for us on the props
+    lets say we have the following fields (title,categories, content)
+    
+  3 - we extract the handleSubmit and the fields in just one line using es6 syntax
+      const {fields: {title, categories, content}, handleSubmit } = this.props
+        or you can use normal javascript 
+      const title = this.props.fields.title;   
+
+  4 - reduxForm function acts exactly like connect and it can also be used to covert a 
+      component to a container.
+      reduxForm(formConfig, mapStateToProps, mapDispatchToProps)
+        so here we can make use of the third argument to dispatch an action
+        whenever the onSubmit event is fired and the form is valid (handle makes sure it's vaild)
+
+
+  5 - in our form tag <form onSubmit={handleSubmit(here you pass the action you dispatched)}
+  
+
+  6 - an object containing the fields values will be sent to the action which receives it as argument
+      {
+        title: value,
+        categories: value,
+        content: value
+      }
+
+  7 - to validate you pass the validation function into the formConfig object and u define 
+      the validation rules inside it 
+
+  notice that whenever the user does any changes to the fields, redux-form sets 
+  the new values on our global application state.
+
+****************************************** React-Router ***********************************************************
+
+
 * React-Router library :
     history library comes as a bounce with react-router, it just watches the url and passes new url changes to 
     react-router which updates the react components shown on the screen depending on the url
@@ -183,7 +271,11 @@
 * componentWillMount : it's a component lifecycle method, it's called when thte component is about to render on the screen for the first time
     automatically called by react.
 
-* 
+* to link between components in react-router we use the link component that comes with it 
+    import {Link} from 'react-router'; it's rendered as <a></a>
+
+* you should avoid working with context as mush as possible except when working with react router
+  context 
 ******************************************************************************************************
 
 

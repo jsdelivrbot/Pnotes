@@ -65,10 +65,14 @@
   static defaultProps = {}
   now you can access whatever you define inside that object through this.props
  
-* refs Attribute 
+* refs Attribute :
+    https://www.youtube.com/watch?v=tiytyGEodl0
+
+
 
 
 * Controlled Components are set by the state object 
+  check out this link on controlled components : https://www.youtube.com/watch?v=BvtQMxekmH0
   value={this.state.term}
   it's value only ever changes when the state value changes
 

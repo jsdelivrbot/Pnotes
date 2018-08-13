@@ -1,3 +1,8 @@
+* in react components have their own states which is fine for a small app, However
+  if you have an app with many components it becomes really hard to manage individual states. that's where redux
+  kicks in. redux is a state management in which you basically have one big state throughout you entire application
+ 
+
 * to start a react project you can either :
   1 - use webpack
   2 - using a CDN
@@ -7,7 +12,7 @@
 
 * React is a javascript library that is used to produce html code to the browser 
   
-* render function is the one required function in a component
+* render function is the one required function in a component, it only returns one root element 
 
 
 * React library is starting to diverge into to separate libraries :
@@ -25,7 +30,25 @@
 * to give a component a class we use className to avoid naming conflict with the keyword class
 
 * props are data passed between components
+
+
+* there is another way also of passing data between components (using this.props.children)
   
+    class App extends Component{
+      <HomeComponent>
+        <p>this is a paragraph</p>
+      </HomeComponent>
+    }
+
+    // now inside the <HomeComponent> u can access whatever was passed 
+    this.props.children
+    
+    // to validate it as a props 
+    HomeComponent.propTypes = {
+      children: React.PropTypes.element.isRequired
+    }
+
+
 
 * we only update the state using the setState(). However we define the state inside our constructor
   when setState is called the component rerenders again
@@ -48,11 +71,14 @@
 * use propTypes to validate props on a component :
   MyComponent.propTypes= {
     prop1: React.PropTypes.array,
-    prop2: React.PropTypes.func
+    prop2: React.PropTypes.func.isRequired
   }
 
 * React life-cycle functions and API calls (where should u do you API calls) :
-   Component life-cycle methods : https://hackernoon.com/reactjs-component-lifecycle-methods-a-deep-dive-38275d9d13c0
+   Component life-cycle methods :
+                                https://codeburst.io/how-to-use-react-lifecycle-methods-ddc79699b34e
+                                https://medium.com/@baphemot/understanding-reactjs-component-life-cycle-823a640b3e8d 
+                                https://hackernoon.com/reactjs-component-lifecycle-methods-a-deep-dive-38275d9d13c0
    
    APIs in React : https://hackernoon.com/where-to-integrate-api-calls-in-reactjs-componentwillmount-vs-componentdidmount-710085dc05c3
                    https://forum.freecodecamp.org/t/react-lifecycle-methods-where-do-you-make-your-api-calls/89117
@@ -67,7 +93,6 @@
  
 * refs Attribute :
     https://www.youtube.com/watch?v=tiytyGEodl0
-
 
 
 
@@ -106,10 +131,6 @@
 
 **********************************************Reducers***********************************************************  
 
-* state in react is more of a component level state, however in redux, it's more of an application level state
-
-* Redux : a state container (a collection of all the date that describes the app).
-
 * reducers : a function that returns a piece of the application state
   the get two arguments (state,action). 
   state argument is not the application state, it's the state the reducer is responsible for.
@@ -126,6 +147,32 @@
 
 ***********************************************Redux*****************************************************
 
+* we use redux when we wanna share the state between components 
+
+* the redux store holds the state tree of your application, the only way to change the state is to dispatch actions 
+  on it.
+
+* createStore(rootReducer, [initialState], [enhancers])
+  the initialState can either by passed using createStore or it can by specified in the reducer itself using default parameters (es6)
+  enhancer such as middleware.
+  createStore and applyMiddleware are imported from 'redux'
+
+
+* to enable REDUX_DEVTOOLS_EXTENSION__&& window.__REDUX_DEVTOOLS_EXTENTIONS__() :
+  first install the extension from the chrome store
+
+  pass the following as an enhancer to the createStore (third parameter) we may also need to import compose from redux
+  compose(
+    applyMiddleware ( ),
+    window.__REDUX_DEVTOOLS_EXTENSION__&& window.__REDUX_DEVTOOLS_EXTENTIONS__()
+  )
+
+
+* Redux : a state container (a collection of all the date that describes the app).
+
+* state in react is more of a component level state, however in redux, it's more of an application level state
+
+
 * containers are called smart components because they have a direct access to redux
 
 * difference between smart component and dump component :
@@ -137,9 +184,10 @@
 
 * smart components (containers) need to be the components that care the most about the state
 
-* to connect React with Redux we use a separate library called react-redux
+* to connect React with Redux we use a separate library called react-redux, it connects the component to the redux store
+  turning the component into a container
 
-* Provider : makes store available to all containers (components)
+* Provider : makes store available to all containers (and that's the core feature of redux), it's the glue between react and redux.
   this goes in your main index.js file :
     1 - import {Provider} from 'react-redux';
     2 - ReactDom.render(
@@ -181,6 +229,10 @@
 
 * 4 ways to dispatch actions with Redux
   https://blog.bam.tech/developper-news/4-ways-to-dispatch-actions-with-redux
+
+
+* Create you own MiddleWare :
+  
 
 
 * MiddleWares : functions that manipulate actions before they hit reducers 
@@ -249,6 +301,17 @@
 
 ****************************************** React-Router ***********************************************************
 
+* Getting Started :
+  1- https://www.youtube.com/watch?v=eofpZPRUnP8&index=16&list=PL55RiY5tL51oyA8euSROLjMFZbXaV7skS
+  2- https://www.youtube.com/watch?v=5pt_igBTCsI&index=17&list=PL55RiY5tL51oyA8euSROLjMFZbXaV7skS
+  3- https://www.youtube.com/watch?v=XRfD8xIOroA&t=2s
+  4- https://www.youtube.com/watch?v=idvCKXXFGs4
+  5- https://reacttraining.com/react-router/web/example/basic
+
+* you should configure the server to work with the front-end app on urls:
+  in the build configuration of webpack add the following :
+    "build": ... --history-api-fallback
+    
 
 * React-Router library :
     history library comes as a bounce with react-router, it just watches the url and passes new url changes to 
@@ -272,7 +335,7 @@
 
 * IndexRoute : only shows up only when the path matches up the one defined by the parent.
 
-* componentWillMount : it's a component lifecycle method, it's called when thte component is about to render on the screen for the first time
+* componentWillMount : it's a component life-cycle method, it's called when the component is about to render on the screen for the first time
     automatically called by react.
 
 * to link between components in react-router we use the link component that comes with it 

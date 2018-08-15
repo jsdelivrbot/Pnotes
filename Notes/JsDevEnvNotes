@@ -68,11 +68,117 @@ npm install redux-logger --save (import logger from 'redux-logger) without {logg
 /************************************************************************************************************************************************************************************************/  
                                                                                     WepPack
 
+* webpack core concepts :
+    1 - Entry           : where it should start looking for dependencies. (there can be more than one entry point)
+    2 - output          : where it should store the bundle file (or the bundles. if you have multiple entry points) 
+    3 - module loaders  : transform our code (are applied on per file basis)
+    4 - Plugins         : transform our code (it's applied on you bundle before it's output) an example would be 
 
 
-npm install webpack --save-dev              : adds/installs it to devDependencies   (installed locally)
-npm install webpack-cli --save-dev          : installs cli for webpack
+* webpack understands es6 but it does not automatically transpile it. for that you would use babel
+
+* 
+
+* to use webpack we need to :
+    
+    1 - install node.js
+    
+    2 - run npm init 
+    
+    3 - add scripts in package.json file :
+        "build" :     "webpack src/js/app.js dist/bundle.js", (this will manage all your import statements)
+        "build:prod" :"webpack src/js/app.js dist/bundle.js -p" (for a minified version )
+    
+    4 - to run any of these scripts use ( npm run {scriptName} )
+
+    5 - if you're using webpack-dev-server, alter your scripts above to use 'webpack-dev-server' command instead of 'webpack'
+        "build" :     "webpack-dev-server --entry ./src/js/app.js --output-filename ./dist/bundle.js"
+
+    6 - when use webpack-dev-server, you bundle.js file (or dist folder) will be generated in the server's memory and not on you local machine unless you run the build command 
+
+    7 - we can also create a 'webpack.config.js' file which exports a javascript object using node.js syntax export for this 
+        
+        var path = require('path');
+        module.exports = {
+            entry: './src/js/app.js',
+            output:{
+                path: path.resolve(__dirname, 'dist') // we use the resolve method because the output path has to be absolute
+                filename: 'bundle.js'
+                publicPath: '/dist' // this tells the server where it should start looking for assets, by default it's '/' (without publicPath the dev-server will not pick up the correct path)
+                                    // this is important as long as you are using dev-server.
+            }
+        }
+
+    8 - when working with css Loader do the following : (notice that the css modules must be imported in the entry point file)
+        - run npm install css-loader style-loader --save-dev
+        - add the module in your webpack-config file 
+        - each module has rules which is an array of rules, each rule is an object
+            var path = require('path');
+            module.exports = {
+                entry: './src/js/app.js',
+                output:{
+                    path: path.resolve(__dirname, 'dist') // we use the resolve method because the output path has to be absolute
+                    filename: 'bundle.js'
+                    publicPath: '/dist' // this tells the server where it should start looking for assets, by default it's '/' (without publicPath the dev-server will not pick up the correct path)
+                                        // this is important as long as you are using dev-server.
+                },
+                module:{
+                    rules: [
+                        {
+                            test:/\.css$/,
+                            loader: 'css-loader' // use this if you only have one loader
+                            use:[ // use the 'use' property when you have multiple loaders to add. the order of the array is important (webpack loads the last element first)
+                                'style-loader', // adds the css to the index.html file (inside the head tag) 
+                                'css-loader' // loads css into javascript
+                            ]
+                        }
+                    ]
+                },
+                plugins: [
+                    new webpack.optimize.UglifyJsPlugin({
+                        // ..
+                    })
+                ]
+            }
+
+    9 - when working with babel and scss :
+        
+        install the following packages (--save-dev)  :
+            sass-loader                 : needed by the webpack
+            node-sass                   : needed by sass-loader
+            css-loader                  : loads css into javascript
+            style-loader                : will inject the css into the head tag in the index.html file. (you should use extract-text-webpack-plugin instead)
+            extract-text-webpack-plugin : puts all the compiled css code into a separated file, this way the css code would still work even if the javascript code does not, unlike style-loader which inject css in index.html
+
+            babel-core                  : 
+            babel-loader                ;
+            babel-preset-env            :
+
+
+
+        var path = require('path');
+        module.exports = {
+            entry: './src/js/app.js',
+            output:{
+                path: path.resolve(__dirname, 'dist') // we use the resolve method because the output path has to be absolute
+                filename: 'bundle.js'
+            },
+            module:{
+                rules:[
+                    {
+                        test: /\.js$/,
+                        use: [
+
+                        ]
+                    }
+                ]
+            }
+        }
+
+
+npm install webpack --save-dev              : adds/installs it to devDependencies (--save-dev means you don't need it in production)
 nmp install webpack-dev-server              : automatically bundles the code and reloads the browser whenever a change is made
+npm install webpack-cli --save-dev          : installs cli for webpack
 npm install html-webpack-plugin --save-dev  : automatically copies your index.html file into the distribution folder and inject bundle.js to it
 
 
@@ -109,8 +215,8 @@ webpack.config.js file, so that it can be compiled together with our entries and
 in the html file
 
 1 - babel-loader        : needed by the webpack
-2 - babel-preset-env    : specifies the target browsers
-3 - babel-core          : does the actual conversion 
+2 - babel-preset-env    : without any configuration options behaves ths same as (preset-es2015, preset-es2017) specifies the target browsers
+3 - babel-core          : does the actual conversion. even though this package does the conversion it still needs some presets to tell it what features to convert (ex : babel-preset-env)
 4 - babel-polyfill      : converts Es6 features like (promises)
 5 - babel-preset-es2015 : (deprecated) use babel-preset-env
 6 - babel-preset-react  : complies JSX

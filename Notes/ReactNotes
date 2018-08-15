@@ -231,24 +231,44 @@
   https://blog.bam.tech/developper-news/4-ways-to-dispatch-actions-with-redux
 
 
-* Create you own MiddleWare :
-  
-
 
 * MiddleWares : functions that manipulate actions before they hit reducers 
-  redux-promise middleware package : 
-   it's going to automatically stop the action before it's sent to the reducers 
-   and check whether it contains a promise or not, if it does it consumes that 
-   promise and sends the date to the reducers
+    Create you own MiddleWare :
+      https://www.youtube.com/watch?v=AgO7YcJeBh4&list=PL55RiY5tL51rrC3sh8qLiYHqUV3twEYU_&index=6
 
-   notes on redux-promise :
-    If it receives a promise, it will dispatch the resolved value of the promise. It will not dispatch anything if the promise rejects.
-    If it receives an Flux Standard Action whose payload is a promise, it will either
-      - dispatch a copy of the action with the resolved value of the promise, and set status to success.
-      - dispatch a copy of the action with the rejected value of the promise, and set status to error.
 
-    to deal with failed promise :
-      https://stackoverflow.com/questions/35439019/redux-promise-with-axios-and-how-do-deal-with-errors
+
+* Async Actions :   https://www.youtube.com/watch?v=Td-2D-_7Y2E&t=295s
+
+  redux cannot handle async actions by default.
+  that's where redux-thunk comes in.
+  it gives us a control over the dispatch method of the redux store.
+  vanilla redux expects us to return an action that is a plain js object.
+  only with redux-thunk we are able to return a plain javascript function.
+  this function gives as access to the dispatch function through it's parameter.
+  
+  you can also use promises with redux-thunk, but you will have to manually consume and dispatch them.
+    
+    example :    
+      export function fetchUsers(){
+        const myPromise = axios.get ('http://.....);
+
+        return (dispatch) => {
+          myPromise.then(({data}) => {
+            dispatch({ type:'FETCH' , payload: data})
+          });
+        };
+
+      }
+
+  alternatively, when working with promises you can use the redux-promise-middleware.
+  which will automatically consume the promise for you.
+  if the promise is successful, you should handle it in the reducer and keep in mind that the type of the action will change:
+    ex :
+      switch(action.type){
+        case: yourActionTypeString + _FULFILLED
+      }
+
 
 
 * third-part libraries like google-maps that don't know how to work with react, have a special 

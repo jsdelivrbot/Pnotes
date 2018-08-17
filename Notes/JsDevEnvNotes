@@ -68,6 +68,9 @@ npm install redux-logger --save (import logger from 'redux-logger) without {logg
 /************************************************************************************************************************************************************************************************/  
                                                                                     WepPack
 
+
+* never install webpack globally
+
 * webpack core concepts :
     1 - Entry           : where it should start looking for dependencies. (there can be more than one entry point)
     2 - output          : where it should store the bundle file (or the bundles. if you have multiple entry points) 
@@ -104,8 +107,8 @@ npm install redux-logger --save (import logger from 'redux-logger) without {logg
             output:{
                 path: path.resolve(__dirname, 'dist') // we use the resolve method because the output path has to be absolute
                 filename: 'bundle.js'
-                publicPath: '/dist' // this tells the server where it should start looking for assets, by default it's '/' (without publicPath the dev-server will not pick up the correct path)
-                                    // this is important as long as you are using dev-server.
+                publicPath: '/dist' // this tells the server where it should start looking for assets, by default it's '/' 
+                                    
             }
         }
 
@@ -113,14 +116,14 @@ npm install redux-logger --save (import logger from 'redux-logger) without {logg
         - run npm install css-loader style-loader --save-dev
         - add the module in your webpack-config file 
         - each module has rules which is an array of rules, each rule is an object
+
             var path = require('path');
             module.exports = {
                 entry: './src/js/app.js',
                 output:{
                     path: path.resolve(__dirname, 'dist') // we use the resolve method because the output path has to be absolute
                     filename: 'bundle.js'
-                    publicPath: '/dist' // this tells the server where it should start looking for assets, by default it's '/' (without publicPath the dev-server will not pick up the correct path)
-                                        // this is important as long as you are using dev-server.
+                    publicPath: '/dist' // this tells the server where it should start looking for assets, by default it's '/' 
                 },
                 module:{
                     rules: [
@@ -141,12 +144,13 @@ npm install redux-logger --save (import logger from 'redux-logger) without {logg
                 ]
             }
 
+
     9 - when working with babel and scss :
         
         install the following packages (--save-dev)  :
             sass-loader                 : needed by the webpack
             node-sass                   : needed by sass-loader
-            css-loader                  : loads css into javascript
+            css-loader                  : knows how to deal with css imports
             style-loader                : will inject the css into the head tag in the index.html file. (you should use extract-text-webpack-plugin instead)
             extract-text-webpack-plugin : puts all the compiled css code into a separated file, this way the css code would still work even if the javascript code does not, unlike style-loader which inject css in index.html
 
@@ -157,23 +161,182 @@ npm install redux-logger --save (import logger from 'redux-logger) without {logg
 
 
         var path = require('path');
+        var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+        var extractPlugin = new ExtractTextPlugin({
+            filename: 'main.css'
+        });
+
         module.exports = {
             entry: './src/js/app.js',
             output:{
                 path: path.resolve(__dirname, 'dist') // we use the resolve method because the output path has to be absolute
-                filename: 'bundle.js'
+                filename: 'bundle.js',
+                publicPath: '/dist';
             },
             module:{
                 rules:[
                     {
                         test: /\.js$/,
                         use: [
-
+                            {
+                                loader:'babel-loader',
+                                options: {
+                                    presets:['env']
+                                }
+                            }
                         ]
+                    },
+                    {
+                        test:/\.scss$/,
+                        use: extractPlugin.extract({
+                            use: ['css-loader','sass-loader']
+                        })
+                    }
+                ]
+            },
+            plugins:[
+                extractPlugin
+            ]
+        };
+
+
+
+    10 - copying images and the index.html file from the scr to dist and automatically injecting the js and css on the fly without hard coding the tags in the index file.
+         and regenerating the dist folder with every build
+
+    run the following commands (--save-dev) :
+    1 - html-loader             : 
+    2 - html-webpack-plugin     : creates a new copy of the index.html file and copies it to the dist folder
+    3 - file-loader             : to copy some files (images in this example)
+    4 - clean-webpack-plugin    : regenerates the dist folder with every build
+
+
+
+    var path = require('path');
+    var ExtractTextPlugin = require('extract-text-webpack-plugin');
+    var HtmlWebpackPlugin = require('html-webpack-plugin');
+    var CleanWebpackPlugin = require('clean-webpack-plugin');
+
+    var extractPlugin = new ExtractTextPlugin({
+        filename: 'main.css'
+    });
+    
+    module.exports = {
+    entry: './src/js/app.js',
+    output:{
+        path: path.resolve(__dirname, 'dist') // we use the resolve method because the output path has to be absolute
+        filename: 'bundle.js',
+        // publicPath: '/dist'; we commented it out because the index.html will now be also generated in the dist folder 
+    },
+    module:{
+        rules:[
+            {
+                test: /\.js$/,
+                use: [
+                    {
+                        loader:'babel-loader',
+                        options: {
+                            presets:['env']
+                        }
+                    }
+                ]
+            },
+            {
+                test:/\.scss$/,
+                use: extractPlugin.extract({
+                    use: ['css-loader','sass-loader']
+                })
+            },
+            {
+                test:/\.html$/,
+                use:['html-loader]
+            },
+            {
+                test:/\.(jpg|png)$/,
+                use:[
+                    {
+                        loader:'file-loader',
+                        options:{
+                            name:'[name].[ext]',     // by default file-loader would replace your filename with a random hash. but with this line it will keep the original name and extension
+                            outputPath:'img/',       // by default this would be the dist directory
+                            publicPath:'img/'        // if you get an error. try removing this line
+                        }
                     }
                 ]
             }
-        }
+        ]
+    },
+    plugins:[
+        extractPlugin,
+        new HtmlWebpackPlugin({
+            filename:'index.html',
+            template: 'src/index.html'
+        }),
+        new CleanWebpackPlugin(['dist'])
+    ]      
+
+    }
+
+
+    11 - webpack with multiple html files                       :   https://www.youtube.com/watch?v=y_RFOaSDL8I&index=6&list=PL55RiY5tL51rcCnrOrZixuOsZhAHHy6os
+
+    12 - webpack with jquery or any other third=party library   :   https://www.youtube.com/watch?v=IYuh8hIyvfE&list=PL55RiY5tL51rcCnrOrZixuOsZhAHHy6os&index=7
+         
+
+    13 - webpack with babel (different approach using .babelrc)
+        run the following command (--save-dev) :
+        npm install --save-dev babel-core babel-preset-env babel-loader 
+
+        instead of configuring babel in the webpack.config.js file. we can write the configurations in the .babelrc
+
+        const path = require('path');
+
+        webpack.config.js file :
+            const config = {
+            entry: './src/index.js',
+            output: {
+                path: path.resolve(__dirname, 'build'),
+                filename: 'bundle.js'
+            },
+            module:{
+                rules:[
+                {
+                    use:'babel-loader',
+                    test:/\.js$/
+                }
+                ]
+            }
+            };
+
+            module.exports = config;
+
+        .babelrc file :
+            {
+              "presets": [
+                "babel-preset-env"
+              ]
+            }
+
+    
+    14 - webpack with pure css (ExtractTextPlugin) and babel
+    
+    because loading css in a separate file is a lot more faster than loading it with the bundle file
+    you should use the ExtractTextPlugin.
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 npm install webpack --save-dev              : adds/installs it to devDependencies (--save-dev means you don't need it in production)
@@ -216,10 +379,11 @@ in the html file
 
 1 - babel-loader        : needed by the webpack
 2 - babel-preset-env    : without any configuration options behaves ths same as (preset-es2015, preset-es2017) specifies the target browsers
-3 - babel-core          : does the actual conversion. even though this package does the conversion it still needs some presets to tell it what features to convert (ex : babel-preset-env)
+3 - babel-core          : knows how to take in code, parse it, and generate some output files. It still needs some presets to tell it what features to convert (ex : babel-preset-env)
 4 - babel-polyfill      : converts Es6 features like (promises)
 5 - babel-preset-es2015 : (deprecated) use babel-preset-env
 6 - babel-preset-react  : complies JSX
+
 
 
 

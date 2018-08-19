@@ -148,15 +148,16 @@ npm install redux-logger --save (import logger from 'redux-logger) without {logg
     9 - when working with babel and scss :
         
         install the following packages (--save-dev)  :
-            sass-loader                 : needed by the webpack
-            node-sass                   : needed by sass-loader
-            css-loader                  : knows how to deal with css imports
-            style-loader                : will inject the css into the head tag in the index.html file. (you should use extract-text-webpack-plugin instead)
-            extract-text-webpack-plugin : puts all the compiled css code into a separated file, this way the css code would still work even if the javascript code does not, unlike style-loader which inject css in index.html
+            sass-loader                         : needed by the webpack
+            node-sass                           : needed by sass-loader
+            css-loader                          : knows how to deal with css imports
+            style-loader                        : will inject the css into the head tag in the index.html file. (you should use extract-text-webpack-plugin instead)
+            extract-text-webpack-plugin@2.1.2   : puts all the compiled css code into a separated file, this way the css code would still work even if the javascript 
+                                                code does not, unlike style-loader which inject css in index.html
 
-            babel-core                  : 
-            babel-loader                ;
-            babel-preset-env            :
+            babel-core                          : 
+            babel-loader                        ;
+            babel-preset-env                    :
 
 
 
@@ -321,10 +322,171 @@ npm install redux-logger --save (import logger from 'redux-logger) without {logg
     
     14 - webpack with pure css (ExtractTextPlugin) and babel
     
-    because loading css in a separate file is a lot more faster than loading it with the bundle file
-    you should use the ExtractTextPlugin.
+        because loading css in a separate file is a lot more faster than loading it with the bundle file because of how the browser handles parallel download requests
+        you should use the ExtractTextPlugin.
 
-    
+        npm install --save-dev extract-text-webpack-plugin@2.1.2
+
+
+        const path = require('path');
+        const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+        const config = {
+          entry: './src/index.js',
+          output: {
+            path: path.resolve(__dirname, 'build'),
+            filename: 'bundle.js'
+          },
+          module: {
+            rules: [
+              {
+                use: 'babel-loader',
+                test: /\.js$/
+              },
+              {
+                test: /\.css$/,
+                // use: ['style-loader', 'css-loader']
+                use: ExtractTextPlugin.extract({
+                  fallback: 'style-loader',
+                  use: 'css-loader'
+                })
+              }
+            ]
+          },
+          plugins: [
+            new ExtractTextPlugin('style/main.css')
+
+          ]
+
+
+
+
+
+        };
+
+        module.exports = config;
+
+
+    15 -importing images with webpack :
+        
+        for that we use two separate loaders :  
+        1 - image-webpack-loader    : compresses the images (reduces the file size)
+
+        2 - url-loader              : takes the compressed image and decides where to put the image
+                                    if the image size is smaller than the limit you set it will be 
+                                    put as row data in side the bundle.js.
+                                    if it's larger it will be put inside the directory as normal pic
+                                    via 'file-loader'.
+                                    'file-loader' is the default fallback for url-loader
+
+        3- file-loader              : needed in case the size is bigger than the limit set for url-loader
+                                    it is the default fallback for url-loader
+
+        4- publicPath               : it is used by any loader that produces a direct file path reference to a file in our output (dist) directory
+
+        npm install --save-dev image-webpack-loader url-loader 
+        if you have any dependency problem check out these links : 
+            https://github.com/imagemin/mozjpeg-bin/issues/18
+            https://github.com/imagemin/pngquant-bin/issues/78#issuecomment-373972847 
+            https://github.com/StephenGrider/WebpackCasts/issues/1
+
+        
+        sudo dpkg -i /path/to/libpng12
+        +
+        sudo apt-get install -f
+
+        webpackFile :
+            const path = require('path');
+            const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+            const config = {
+            entry: './src/index.js',
+            output: {
+                path: path.resolve(__dirname, 'build'),
+                filename: 'bundle.js',
+                publicPath: 'build/'
+            },
+            module: {
+                rules: [
+                {
+                    use: 'babel-loader',
+                    test: /\.js$/
+                },
+                {
+                    test: /\.css$/,
+                    // use: ['style-loader', 'css-loader']
+                    use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader'
+                    })
+                },
+                {
+                    test: /\.(jpe?g|png|svg|gif)$/,
+                    use: [
+                    {
+                        loader: 'url-loader',
+                        options: { limit: 40000 }
+                    },
+                    'image-webpack-loader'
+                    ]
+                }
+                ]
+            },
+            plugins: [
+                new ExtractTextPlugin('style/main.css')
+
+            ]
+
+            };
+
+            module.exports = config;
+        
+        babelrcFile :
+            {
+              "presets": [
+                "babel-preset-env"
+              ]
+            }
+
+
+
+    16- Code Splitting with webpack:
+
+        There are two ways to split you code with webpack
+            - using System.import()
+                04 Building for performance with webpack
+                webpack2 project 
+
+            - by passing multiple Entry points
+                05 Applying WebPack to a Real project
+                webpack3 project
+
+        some important plugins :
+
+            webpack.CommonsChunkPlugin : removes the duplicate packages
+
+            npm install --save-dev htmlwebpackplugin : regenerates the index.html with the correct script tags so that u don't have to hard code them
+
+            npm install --save-dev rimraf           : handles inconsistencies in commands between different operating systems 
+                                                    (check out CleanWebpackPlugin as well line206) 
+                then go to your package.json file and add this script :
+                    "build": "npm run clean && webpack",
+                    "clean": "rimraf dist"
+            
+            
+
+    17- webpack-dev-server :
+
+        watches for changes and rebuilds only the changed file.
+        However, it does not watch for any changes made in the webpack.config.js
+        and you have to restart the dev-server every time you make changes to webpack.config.js.
+
+
+
+
+
+
+
 
 
 

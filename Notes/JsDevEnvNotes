@@ -450,7 +450,7 @@ npm install redux-logger --save (import logger from 'redux-logger) without {logg
 
 
 
-    16- Code Splitting with webpack:
+    16- Code Splitting with webpack: (webpack2, webpack3 projects)
 
         There are two ways to split you code with webpack
             - using System.import()
@@ -475,19 +475,108 @@ npm install redux-logger --save (import logger from 'redux-logger) without {logg
             
             
 
-    17- webpack-dev-server :
+    17- webpack-dev-server :(webpack3 projects)
 
         watches for changes and rebuilds only the changed file.
         However, it does not watch for any changes made in the webpack.config.js
         and you have to restart the dev-server every time you make changes to webpack.config.js.
+        
 
 
 
 
+    18- Code Splitting with react router : (webpack3 projects)
+        07 React-Specific-topics 
+        042 + 043
 
 
 
+    19- Deployment with Webpack :
 
+        changes to make first : (in the plugins)
+            - webpack.config.js
+                new webpack.DefinePlugin({
+                  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+                })
+
+            - package.json :
+                "build": "NODE_ENV=production npm run clean && webpack -p",
+
+        Deployment options :
+            -static :
+                Gitub pages 
+                Amazon s3 (AWS S3)
+                Digital Ocean
+                Ms Azure
+                surge (the easiest)
+            -server-based providers :
+                Amazon EC2
+                Amazon ELB
+                Digital Ocean
+                Heroku
+                Ms Azure
+
+        Static Deployment :
+            surge.sh :
+                1- npm install -g surge
+                2- npm run build
+                3- surge -p dist
+
+            
+            Github Repo :
+
+                1- run git init in the project directory
+
+                2- run git add .
+
+                3- run git commit -m ""
+
+                4- git remote add origin <the Link>
+
+                5- git checkout -b gh-pages
+
+                6- git subtree push --prefix dist origin gh-pages (i just wanna push my dist dir to my origin and then to the gh-pages branch)
+                
+                7- to automate the deployment process : 
+                        add the following script in the package.json :
+                            "deploy": "npm run build && git subtree push --prefix dist origin gh-pages"
+
+                8- Automatically served on :
+                    https://<Username>.github.io/<RepoName></Username>
+
+
+
+        server-based :
+            - webpack-dev-server :
+                is itself an express server which uses webpack-dev-middleware to serve the latest bundle and additionally 
+                handles hot module replacement (HMR) requests for live module updates in the client.
+
+            - webpack-dev-middleware : (with this we don't need to start a webpack server. we will only have one server (node.js))
+                is middleware which can be mounted in an express server to serve the latest compilation of your bundle during 
+                development. This uses webpack's Node API in watch mode and instead of outputting to the file system it outputs to memory.
+                
+                npm install --save-dev webpack-dev-middleware@1.9.0
+                
+
+
+            - webpack-hot-middleware :
+                is an alternative to webpack-dev-server but instead of starting a server itself it allows you to mount it in 
+                an existing / custom express server alongside webpack-dev-middleware.
+                using this middleware, webpack will rebuild our project after every change we make, so we don't have to manually run webpack.
+
+            - (webpack-hot-middleware & webpack-dev-middleware) or webpack-dev-server :
+                these middleware don't handle server bundles meaning you need to frequently restart your server to see the latest 
+                changes. to solve this problem we can use webpack-hot-server-middleware. 
+
+            - webpack-hot-server-middleware :
+                is designed to be used alongside webpack-dev-middleware and webpack-hot-middleware to handle hot module 
+                replacement of server rendered apps.
+
+            
+
+
+                
+                    
 
 
 

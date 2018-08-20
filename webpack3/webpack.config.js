@@ -31,10 +31,15 @@ module.exports = {
     ]
   },
   plugins: [
+
     new webpack.optimize.CommonsChunkPlugin({ // fi there are any common modules only leave the ones in vendor and delete the rest
       names: ['vendor', 'manifest'] // manifest will be created inside our dist folder to better tell the browser about the updates vendor.js receives
 
     }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    }),
+
     new HtmlWebPackPlugin({
       template: 'src/index.html'
     })

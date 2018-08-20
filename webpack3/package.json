@@ -4,15 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm run clean && webpack",
+    "build": "npm run clean && NODE_ENV=production webpack -p",
     "clean": "rimraf dist",
-    "serve": "webpack-dev-server"
+    "serve": "webpack-dev-server",
+    "node:prod": "npm run build && NODE_ENV=production node server.js",
+    "node:dev": "npm run clean && webpack && NODE_ENV=development node server.js"
   },
   "repository": "https://github.com/StephenGrider/WebpackProject",
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.16.3",
     "faker": "^3.1.0",
+    "install": "^0.12.1",
     "lodash": "^4.17.2",
     "react": "15.4.1",
     "react-dom": "15.4.1",
@@ -33,6 +37,7 @@
     "rimraf": "^2.6.2",
     "style-loader": "^0.13.1",
     "webpack": "2.2.0-rc.0",
+    "webpack-dev-middleware": "^1.9.0",
     "webpack-dev-server": "^2.2.0-rc.0"
   }
 }

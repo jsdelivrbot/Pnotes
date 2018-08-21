@@ -78,9 +78,15 @@ npm install redux-logger --save (import logger from 'redux-logger) without {logg
     4 - Plugins         : transform our code (it's applied on you bundle before it's output) an example would be 
 
 
+
 * webpack understands es6 but it does not automatically transpile it. for that you would use babel
 
-* 
+* in webpack 4 we have the development(builds the bundle without minifying) and the production mode (minifys)
+    you can specify the mode either in the package.json file (inside scripts) or in webpack.config.js file
+
+
+
+when using the dev-server, the files will not be saved on the disk, instead they will be streamed to the server
 
 * to use webpack we need to :
     
@@ -575,41 +581,6 @@ npm install redux-logger --save (import logger from 'redux-logger) without {logg
             
 
 
-                
-                    
-
-
-
-
-
-
-
-
-
-
-
-
-
-npm install webpack --save-dev              : adds/installs it to devDependencies (--save-dev means you don't need it in production)
-nmp install webpack-dev-server              : automatically bundles the code and reloads the browser whenever a change is made
-npm install webpack-cli --save-dev          : installs cli for webpack
-npm install html-webpack-plugin --save-dev  : automatically copies your index.html file into the distribution folder and inject bundle.js to it
-
-
-in webpack there are four core concepts :
-1 - Entry point 
-2 - Output (takes an object, tha path needs to be absolute)
-3 - Loaders
-4 - Plugins 
-
-
-
-in webpack 4 we have the development(builds the bundle without minifying) and the production mode (minifys)
-you can specify the mode either in the package.json file (inside scripts) or in webpack.config.js file
-
-
-
-when using the dev-server, the files will not be saved on the disk, instead they will be streamed to the server
 
 
 

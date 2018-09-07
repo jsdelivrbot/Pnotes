@@ -1,0 +1,19 @@
+button{
+  width:100%;
+  text-align: left;
+  border: none;
+  background-color: #ddd;
+  padding: 0.5rem 0;
+  
+}
+.parent{
+  background-color: #ddd;
+}
+
+.active, button:hover{
+  background-color: #aaa;
+}
+
+.panel{
+  display: none;
+}

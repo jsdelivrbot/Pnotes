@@ -401,7 +401,7 @@ CSS Layout - display: inline-block :
 
 
 
-CSS Layout - Horizontal & Vertical Align:
+CSS Layout - Horizontal & Vertical Align:   https://css-tricks.com/centering-css-complete-guide/
     To horizontally center a block element (like <div>), use margin: auto;
     Setting the width of the element will prevent it from stretching out to the edges of its container.
     The element will then take up the specified width, and the remaining space will be split equally between the two margins

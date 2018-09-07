@@ -25,6 +25,8 @@
 
 
 
+
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //function expression :
     var x = function (par) {
@@ -32,9 +34,38 @@
     }
 
 
+
+
+
+
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Loops in JavaScript
     // https://stackoverflow.com/questions/9329446/for-each-over-an-array-in-javascript
+
+    // for of loop (es6)
+    let incomes = [62000, 67000, 75000];
+    for (const income of incomes) {
+        console.log(income);
+    }
+
+
+    let fullName = "Dylan Coding God Israel";
+    for (const char of fullName) {
+        console.log(char);
+    }
+
+    // trying to change values of an array
+    let incomes = [62000, 67000, 75000];
+    for (let income of incomes) {
+        income += 5000;
+    }
+    console.log(incomes); // won't change. it's only designed to loop through arrays not to modigy them
+
+
+
+
+
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,8 +102,6 @@
     }
 
 
-
-
     // reduce method https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
     // Array Reference (Properties && Methods) : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
     //                                          https://www.w3schools.com/jsref/jsref_obj_array.asp
@@ -87,6 +116,29 @@
     };
     var names = ['omar', 'moh'];
     names.myUcase();
+
+
+    // removing elements without leaving any gaps
+    var myList = [];
+    myList.push({ololo: "ololo0"});
+    myList.push({ololo: "ololo1"});
+    myList.push({ololo: "ololo2"});
+    console.log(myList);
+
+    console.log(remove(myList,1));
+
+
+    function remove(arr, index){
+        arr.splice(index,1);
+        return arr;
+    }
+
+
+    // in es6 includes() replaced indexOf() which only returns either true or false 
+    // includes is not supported by internet explorer 
+    let numArray = [1,2,3,4,5];
+    console.log(numArray.includes(2));
+
 
 
 
@@ -156,24 +208,68 @@
 
 
 
+
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Execution Contexts :
+    // Execution Contexts : what section No:3
 
-    // Global : code that is not inside any function
-    //          associated with the global object
-    //          in the browser, that's the widow object
-    // in other words, everything we declare in the global object automatically gets attached to the window object
-    lastName === window.lastName
+    /* Section No:3 summary 
+        Our code runs inside Js Engine, each browser has it's own Js Engine.
+        Inside the Js Engine there is a parser which reads our code line by line and checks the syntax.
+        The parser converts our code to a data structure called abstract syntax tree which is later converted to machine language.
+        Js code need an environment (Execution Context) to run.
+        Execution Context : wrapper which stores variables and in which the code is evaluated and executed.
+        The global context is the default execution context.
+
+        Global code that is not inside any function, it's associated with the global object, that's the widow object in the browser
+        in other words, everything we declare in the global object automatically gets attached to the window object
+        lastName === window.lastName   
+        
+        Each time we call a function it gets its own execution context added on top of the execution stack.
+
+        Execution context has 3 properties :
+            Variable Object(vo) :
+                - function arguments
+                - variable declaration 
+                - function declaration 
+
+            scope chain :  
+                - the current vo
+                - VOs of all its parents 
+
+            This variable 
+
+        When we call a function an execution context is created and it goes through 2 phases :
+            1 - Creation phase :
+                - creation of VO :
+                    - argument object is created containing all the arguments passed into the function
+                    - code is scanned for function declarations, for each function a property is created in the VO pointing to the function (Hoisting)
+                    - code is scanned for variable declaration for each variable a property is created in VO and set to undefined (Hoisting)
+                    - Both variables and functions are hoisted (available before the execution phase starts)
+                    - Functions are already defined before the execution phase. However variables are set to undefined until the execution phase
+
+                - creation of scope chain :
+                    - a new scope is created with every new function(in Js creating functions is the only way of creating new scopes)
+                    - lexical scoping : an inner functions get access to the outer functions scope.
+                
+                - determine value of 'this' :
+                    - the value of the 'this' keyword is only determine when the function gets called 
+
+            2- execution phase :
+                the code is executed line by line.
+    */
 
 
-
-
+        
+    
+    
 
 
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Hoisting in JavaScript : the main takeaway is that you can use a function in js before u actually create it
+    // what section No:3
 
     calculateAge(1965); // this would work because functions statements and variables in Js are hoisted
     function calculateAge(year) {
@@ -183,11 +279,38 @@
     retirement(1956); // wouldn't work coz this is function expression
     var retirement = function (year) {
         console.log(65 - (2016 - year));
-    }
+    } 
 
-    console.log(age); // this would give you undefined coz, and if u remove the declaration it will give you an error
+    console.log(age); // this would give you undefined coz in javascript variables are hoisted and set to undefined before the execution phase 
     var age = 23;
 
+
+
+    if (false) {
+        var example = 5;
+    }
+    console.log(example); // this would be undefined  
+
+
+
+    if (false) {
+        let example = 5;
+    }
+    console.log(example); // this would be through an error, let and const aren't hoisted 
+
+
+
+    const example = {
+        firstName: 'omar'
+    };
+    example.firstName = 'Dylan'; // even though example is a const, we still can modify the content (the same applies for object)
+    console.log(example);
+
+
+
+    const example = [];
+    example = 3; // this would through an error, we can't change the datatype 
+    console.log(example);
 
 
 
@@ -217,13 +340,13 @@
 
         function second() {
             var c = 'Hey!';
-            third()
+            third(); // second function has access to the third function because of scoping  
         }
     }
 
     function third() {
         var d = 'John';
-        //console.log(c); will give you C in not defined error
+        //console.log(c); will give you an error
         console.log(a + d); // it only has access to these variables
     }
 
@@ -240,7 +363,7 @@
     // 1 - each execution context has 'this' keyword
     // 2 - in a Regular Function Call : points at the global object (the window object)
     // 3 - in a Method Call : points to the object calling the method
-    // 4 - this keyword is only assigned a value when the object calls the method
+    // 4 - this keyword is only assigned a value when the function where it's defined is called 
     // 5 - arrow functions don't have their own this keyword. (search for Arrow functions 2 lexical this keyword in this file)  
     // 6 - this keyword in object methods set as callbacks :
     // https://stackoverflow.com/questions/20279484/how-to-access-the-correct-this-inside-a-callback
@@ -362,6 +485,255 @@
     // how to add the same event listener to different events 
     ['hashchange', 'load'].forEach(event => window.addEventListener(event, () => { }))
 
+    /*                          
+    You can only access style properties in Javascript that have been set via Javascript or the style attr (inline styling).
+
+    To access the elements current style you should fetch the computed style of the element. 
+        var el = document.getElementById('mydiv');
+        var comp = el.currentStyle || getComputedStyle(el,null);
+        alert(comp.backgroundColor)
+    */
+
+
+    // console.dir is the way to see all the properties of a specified JavaScript object in console 
+    // by which the developer can easily get the properties of the object.
+    console.log(document.location);
+
+
+    // EXAMINE THE DOCUMENT OBJECT //
+    console.dir(document);
+    console.log(document.domain);
+    console.log(document.URL);
+    console.log(document.title);
+    document.title =  123;
+    console.log(document.doctype);
+    console.log(document.head);
+    console.log(document.body);
+    console.log(document.all); // gives you an array-like object of the document elements 
+    console.log(document.all[10]);
+    document.all[10].textContent = 'Hello';
+    console.log(document.forms); // gives you an array-like object of all the forms that you have
+    console.log(document.forms[0]);
+    console.log(document.links);
+    console.log(document.images);
+
+    // GETELEMENTBYID //
+    console.log(document.getElementById('header-title'));
+    var headerTitle = document.getElementById('header-title');
+    var header = document.getElementById('main-header');
+    console.log(headerTitle);
+    headerTitle.textContent = 'Hello'; // textContent doesn't respect the styling of an element
+    headerTitle.innerText = 'Goodbye'; // innerText property respects the styling of elements
+    console.log(headerTitle.innerText);
+    headerTitle.innerHTML = '<h3>Hello</h3>';
+    header.style.borderBottom = 'solid 3px #000';
+
+    // GETELEMENTSBYCLASSNAME //
+    var items = document.getElementsByClassName('list-group-item');
+    console.log(items);
+    console.log(items[1]);
+    items[1].textContent = 'Hello 2';
+    items[1].style.fontWeight = 'bold';
+    items[1].style.backgroundColor = 'yellow';
+    
+    for(var i = 0; i < items.length; i++){
+        items[i].style.backgroundColor = '#f4f4f4';
+    }
+
+    // GETELEMENTSBYTAGNAME //
+    var li = document.getElementsByTagName('li'); // gives you all the li elements in the document
+    console.log(li);
+    console.log(li[1]);
+    li[1].textContent = 'Hello 2';
+    li[1].style.fontWeight = 'bold';
+    li[1].style.backgroundColor = 'yellow';
+
+    // QUERYSELECTOR //
+    var header = document.querySelector('#main-header');
+    header.style.borderBottom = 'solid 4px #ccc';
+
+    var input = document.querySelector('input');
+    input.value = 'Hello World'
+
+    var submit = document.querySelector('input[type="submit"]');
+    submit.value="SEND"
+
+    var item = document.querySelector('.list-group-item');
+    item.style.color = 'red';
+
+    var lastItem = document.querySelector('.list-group-item:last-child');
+    lastItem.style.color = 'blue';
+
+    var secondItem = document.querySelector('.list-group-item:nth-child(2)');
+    secondItem.style.color = 'coral';
+
+
+    // QUERYSELECTORALL //
+    var titles = document.querySelectorAll('.title'); // returns a node list
+
+    console.log(titles);
+    titles[0].textContent = 'Hello';
+
+    var odd = document.querySelectorAll('li:nth-child(odd)');
+    var even= document.querySelectorAll('li:nth-child(even)');
+
+    for(var i = 0; i < odd.length; i++){
+        odd[i].style.backgroundColor = '#f4f4f4';
+        even[i].style.backgroundColor = '#ccc';
+    }
+
+
+    // TRAVERSING THE DOM //
+    var itemList = document.querySelector('#items');
+
+    // parentNode
+    console.log(itemList.parentNode);
+    itemList.parentNode.style.backgroundColor = '#f4f4f4';
+    console.log(itemList.parentNode.parentNode.parentNode);
+
+
+    // parentElement
+    console.log(itemList.parentElement);
+    itemList.parentElement.style.backgroundColor = '#f4f4f4';
+    console.log(itemList.parentElement.parentElement.parentElement);
+
+
+    // childNodes (not recommended. use children instead) 
+    console.log(itemList.childNodes);
+    // the list that is returned by childNodes includes any white spaces or line breaks you have
+    // as elements of the list 
+
+
+    // children
+    console.log(itemList.children);
+    console.log(itemList.children[1]);
+    itemList.children[1].style.backgroundColor = 'yellow';
+
+
+    // FirstChild and LastChild (not recommended. use FirstElementChild and lastElementChild instead)
+    console.log(itemList.firstChild);
+    console.log(itemList.lastChild);
+    // it does the exact same thing as the childNodes
+    
+
+    // firstElementChild and lastElementChild
+    console.log(itemList.firstElementChild);
+    itemList.firstElementChild.textContent = 'Hello 1';
+
+    console.log(itemList.lastElementChild);
+    itemList.lastElementChild.textContent = 'Hello 4';
+
+
+    // nextSibling (not recommended use nextElementSibling instead)
+    console.log(itemList.nextSibling);
+
+    // nextElementSibling
+    console.log(itemList.nextElementSibling);
+
+    // previousSibling (not recommended use previousElementSibling instead)
+    console.log(itemList.previousSibling);
+
+    // previousElementSibling
+    console.log(itemList.previousElementSibling);itemList.previousElementSibling.style.color = 'green';
+
+
+    // createElement
+
+    var newDiv =  document.createElement('div');
+
+    // Add class
+    newDiv.className= 'hello';
+
+    // Add id
+    newDiv.id = 'hello1';
+
+    // Add attr
+    newDiv.setAttribute('title', 'Hello Div');
+
+    // Create text node
+    var newDivText = document.createTextNode('Hello World');
+
+    // Add text to div
+    newDiv.appendChild(newDivText);
+
+    var container = document.querySelector('header .container');
+    var h1 = document.querySelector('header h1');
+
+    console.log(newDiv);
+
+    newDiv.style.fontSize = '30px';
+
+    container.insertBefore(newDiv, h1);
+
+
+
+    // EVENTS //
+
+    var button = document.getElementById('button').addEventListener('click', buttonClick);
+
+    function buttonClick(e){
+
+        console.log('Button clicked');
+        document.getElementById('header-title').textContent = 'Changed';
+        document.querySelector('#main').style.backgroundColor = '#f4f4f4';
+        console.log(e);
+
+        console.log(e.target);
+        console.log(e.target.id);
+        console.log(e.target.className);
+        console.log(e.target.classList);
+        var output = document.getElementById('output');
+        output.innerHTML = '<h3>'+e.target.id+'</h3>';
+
+        console.log(e.type);
+
+        console.log(e.clientX); // from the browser 
+        console.log(e.clientY);
+
+        console.log(e.offsetX); // from the element itself
+        console.log(e.offsetY);
+
+        console.log(e.altKey); // if the key was held while the event happened, it returns true
+        console.log(e.ctrlKey);
+        console.log(e.shiftKey);
+    }
+
+
+    // handle a submit event of a form :
+        form.addEventListener('submit',myCallback);
+        function myCallback(e){
+            e.preventDefault();
+            // you code codes here
+        }
+
+
+    // important events to go over 
+    /* 
+        click
+        dblclick
+        mousedown
+        mouseup
+        mouseenter
+        mouseleave
+        mouseover
+        mouseout
+        mousemove
+
+        keydown
+        keyup
+        keypress
+        focus
+        blur
+        cut
+        paste
+        input // it listens for keystrokes, cut and paste events on a particular input element. it also can be used with select elements            
+        change
+    
+    */
+
+
+
+
 
 
 
@@ -378,11 +750,14 @@
     // object itself, and if it's not there it moves to the object's prototype.
 
 
-
-
     // in and delete operator :
-    //  https: //developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/in
-    //  https: //developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete
+    //  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/in
+    //  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete
+
+
+
+
+
 
 
 
@@ -608,8 +983,7 @@
         var score = Math.random() * 10;
         console.log(score >= 5);
     })();
-
-    //console.log(score);
+    //console.log(score); this would through an error, score is not accessible outside the function 
 
 
     (function (goodLuck) {
@@ -876,6 +1250,11 @@
     console.log(i); // this will print (23)
 
 
+
+
+
+
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Import & Export Es6 :
     https: //www.youtube.com/watch?v=Jqn_wjkSZwo
@@ -883,6 +1262,10 @@
     //    2 - https://hackernoon.com/import-export-default-require-commandjs-javascript-nodejs-es6-vs-cheatsheet-different-tutorial-example-5a321738b50f
 
     import './loadImage.js'; // suppose that loadImage only contains some code that needs to run (ex: loading an image)
+
+
+
+
 
 
 
@@ -918,7 +1301,7 @@
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Lecture: Strings
+    // Lecture: Strings & template literal
 
 
     let firstName = 'John';
@@ -937,6 +1320,13 @@
     console.log(
         `This is ${firstName} ${lastName}. He was born in ${yearOfBirth}. Today, he is ${calcAge(yearOfBirth)} years old.`
     ); // this is template literals using
+
+    // template literals allow multi-line strings
+    let example = `${word1}
+    ${word2}
+    `;
+
+
 
 
     const n = `${firstName} ${lastName}`;
@@ -1100,12 +1490,12 @@
     var age = john[1];
 
 
-    // ES6
+    // ES6 Destructuring Arrays
     const [name, age] = ['John', 26];
     console.log(name);
     console.log(age);
-
-    //
+ 
+    // Destructuring objects
     const obj = {
         firstName: 'John',
         lastName: 'Smith'
@@ -1405,6 +1795,10 @@
 
 
 
+    
+
+    
+
 
 
 
@@ -1413,6 +1807,8 @@
     // class definitions are not hoisted unlike function constructors
     // we can only add method to classes (it's not recommended anyway to add properties to classes)
     // functions are balled methods inside the class, so you create them without the function keyword
+
+    // https://medium.com/tech-tajawal/javascript-classes-under-the-hood-6b26d2667677
 
     //ES5
     var Person5 = function (name, yearOfBirth, job) {
@@ -1450,6 +1846,127 @@
 
     Person6.greeting();
 
+
+    // the class syntax has two components: class expressions and class declarations.
+        
+    // class declaration:
+        class Rectangle {
+            constructor(height, width) {
+            this.height = height;
+            this.width = width;
+            }
+        }
+
+    /* Hoisting:
+        An important difference between function declarations and class declarations is that function declarations are hoisted and class 
+        declarations are not. You first need to declare your class and then access it, otherwise code like the following will throw an error 
+        Class expressions are subject to the same hoisting restrictions as well. 
+    */
+
+    /* Class expressions:
+        Class expressions can be named or unnamed. The name given to a named class expression can be retrieved 
+        through the class's (not an instance's) .name property. 
+    */
+
+    // unnamed
+    let Rectangle = class {
+      constructor(height, width) {
+        this.height = height;
+        this.width = width;
+      }
+    };
+    console.log(Rectangle.name);
+    // output: "Rectangle"
+
+    // named
+    let Rectangle = class Rectangle2 {
+      constructor(height, width) {
+        this.height = height;
+        this.width = width;
+      }
+    };
+    console.log(Rectangle.name);
+    // output: "Rectangle2"
+
+
+    /* Constructor 
+        The constructor method is a special method for creating and initializing an object created with a class. There can only be 
+        one special method with the name "constructor" in a class. A SyntaxError will be thrown if the class contains more than one 
+        occurrence of a constructor method.
+    */
+
+    class Rectangle {
+    constructor(height, width) {
+        this.height = height;
+        this.width = width;
+    }
+    // Getter
+    get area() { // acts as a property 
+        return this.calcArea();
+    }
+    // Method
+    calcArea() {
+        return this.height * this.width;
+    }
+    }
+
+    const square = new Rectangle(10, 10);
+
+    console.log(square.area); // 100
+
+
+    /* Static Methods
+        The static keyword defines a static method for a class. Static methods are called without instantiating their class and 
+        cannot be called through a class instance. Static methods are often used to create utility functions for an application.
+    */
+
+    /* prototype and static methods 
+        When a static or prototype method is called without a value for this, the this value will be undefined inside the method. 
+        This behavior will be the same even if the "use strict" directive isn't present, because code within the class body's 
+        syntactic boundary is always executed in strict mode.
+    */
+    class Animal { 
+      speak() {
+        return this;
+      }
+      static eat() {
+        return this;
+      }
+    }
+
+    let obj = new Animal();
+    obj.speak(); // Animal {}
+    let speak = obj.speak;
+    speak(); // undefined
+
+    Animal.eat() // class Animal
+    let eat = Animal.eat;
+    eat(); // undefined
+
+
+    /* function-based syntax
+        If the above is written using traditional function-based syntax, then autoboxing in method calls will happen in non–strict mode based on the initial this value. If the initial value is undefined, this will be set to the global object.
+    */
+
+    function Animal() { }
+
+    Animal.prototype.speak = function() {
+      return this;
+    }
+
+    Animal.eat = function() {
+      return this;
+    }
+
+    let obj = new Animal();
+    let speak = obj.speak;
+    speak(); // global object
+
+    let eat = Animal.eat;
+    eat(); // global object
+
+
+    
 
 
 
@@ -1921,6 +2438,102 @@
 
     // to set the focus on an element use this :
     element.focus();
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Json 
+    
+    // some Rules :
+        // uses key/value pairs 
+        // double quotes around key and value
+        // file type is .json
+        // MiME type is "Application/json"
+    
+
+    // Json Data Types 
+        // Numbers : no difference between integer and floats
+        // String  : 
+        // Boolean : 
+        // Array   :
+        // Object  : Key/value Pairs
+        // Null    : Empty value
+
+
+    // normal array
+    var people = [
+        {
+        name:"Brad",
+        age: 35
+        },
+        {
+        name:"John",
+        age:40
+        },
+        {
+        name:"Sara",
+        age:25
+        }
+    ];
+
+    // converted to Json format
+    /* {
+        "people": [
+        {
+            "name":"Brad",
+            "age": 35
+        },
+        {
+            "name":"John",
+            "age":40
+        },
+        {
+            "name":"Sara",
+            "age":25
+        },
+        {
+            "name":"Jeff",
+            "age":20
+        }
+        ]
+    } */
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Chrome Dev Tools 
+
+    
+    // console.error('An error');
+    // console.warn('A warning');
+    // console.dir(document);
+
+    // console.table([{name:'John', email:'test@test.com', age:33}]);
+    // console.clear();
+
+    // console.group('Say Hello'); 
+    //   console.log('Hello Brad');
+    //   console.log('Hello John');
+    //   console.log('Hello Sally');
+    // console.groupEnd('Say Hello');
+    
+    // console.time('Run Loop');
+    // for (var i = 0; i < 20000; i++) {
+    //     console.log(i);
+    // };
+    // console.timeEnd('Run Loop');
+    // function greaterThan(a,b) {
+    //   console.assert(a > b, {"message":"a is not greater than b","a":a,"b":b});
+    // }
+
+    // greaterThan(5,6);
+
+
+
+
+
 </script>
 
 

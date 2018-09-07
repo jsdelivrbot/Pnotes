@@ -1,0 +1,57 @@
+/* body{
+  margin:0;
+}
+
+.icon-bar{
+  width:3rem;
+  background-color:#555;
+}
+.icon-bar a {
+  display: block;
+  color: white;
+  text-align:center;
+  font-size: 2rem;
+}
+
+.icon-bar a:hover{
+  background-color:black;
+
+}
+
+.active{
+  background-color: green;
+}
+ */
+
+body{
+  margin:0;
+}
+
+.icon-bar{
+  background-color:#555;
+}
+
+.icon-bar::after{
+  content:"";
+  clear:both;
+  display:table;
+
+}
+
+.icon-bar a{
+  float: left;
+  width: 20%;
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 2rem;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+a:hover{
+  background-color:black;
+}
+
+.active{
+  background-color:green;
+}

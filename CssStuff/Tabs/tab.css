@@ -1,0 +1,45 @@
+body{
+  font-family: Arial;
+}
+.tab{
+  text-align: center;
+  background-color: #f1f1f1;
+  border:0.2rem solid #ccc;
+  margin: 0;
+}
+
+.tab::after{
+  content: "";
+  clear: both;
+  display: block;
+}
+
+.tab button{
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size:1rem;
+  font-weight:bold;
+}
+
+.tab button:hover{
+  background-color: #ddd;
+}
+
+.tab button.active{
+  background-color: #ccc;
+}
+
+.tabcontent{
+  border:0.2rem solid #ccc;
+  border-top: none;
+  padding:1rem 1rem;
+  display: none;
+}
+.fa-times{
+  float: right;
+  cursor:pointer;
+}

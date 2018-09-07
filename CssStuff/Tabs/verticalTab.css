@@ -1,0 +1,53 @@
+*{
+  box-sizing: border-box;
+}
+body,html{ /* this is required for the height property of the .tab to work */
+  height: 100%;
+}
+
+body {font-family: "Lato", sans-serif;}
+
+.tab{
+  float: left;
+  background-color: #f1f1f1;
+  border: 0.0625rem solid #ccc;
+  width: 20%;
+  
+  height:50%;
+}
+
+
+.tab button{
+  display: block;
+  border:none;
+  outline:none;
+  padding:2rem 1rem;
+  background-color: inherit;
+  width:100%;
+  text-align: center;
+  cursor: pointer;
+  font-size: .8rem;
+  color: black;
+}
+
+.tab button:hover{
+  background-color: #aaa;
+}
+
+.tab button.active{
+  background-color: #ccc;
+}
+
+.tabcontent{ /* float property is needed here so that we can add padding
+                this is because the tab div is using float which means it's not
+                following the normal flow of the browser. so when we use float here 
+                we are putting tabcontent in the same flow as tab div, and therefore
+                we are able to use the padding property */
+  float: left;
+  padding:0 3rem;
+  border: 0.0625rem solid #ccc;
+  width:80%;
+  border-left: none;
+  height:50%;
+  
+}

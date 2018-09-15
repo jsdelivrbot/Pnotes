@@ -28,10 +28,67 @@
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //function expression :
-    var x = function (par) {
-        // code goes here
+    // if statement
+
+    // any datatype that you put inside the () of an if statement gets converted to a boolean 
+
+    if (a) { // if a is one these [undefined, null, '', 0] the statement will fail 
+
     }
+
+    // some examples on the or operator 
+    0 || 1                  // 1
+    undefined || 'hello'    // hello
+    null || 'hello'         // hello
+    "" || 'hello'           // hello
+
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //function in Js :
+
+    // in Js are primitive types are passed by values 
+    // and all objects are by reference 
+
+    // because functions in Js are first class functions we can do the following 
+    // functions are objects (first class functions)
+    function greet() {
+        console.log('hi');
+    }
+    greet.language = 'english';
+    console.log(greet);         // that would output the function itself
+    console.log(greet.language);// this outputs 'english'
+
+
+
+    // functions expression & statements hoisting 
+    greet(); // works
+    function greet() {
+        console.log('hi');
+    }
+
+    anonymousGreet(); // this would give an undefined error (function expressions are not hoisted )
+    var anonymousGreet = function () { // 
+        console.log('hi');
+    }
+    anonymousGreet();
+
+
+
+    // passing functions as arguments 
+    function log(a) { // 'a' is the function created on the fly 
+        a();
+    }
+
+    log(function () { // here we are creating a function on the fly as an arguments (we can do that coz functions are objects)
+        console.log('hi');
+    });
+
 
 
 
@@ -120,23 +177,23 @@
 
     // removing elements without leaving any gaps
     var myList = [];
-    myList.push({ololo: "ololo0"});
-    myList.push({ololo: "ololo1"});
-    myList.push({ololo: "ololo2"});
+    myList.push({ ololo: "ololo0" });
+    myList.push({ ololo: "ololo1" });
+    myList.push({ ololo: "ololo2" });
     console.log(myList);
 
-    console.log(remove(myList,1));
+    console.log(remove(myList, 1));
 
 
-    function remove(arr, index){
-        arr.splice(index,1);
+    function remove(arr, index) {
+        arr.splice(index, 1);
         return arr;
     }
 
 
     // in es6 includes() replaced indexOf() which only returns either true or false 
     // includes is not supported by internet explorer 
-    let numArray = [1,2,3,4,5];
+    let numArray = [1, 2, 3, 4, 5];
     console.log(numArray.includes(2));
 
 
@@ -153,7 +210,7 @@
 
     // set removes any duplicate values. exampleSet.size is 2 at this point 
     // stes are iterable (with forEach etc....) 
-    const exampleSet = new Set([1,1,1,1,2,2,2,2]); 
+    const exampleSet = new Set([1, 1, 1, 1, 2, 2, 2, 2]);
 
     exampleSet.add(5);
     exampleSet.add(5).add(17);
@@ -183,7 +240,7 @@
     // The object x is not a copy of person. It is person. Both x and person are the same object.
 
 
-    var john = {
+    var john = { // this way of creating objects is called object literal (the best way of creating object)
         name: 'John',
         lastName: 'Smith',
         yearOfBirth: 1990,
@@ -235,6 +292,24 @@
     mike.calculateAge();
 
 
+    // objects inside of objects 
+    var person = new Object();
+
+    person.address = new Object();
+    person.address.city = 'ny';
+    person.address.state = 'sdf';
+
+    // object literal way 
+    var person = {
+        firstName: 'omar',
+        lastName: 'awwad',
+        address: {
+            street: 'sdfsd',
+            city: 'sdf',
+        }
+    };
+
+
 
 
 
@@ -281,7 +356,7 @@
                     - Both variables and functions are hoisted (available before the execution phase starts)
                     - Functions are already defined before the execution phase. However variables are set to undefined until the execution phase
 
-                - creation of scope chain :
+                - creation of scope chain : 
                     - a new scope is created with every new function(in Js creating functions is the only way of creating new scopes)
                     - lexical scoping : an inner functions get access to the outer functions scope.
                 
@@ -292,10 +367,25 @@
                 the code is executed line by line.
     */
 
+    /* 
+    If your code is not inside a function it gets attached to the global object
+    
+    Each execution context has a reference to the outer environment (scope chain)
+    where it searches for variables that don't exist in the current scope
+ 
+    any event that you have gets added to the event queue inside the browser, However Js would only handle the 
+    event when the the execution stack is empty, so if you have functions that take time to run they might
+    interrupt events being handled.
 
-        
+    Asynchronous callbacks are possible in Js, However the Asynchronous part happens outside the Js Engine
+    itself (ex: Event Queue) but js Engine itself is not Asynchronous   
     
-    
+    */
+
+
+
+
+
 
 
 
@@ -312,7 +402,7 @@
     retirement(1956); // wouldn't work coz this is function expression
     var retirement = function (year) {
         console.log(65 - (2016 - year));
-    } 
+    }
 
     console.log(age); // this would give you undefined coz in javascript variables are hoisted and set to undefined before the execution phase 
     var age = 23;
@@ -528,6 +618,18 @@
     */
 
 
+    /* 
+     The difference between Event.target and Event.currentTarget
+     
+     // http://joequery.me/code/event-target-vs-event-currenttarget-30-seconds/
+     
+     currentTarget: will never change (whatever before the dot)
+     target: what you actually click on will never change
+ 
+     
+    */
+
+
     // console.dir is the way to see all the properties of a specified JavaScript object in console 
     // by which the developer can easily get the properties of the object.
     console.log(document.location);
@@ -538,7 +640,7 @@
     console.log(document.domain);
     console.log(document.URL);
     console.log(document.title);
-    document.title =  123;
+    document.title = 123;
     console.log(document.doctype);
     console.log(document.head);
     console.log(document.body);
@@ -568,8 +670,8 @@
     items[1].textContent = 'Hello 2';
     items[1].style.fontWeight = 'bold';
     items[1].style.backgroundColor = 'yellow';
-    
-    for(var i = 0; i < items.length; i++){
+
+    for (var i = 0; i < items.length; i++) {
         items[i].style.backgroundColor = '#f4f4f4';
     }
 
@@ -589,7 +691,7 @@
     input.value = 'Hello World'
 
     var submit = document.querySelector('input[type="submit"]');
-    submit.value="SEND"
+    submit.value = "SEND"
 
     var item = document.querySelector('.list-group-item');
     item.style.color = 'red';
@@ -608,9 +710,9 @@
     titles[0].textContent = 'Hello';
 
     var odd = document.querySelectorAll('li:nth-child(odd)');
-    var even= document.querySelectorAll('li:nth-child(even)');
+    var even = document.querySelectorAll('li:nth-child(even)');
 
-    for(var i = 0; i < odd.length; i++){
+    for (var i = 0; i < odd.length; i++) {
         odd[i].style.backgroundColor = '#f4f4f4';
         even[i].style.backgroundColor = '#ccc';
     }
@@ -647,7 +749,7 @@
     console.log(itemList.firstChild);
     console.log(itemList.lastChild);
     // it does the exact same thing as the childNodes
-    
+
 
     // firstElementChild and lastElementChild
     console.log(itemList.firstElementChild);
@@ -667,15 +769,15 @@
     console.log(itemList.previousSibling);
 
     // previousElementSibling
-    console.log(itemList.previousElementSibling);itemList.previousElementSibling.style.color = 'green';
+    console.log(itemList.previousElementSibling); itemList.previousElementSibling.style.color = 'green';
 
 
     // createElement
 
-    var newDiv =  document.createElement('div');
+    var newDiv = document.createElement('div');
 
     // Add class
-    newDiv.className= 'hello';
+    newDiv.className = 'hello';
 
     // Add id
     newDiv.id = 'hello1';
@@ -704,7 +806,7 @@
 
     var button = document.getElementById('button').addEventListener('click', buttonClick);
 
-    function buttonClick(e){
+    function buttonClick(e) {
 
         console.log('Button clicked');
         document.getElementById('header-title').textContent = 'Changed';
@@ -716,7 +818,7 @@
         console.log(e.target.className);
         console.log(e.target.classList);
         var output = document.getElementById('output');
-        output.innerHTML = '<h3>'+e.target.id+'</h3>';
+        output.innerHTML = '<h3>' + e.target.id + '</h3>';
 
         console.log(e.type);
 
@@ -733,11 +835,11 @@
 
 
     // handle a submit event of a form :
-        form.addEventListener('submit',myCallback);
-        function myCallback(e){
-            e.preventDefault();
-            // you code codes here
-        }
+    form.addEventListener('submit', myCallback);
+    function myCallback(e) {
+        e.preventDefault();
+        // you code codes here
+    }
 
 
     // important events to go over 
@@ -767,6 +869,16 @@
 
 
 
+    // HOW TO GET THE CLASSES OF ELEMENTS :
+
+    document.getElementById('el').className // returns a string
+    document.getElementById('el').classList // returns a list 
+    // you can perform some method on the classList 
+    // https://www.w3schools.com/jsref/prop_element_classlist.asp
+
+
+    // to get the height of an element's content :
+    Element.scrollHeight // read-only property
 
 
 
@@ -841,7 +953,7 @@
     // another example :
 
     function Vehicle(make, model, color) {
-            this.make = make,
+        this.make = make,
             this.model = model,
             this.color = color,
             this.getName = function () {
@@ -869,25 +981,25 @@
 
     // inheritance with function constructor
 
-    function Book(title, author, year){
-      this.title = title;
-      this.author = author;
-      this.year = year;
+    function Book(title, author, year) {
+        this.title = title;
+        this.author = author;
+        this.year = year;
     }
 
-    Book.prototype.getSummary = function(){
-      return `${this.title} was written by ${this.author}
+    Book.prototype.getSummary = function () {
+        return `${this.title} was written by ${this.author}
       in${this.year}`;
     };
 
     // magazine Constructor
-    function Magazine(title, author, year, month){
-      Book.call(this, title, author, year);
-      this.month = month;
+    function Magazine(title, author, year, month) {
+        Book.call(this, title, author, year);
+        this.month = month;
     }
 
-    Magazine.prototype.sayHi = function(){
-      console.log("hi");
+    Magazine.prototype.sayHi = function () {
+        console.log("hi");
     };
 
     // Instantiate Magazine object
@@ -902,18 +1014,18 @@
     Magazine.prototype.constructor = Magazine; // here we are setting back the right constructor (the code still works without this line)
     const mg1 = new Magazine('Mag one', 'john doe', '2018', 'Jan');
     console.log(mg1.getSummary()); // now it works just
-    
+
 
 
     // Object.create (setting the prototype manually)
     const bookProtos = { // here we are creating the prototype we want to use 
-      getSummury: function(){
-        return `${this.title} was written by ${this.author} in ${this.year}`;
-      },
-      getAge: function(){
-        const years = new Date().getFullYear() - this.year;
-        return `${this.title} is ${year} years old;`
-      }
+        getSummury: function () {
+            return `${this.title} was written by ${this.author} in ${this.year}`;
+        },
+        getAge: function () {
+            const years = new Date().getFullYear() - this.year;
+            return `${this.title} is ${year} years old;`
+        }
     };
 
     // now we create the object
@@ -923,8 +1035,8 @@
 
     // another way of creating the same object 
     const book1 = Object.create(bookProtos, {
-      title: {value: 'book one'},
-      author: {value: 'john doe'}
+        title: { value: 'book one' },
+        author: { value: 'john doe' }
     });
 
 
@@ -1335,6 +1447,21 @@
     // ES6
     function driversLicence6(passedTest) {
 
+        if (passedTest) {
+            let firstName = 'John';
+            const yearOfBirth = 1990;
+
+        }
+
+        console.log(firstName + ', born in ' + yearOfBirth + ', is now officially allowed to drive a car.'); // this won't work coz variables declared with let and const are block-scope. (aren't available outside the if block)
+    }
+
+    driversLicence6(true);
+
+
+    // this is a workaround for this problem (declare them in the function scope)
+    function driversLicence6(passedTest) {
+
         //console.log(firstName); // will not work in ES6 even though it's hoisted
         let firstName;
         const yearOfBirth = 1990; // constants have to be initialized on the same line the were declared
@@ -1614,7 +1741,7 @@
     const [name, age] = ['John', 26];
     console.log(name);
     console.log(age);
- 
+
     // Destructuring objects
     const obj = {
         firstName: 'John',
@@ -1915,9 +2042,9 @@
 
 
 
-    
 
-    
+
+
 
 
 
@@ -1960,13 +2087,13 @@
         this.level = level;
     }
 
-    Hero.prototype.greet = function() {
+    Hero.prototype.greet = function () {
         return `${this.name} says hello.`;
     }
 
     function Mage(name, level, spell) {
         // Chain constructor with call
-        Hero.call(this, name, level);  
+        Hero.call(this, name, level);
         this.spell = spell;
     }
     const hero2 = new Mage('Lejon', 2, 'Magic Missile');
@@ -1974,9 +2101,9 @@
 
 
 
-    
+
     // super and extends in action 
-    
+
     // Es6 Version
     class Animal {
         constructor(name, weight) {
@@ -2038,18 +2165,18 @@
         this.name = name;
         this.weight = weight;
     }
-    
-    Animal.getName = function (){return "Animal"} // static member example
 
-    Animal.prototype.eat = function() {
+    Animal.getName = function () { return "Animal" } // static member example
+
+    Animal.prototype.eat = function () {
         return `${this.name} is eating!`;
     }
 
-    Animal.prototype.sleep = function() {
+    Animal.prototype.sleep = function () {
         return `${this.name} is going to sleep!`;
     }
 
-    Animal.prototype.wakeUp = function() {
+    Animal.prototype.wakeUp = function () {
         return `${this.name} is waking up!`;
     }
 
@@ -2065,7 +2192,7 @@
         return `${this.name} is climbing trees!`;
     }
 
-    Gorilla.prototype.poundChest = function() {
+    Gorilla.prototype.poundChest = function () {
         return `${this.name} is pounding its chest!`;
     }
 
@@ -2073,7 +2200,7 @@
         return `${Animal.prototype.eat.call(this)} ${this.poundChest()}`;
     }
 
-    Gorilla.prototype.dailyRoutine = function() {
+    Gorilla.prototype.dailyRoutine = function () {
         return `${Animal.prototype.wakeUp.call(this)} ${this.poundChest()} ${Animal.prototype.eat.call(this)} ${Animal.prototype.sleep.call(this)}`;
     }
 
@@ -2087,7 +2214,7 @@
     display(gorilla.showVigour());      // George is eating! George is pounding its chest!
     display(gorilla.dailyRoutine());    // George is waking up! George is pounding its chest! George is eating! George is going to sleep!
 
-    
+
 
 
 
@@ -2129,14 +2256,14 @@
 
 
     // the class syntax has two components: class expressions and class declarations.
-        
+
     // class declaration:
-        class Rectangle {
-            constructor(height, width) {
+    class Rectangle {
+        constructor(height, width) {
             this.height = height;
             this.width = width;
-            }
         }
+    }
 
     /* Hoisting:
         An important difference between function declarations and class declarations is that function declarations are hoisted and class 
@@ -2151,20 +2278,20 @@
 
     // unnamed
     let Rectangle = class {
-      constructor(height, width) {
-        this.height = height;
-        this.width = width;
-      }
+        constructor(height, width) {
+            this.height = height;
+            this.width = width;
+        }
     };
     console.log(Rectangle.name);
     // output: "Rectangle"
 
     // named
     let Rectangle = class Rectangle2 {
-      constructor(height, width) {
-        this.height = height;
-        this.width = width;
-      }
+        constructor(height, width) {
+            this.height = height;
+            this.width = width;
+        }
     };
     console.log(Rectangle.name);
     // output: "Rectangle2"
@@ -2177,18 +2304,18 @@
     */
 
     class Rectangle {
-    constructor(height, width) {
-        this.height = height;
-        this.width = width;
-    }
-    // Getter
-    get area() { // acts as a property 
-        return this.calcArea();
-    }
-    // Method
-    calcArea() {
-        return this.height * this.width;
-    }
+        constructor(height, width) {
+            this.height = height;
+            this.width = width;
+        }
+        // Getter
+        get area() { // acts as a property 
+            return this.calcArea();
+        }
+        // Method
+        calcArea() {
+            return this.height * this.width;
+        }
     }
 
     const square = new Rectangle(10, 10);
@@ -2206,13 +2333,13 @@
         This behavior will be the same even if the "use strict" directive isn't present, because code within the class body's 
         syntactic boundary is always executed in strict mode.
     */
-    class Animal { 
-      speak() {
-        return this;
-      }
-      static eat() {
-        return this;
-      }
+    class Animal {
+        speak() {
+            return this;
+        }
+        static eat() {
+            return this;
+        }
     }
 
     let obj = new Animal();
@@ -2231,12 +2358,12 @@
 
     function Animal() { }
 
-    Animal.prototype.speak = function() {
-      return this;
+    Animal.prototype.speak = function () {
+        return this;
     }
 
-    Animal.eat = function() {
-      return this;
+    Animal.eat = function () {
+        return this;
     }
 
     let obj = new Animal();
@@ -2247,7 +2374,7 @@
     eat(); // global object
 
 
-    
+
 
 
 
@@ -2483,7 +2610,7 @@
 
     Promise.race([cleanRoom(), removeGarbage(), winIcecream()]).then(function () {
         console.log('all finished')
-    }); // this takes an array of all the promises and calls then after anyone of them has finished
+    }); // this takes an array of all the promises and calls then after anyone of them has finished  
 
 
 
@@ -2724,36 +2851,36 @@
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Json 
-    
+
     // some Rules :
-        // uses key/value pairs 
-        // double quotes around key and value
-        // file type is .json
-        // MiME type is "Application/json"
-    
+    // uses key/value pairs 
+    // double quotes around key and value
+    // file type is .json
+    // MiME type is "Application/json"
+
 
     // Json Data Types 
-        // Numbers : no difference between integer and floats
-        // String  : 
-        // Boolean : 
-        // Array   :
-        // Object  : Key/value Pairs
-        // Null    : Empty value
+    // Numbers : no difference between integer and floats
+    // String  : 
+    // Boolean : 
+    // Array   :
+    // Object  : Key/value Pairs
+    // Null    : Empty value
 
 
     // normal array
     var people = [
         {
-        name:"Brad",
-        age: 35
+            name: "Brad",
+            age: 35
         },
         {
-        name:"John",
-        age:40
+            name: "John",
+            age: 40
         },
         {
-        name:"Sara",
-        age:25
+            name: "Sara",
+            age: 25
         }
     ];
 
@@ -2786,7 +2913,7 @@
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Chrome Dev Tools 
 
-    
+
     // console.error('An error');
     // console.warn('A warning');
     // console.dir(document);
@@ -2799,7 +2926,7 @@
     //   console.log('Hello John');
     //   console.log('Hello Sally');
     // console.groupEnd('Say Hello');
-    
+
     // console.time('Run Loop');
     // for (var i = 0; i < 20000; i++) {
     //     console.log(i);

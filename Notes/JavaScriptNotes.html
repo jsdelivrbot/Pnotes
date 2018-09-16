@@ -91,6 +91,50 @@
 
 
 
+    //  automatic semicolon insertion 
+
+    function getPerson() {
+
+        return
+        {
+            firstname: 'Tony'
+        }
+
+    }
+    console.log(getPerson()); // wouldn't works because of the automatic semicolon Insertions 
+    // after the return statement inside the function
+
+    function getPerson() {
+
+        return {
+            firstname: 'Tony'
+        }
+
+    }
+    console.log(getPerson());
+
+
+
+
+    // another way of creating function expressions (wrapping the function in () )
+    (
+        function (name) {
+
+        }
+    );
+
+    // to invoke it immediately (IIFE)
+    (
+        function (name) {
+
+        }
+    )(myArgument);
+
+
+
+
+
+
 
 
 
@@ -1291,6 +1335,105 @@
 
 
 
+    /* ************************************* */
+
+    function buildFunctions() {
+
+        var arr = [];
+
+        for (var i = 0; i < 3; i++) {
+
+            arr.push(
+                function () {
+                    console.log(i);
+                }
+            )
+
+        }
+
+        return arr;
+    }
+
+    var fs = buildFunctions();
+
+    fs[0](); // 3
+    fs[1](); // 3
+    fs[2](); // 3
+
+    /* ************************************* */
+
+    function buildFunctions2() {
+
+        var arr = [];
+
+        for (var i = 0; i < 3; i++) {
+            arr.push(
+                (function (j) { // using the power of scope chain (create a parent scope by creating a new function)
+                    return function () {
+                        console.log(j);
+                    }
+                }(i))
+            )
+
+        }
+
+        return arr;
+    }
+
+    var fs2 = buildFunctions2();
+
+    fs2[0](); // 0
+    fs2[1](); // 1
+    fs2[2](); // 2
+
+
+    /* ************************************* */
+
+    function buildFunctions() {
+
+        var arr = [];
+
+        for (var i = 0; i < 3; i++) {
+            let j = i; // explanation of why this works is below 
+            arr.push(
+                function () {
+                    console.log(j);
+                }
+            )
+
+        }
+
+
+        return arr;
+    }
+
+    var fs = buildFunctions();
+
+    fs[0](); // 0
+    fs[1](); // 1
+    fs[2](); // 2
+
+    /* why does let works and not var in this example ?
+
+     let is block-scoped which means that with each iteration of the for loop we are creating a new 'j' 
+     variable different than the one before it.
+     So we end up with three different 'j' variables not overriding each other.
+
+     However, with var keyword it's different, since var is function-scoped, we override the same 'j' with
+     each iteration.
+     That happens because 'j' is function-scoped and available to us within each iteration
+    */
+
+
+
+
+
+
+
+
+
+
+
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1502,6 +1645,11 @@
 
 
 
+
+
+
+
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Import & Export Es6 :
     https: //www.youtube.com/watch?v=Jqn_wjkSZwo
@@ -1509,6 +1657,9 @@
     //    2 - https://hackernoon.com/import-export-default-require-commandjs-javascript-nodejs-es6-vs-cheatsheet-different-tutorial-example-5a321738b50f
 
     import './loadImage.js'; // suppose that loadImage only contains some code that needs to run (ex: loading an image)
+
+
+
 
 
 

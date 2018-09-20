@@ -135,6 +135,40 @@
 
 
 
+    // Function Factories
+    function makeGreeting(language) {
+
+        return function (firstname, lastname) {
+
+            if (language === 'en') {
+                console.log('Hello ' + firstname + ' ' + lastname);
+            }
+
+            if (language === 'es') {
+                console.log('Hola ' + firstname + ' ' + lastname);
+            }
+
+        }
+
+    }
+
+    var greetEnglish = makeGreeting('en');
+    var greetSpanish = makeGreeting('es');
+
+    greetEnglish('John', 'Doe');
+    greetSpanish('John', 'Doe');
+
+    /* In the last two lines we are using the power of closure.
+    greetEnglish has access to 'en' because of closure (greetEnglish is an inner function to makeGreeting)
+
+    This is called function Factories, and that's why we don't need function overloading in Js
+    */
+
+
+
+
+
+
 
 
 
@@ -162,6 +196,98 @@
         income += 5000;
     }
     console.log(incomes); // won't change. it's only designed to loop through arrays not to modigy them
+
+
+    // For in (with objects)
+    var person = {
+        firstname: 'Default',
+        lastname: 'Default',
+        getFullName: function () {
+            return this.firstname + ' ' + this.lastname;
+        }
+    }
+
+    var john = {
+        firstname: 'John',
+        lastname: 'Doe'
+    }
+
+    // don't do this EVER! for demo purposes only!!!
+    john.__proto__ = person;
+
+    for (var prop in john) {
+        if (john.hasOwnProperty(prop)) { // the if statement makes sure that the property really
+            // belongs to the object and not on its prototype. 
+            console.log(prop + ': ' + john[prop]);
+        }
+    }
+
+
+    // For in (with Arrays)
+
+    // avoid iterating though an array with for in (it access the object properties and 
+    // the prototype properties and you don't want that)
+    // 062 js-weird parts
+
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //use strict
+
+    // if you want your whole code to run in a strict mode, declare it at the top of the file (the first line)
+    function logNewPerson() {
+        "use strict"; // the function execution context now is strict but not the global context though
+        var person2;
+        persom2 = {};
+        console.log(persom2);
+    }
+
+    var person;
+    persom = {};
+    console.log(persom);
+    logNewPerson();
+
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //typeof and instanceof
+
+    var a = 3;
+    console.log(typeof a);
+
+    var b = "Hello";
+    console.log(typeof b);
+
+    var c = {};
+    console.log(typeof c);
+
+    var d = [];
+    console.log(typeof d); // weird!
+    console.log(Object.prototype.toString.call(d)); // better!
+
+    function Person(name) {
+        this.name = name;
+    }
+
+    var e = new Person('Jane');
+    console.log(typeof e);
+    console.log(e instanceof Person);
+
+    console.log(typeof undefined); // makes sense
+    console.log(typeof null); // a bug since, like, forever...
+
+    var z = function () { };
+    console.log(typeof z);
 
 
 
@@ -956,8 +1082,33 @@
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Lecture: Function constructor (it's only a template (a class))
-    // the methods that you have inside the function constructor are invoked only
-    // through the object.
+    // the methods that you have inside the function constructor are invoked only through an object.
+
+    /* 
+        any function constructor returns the new object created by default 
+
+        it's best practice to only add properties inside the function constructor and add 
+        method using the 'prototype' property of the function constructor (to not duplicate methods, just have one available to all the instances)
+
+        each function created in Js gets a property called 'prototype' which is only used when the 
+        function is being used as a function constructor, it starts off empty.
+
+        it's worth noting that the 'prototype' property is not the prototype of the function constructor itself
+        ,but it's the prototype of every and each object created using that function constructor 
+
+        prototype vs __proto__ 
+            The prototype is a property on a constructor function that sets what will become the __proto__ property 
+            on the constructed object.
+
+            __proto__ is the actual object that is used in the lookup chain to resolve methods, etc.  prototype is 
+            the object that is used to build __proto__ when you create an object with new:
+
+            ( new Foo ).__proto__ === Foo.prototype;
+            ( new Foo ).prototype === undefined;
+
+            prototype is only available on functions since they are derived from Function, Function, and Object 
+            but in anything else it is not. However, __proto__ is available everywhere.
+    */
 
 
     var john = {
@@ -1023,7 +1174,120 @@
 
 
 
-    // inheritance with function constructor
+    // Inheritance 
+
+    var person = {
+        firstname: 'Default',
+        lastname: 'Default',
+        getFullName: function () {
+            return this.firstname + ' ' + this.lastname;
+        }
+    }
+
+    var john = {
+        firstname: 'John',
+        lastname: 'Doe'
+    }
+
+    // don't do this EVER! for demo purposes only!!!
+    john.__proto__ = person;
+    console.log(john.getFullName()); // john Doe
+
+    var jane = {
+        firstname: 'Jane'
+    }
+
+    // don't do this EVER! for demo purposes only!!!
+    jane.__proto__ = person;
+    console.log(jane.getFullName()); // jane Default
+
+
+
+
+    /* object.create() and prototypal inheritance 
+
+    all modern browsers have object.create built-in.
+    object.create(baseObj) creates an new empty object and sets its prototype to baseObj prototype
+    then we can we can modify this new prototype by overriding or adding new stuff to it
+
+    */
+    var person = {
+        firstname: 'Default',
+        lastname: 'Default',
+        greet: function () {
+            return 'Hi ' + this.firstname;
+        }
+    }
+
+    var john = Object.create(person);
+    john.firstname = 'John';
+    john.lastname = 'Doe';
+    console.log(john);
+
+
+
+
+    /* Classical inheritance with Object.create()
+        we also can do that with function constructors and it's called classical inheritance 
+    */
+
+    // Shape - superclass
+    function Shape() {
+        this.x = 0;
+        this.y = 0;
+    }
+
+    // superclass method
+    Shape.prototype.move = function (x, y) {
+        this.x += x;
+        this.y += y;
+        console.info('Shape moved.');
+    };
+
+    // Rectangle - subclass
+    function Rectangle() {
+        Shape.call(this); // call super constructor.
+    }
+
+    // subclass extends superclass
+    Rectangle.prototype = Object.create(Shape.prototype);
+    Rectangle.prototype.constructor = Rectangle;
+
+    var rect = new Rectangle();
+
+    console.log('Is rect an instance of Rectangle?',
+        rect instanceof Rectangle); // true
+    console.log('Is rect an instance of Shape?',
+        rect instanceof Shape); // true
+    rect.move(1, 1); // Outputs, 'Shape moved.'
+
+
+
+    /* If you wish to inherit from multiple objects, then mixins are a possibility. 
+          Object.assign copies properties from the OtherSuperClass prototype to 
+          the MyClass prototype
+    */
+    function MyClass() {
+        SuperClass.call(this);
+        OtherSuperClass.call(this);
+    }
+
+    // inherit one class
+    MyClass.prototype = Object.create(SuperClass.prototype);
+    // mixin another
+    Object.assign(MyClass.prototype, OtherSuperClass.prototype);
+    // re-assign constructor
+    MyClass.prototype.constructor = MyClass;
+
+    MyClass.prototype.myMethod = function () {
+        // do a thing
+    };
+
+
+
+
+
+    // another example of Classical inheritance with Object.create()
 
     function Book(title, author, year) {
         this.title = title;
@@ -1054,7 +1318,8 @@
     // just because Magazine inherits from Book, doesn't mean Magazine instances have access to Book.prototype.
 
     // to solve this replace the above code (starting from line:894) with the following :
-    Magazine.prototype = Object.create(Book.prototype); // here we are copying the Book.prototype into the Magazine.prototype (note that Magazine.prototype and Book.prototype are two different objects now)
+    Magazine.prototype = Object.create(Book.prototype); // we're create a new object using object.create which accepts an object that it's prototype is used
+    // for the newly created object which gets assigned to Magazine.prototype object
     Magazine.prototype.constructor = Magazine; // here we are setting back the right constructor (the code still works without this line)
     const mg1 = new Magazine('Mag one', 'john doe', '2018', 'Jan');
     console.log(mg1.getSummary()); // now it works just
@@ -1062,7 +1327,7 @@
 
 
     // Object.create (setting the prototype manually)
-    const bookProtos = { // here we are creating the prototype we want to use 
+    const bookProtos = { // here we are creating an object to use its prototype as the base for new objects 
         getSummury: function () {
             return `${this.title} was written by ${this.author} in ${this.year}`;
         },
@@ -1083,6 +1348,21 @@
         author: { value: 'john doe' }
     });
 
+
+
+
+    // modifying built-in prototypes :
+    String.prototype.isLengthGreaterThan = function (limit) { // adding it to all strings 
+        return this.length > limit;
+    }
+
+    console.log("John".isLengthGreaterThan(3));
+
+    Number.prototype.isPositive = function () {
+        return this > 0;
+    }
+
+    console.log(new Number(3).isPositive());
 
 
 
@@ -1117,6 +1397,49 @@
 
 
 
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Functional Programming 
+    // try not to mutate data with functions programming 
+    function mapForEach(arr, fn) {
+
+        var newArr = [];
+        for (var i = 0; i < arr.length; i++) {
+            newArr.push(
+                fn(arr[i])
+            )
+        };
+
+        return newArr;
+    }
+
+    var arr1 = [1, 2, 3];
+
+    var arr2 = mapForEach(arr1, function (item) {
+        return item * 2;
+    });
+    console.log(arr2);
+
+
+    var checkPastLimit = function (limiter, item) {
+        return item > limiter;
+    }
+    var arr4 = mapForEach(arr1, checkPastLimit.bind(this, 1));
+    console.log(arr4);
+
+
+    var checkPastLimitSimplified = function (limiter) {
+        return function (limiter, item) {
+            return item > limiter;
+        }.bind(this, limiter);
+    };
+
+    var arr5 = mapForEach(arr1, checkPastLimitSimplified(1));
+    console.log(arr5);
 
 
 
@@ -1508,7 +1831,7 @@
     // Using an object in an array-like fashion
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
     var obj = {
-        length: 0,
+
 
         addElem: function addElem(elem) {
             // obj.length is automatically incremented 
@@ -1520,8 +1843,65 @@
     // Let's add some empty objects just to illustrate.
     obj.addElem({});
     obj.addElem({});
-    console.log(obj.length);
-    // → 2
+    console.log(obj.length); //  2
+
+
+
+    /* Every function in Js gets access to (bind, call and apply)
+
+    bind : creates a copy of the function, lets you decide what the this variable should be 
+        when the execution context is created
+
+    call : executes the function, unlike bind it doesn't create a copy of it
+        call(this, arg...)
+
+    apply : is the exact same thing as call, the only difference is that it takes an array of args
+        apply(this, [] )
+    */
+
+    var person = {
+        firstname: 'John',
+        lastname: 'Doe',
+        getFullName: function () {
+
+            var fullname = this.firstname + ' ' + this.lastname;
+            return fullname;
+
+        }
+    }
+
+        (function (lang1, lang2) { // wrapping the function into () tricks the parser into 
+            // believing it's a function expression (anonymous function expression)
+            console.log('Logged: ' + this.getFullName());
+            console.log('Arguments: ' + lang1 + ' ' + lang2);
+            console.log('-----------');
+
+        }).apply(person, ['es', 'en']);
+
+
+    // applications of bind, apply and call :
+
+    // 1- function borrowing
+    var person2 = {
+        firstname: 'Jane',
+        lastname: 'Doe'
+    }
+
+    console.log(person.getFullName.apply(person2));
+
+
+    // 2- function currying (predefined parameters)
+    function multiply(a, b) {
+        return a * b;
+    }
+    var multipleByTwo = multiply.bind(this, 2); // this is possible because bind creates a copy
+    console.log(multipleByTwo(4));
+
+    var multipleByThree = multiply.bind(this, 3);
+    console.log(multipleByThree(4));
+
+
+
 
 
 
